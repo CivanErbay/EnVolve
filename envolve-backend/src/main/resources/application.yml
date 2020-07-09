@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      database: envolve-db
+auth:
+  jwt:
+    secret: top-secret-for-token
+
