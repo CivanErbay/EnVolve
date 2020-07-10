@@ -1,26 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-git
+import Landing from "./pages/Landing";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import Login from "./pages/Login";
+import Header from "./components/Header";
+import ThemeProvider from "@material-ui/styles/ThemeProvider";
+import {createMuiTheme} from "@material-ui/core";
+
+const theme = createMuiTheme({
+    typography: {
+        fontFamily: [
+            'Anton',
+            'sans-serif'
+        ].join(','),
+    }
+});
+
+
+function Navigation() {
+
+    return (
+        <Router>
+            <Header/>
+            <Switch>
+                <Route path="/login" exact>
+                    <Login/>
+                </Route>
+                <Route path="/">
+                    <Landing/>
+                </Route>
+            </Switch>
+        </Router>
+    )
+}
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    return (
+        <div className="App">
+            <ThemeProvider theme={theme}>
+            <Navigation/>
+            </ThemeProvider>
+        </div>
+    );
 }
 
 export default App;

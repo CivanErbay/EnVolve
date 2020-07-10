@@ -17,12 +17,12 @@ import java.util.HashMap;
 
 @RequestMapping("auth/login")
 @RestController
-public class TeacherAuth {
+public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JWTUtils jwtUtils;
 
-    public TeacherAuth(AuthenticationManager authenticationManager, JWTUtils jwtUtils) {
+    public AuthController(AuthenticationManager authenticationManager, JWTUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
     }
@@ -36,6 +36,5 @@ public class TeacherAuth {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid credentials");
         }
-
     }
 }
