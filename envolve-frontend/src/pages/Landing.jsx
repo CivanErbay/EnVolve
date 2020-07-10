@@ -7,11 +7,9 @@ export default function Landing() {
 
     return (
         <>
-            <h1>EnVolve</h1>
-            <h5>Enhance education, involve pupils</h5>
             <div>
                 <form>
-                    <TextField id="standard-basic" label="Standard" />
+                    <TextField id="standard-basic" label="Enter your Code" />
                 </form>
                 <Button variant="contained">Submit</Button>
             </div>
