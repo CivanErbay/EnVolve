@@ -31,6 +31,6 @@ public class MongoDbUserDetailsService implements UserDetailsService {
 
         Teacher teacher = optionalUser.get();
 
-        return new User(teacher.getUserName(), teacher.getPassword(), List.of(new SimpleGrantedAuthority("admin")));
+        return new User(teacher.getUsername(), teacher.getPassword(), List.of(new SimpleGrantedAuthority("admin")));
     }
 }

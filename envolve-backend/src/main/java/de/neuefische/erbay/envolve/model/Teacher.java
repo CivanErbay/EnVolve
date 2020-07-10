@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "teacher")
 public class Teacher {
     @Id
-    private String userName;
+    private String username;
     private String password;
     private String firstName;
     private String lastName;
