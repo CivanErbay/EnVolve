@@ -4,13 +4,23 @@ import Landing from "./pages/Landing";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Login from "./pages/Login";
 import Header from "./components/Header";
+import ThemeProvider from "@material-ui/styles/ThemeProvider";
+import {createMuiTheme} from "@material-ui/core";
+
+const theme = createMuiTheme({
+    typography: {
+        fontFamily: [
+            'Anton',
+            'sans-serif'
+        ].join(','),
+    }
+});
 
 
 function Navigation() {
 
     return (
         <Router>
-
             <Header/>
             <Switch>
                 <Route path="/login" exact>
@@ -28,7 +38,9 @@ function App() {
 
     return (
         <div className="App">
+            <ThemeProvider theme={theme}>
             <Navigation/>
+            </ThemeProvider>
         </div>
     );
 }
