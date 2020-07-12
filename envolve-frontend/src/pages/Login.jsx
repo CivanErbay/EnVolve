@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import classNames from 'classnames';
+import MyButton from "../components/MyButton";
 
 
 export default function Login() {
@@ -40,14 +41,14 @@ export default function Login() {
                 <TextField id="standard-basic" label="Username"/>
                 <TextField id="standard-basic" label="Password"/>
                 <Box pt={2}>
-                    <Button variant="contained">Submit</Button>
+                    <MyButton content={"Submit"}/>
                 </Box>
             </form>
             </Box>
             <Box>
             <Typography style={{fontWeight: "bold"}}>Not yet registered?</Typography>
                 <Box pt={2}>
-                    <Button variant="contained">Register</Button>
+                    <MyButton content={"Register"}/>
                 </Box>
             </Box>
         </Box>

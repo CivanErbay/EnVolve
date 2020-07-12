@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import MyButton from "../components/MyButton";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +35,7 @@ export default function Landing() {
                 </form>
 
                 <Box mt={4}>
-                <Button variant="contained">Submit</Button>
+                    <MyButton content={"Submit"}/>
                 </Box>
             </div>
             <Footer/>
