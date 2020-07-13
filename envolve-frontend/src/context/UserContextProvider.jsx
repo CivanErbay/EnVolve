@@ -37,7 +37,6 @@ export default function UserContextProvider({children}) {
             <UserDispatchContext.Provider value={dispatch}>
                 {children}
             </UserDispatchContext.Provider>
-
         </UserStateContext.Provider>
     )
 
