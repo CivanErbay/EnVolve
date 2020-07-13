@@ -6,6 +6,8 @@ import Login from "./pages/Login";
 import Header from "./components/Header";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import {createMuiTheme} from "@material-ui/core";
+import PrivateRoute from "./components/PrivateRoute";
+import Dashboard from "./pages/Dashboard";
 
 const theme = createMuiTheme({
     typography: {
@@ -26,6 +28,7 @@ function Navigation() {
                 <Route path="/login" exact>
                     <Login/>
                 </Route>
+                    <PrivateRoute path="/overview" component={Dashboard} exact/>
                 <Route path="/">
                     <Landing/>
                 </Route>

@@ -9,10 +9,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-export default function MyButton({content}) {
+export default function MyButton({content, onClick}) {
 
     const classes = useStyles();
     return(
-            <Button className={classes.buttonStyle} variant="contained">{content}</Button>
+            <Button className={classes.buttonStyle} onClick={onClick} variant="contained">{content}</Button>
     )
 }
