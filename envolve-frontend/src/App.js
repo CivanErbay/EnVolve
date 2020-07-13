@@ -26,7 +26,7 @@ function Navigation() {
 
     const dispatch = useContext(UserDispatchContext);
 
-    useEffect(() => {
+    useEffect(() => {           //Keep Login status after Refresh
         if (isJWTTokenValid()) {
             dispatch({ type: LOGIN_SUCCESS, payload: getDecodedJWTToken() });
         }

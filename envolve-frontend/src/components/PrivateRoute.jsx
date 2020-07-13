@@ -9,6 +9,7 @@ export default function PrivateRoute({component: Component, ...rest}) {
     const {authStatus, userData } = useContext(UserStateContext);
     const dispatch = useContext(UserDispatchContext);
 
+    //Each private Route is just accessible by authenticated Users
 
     useEffect(() => {
         if (

@@ -32,6 +32,8 @@ function reducer(state, action) {
 export default function UserContextProvider({children}) {
     const [state,dispatch] = useReducer(reducer, initialState);
 
+    //UserContextProvider is wrapping everything in the App.js
+    //children are all the other components inside the wrapped App.js content
     return (
         <UserStateContext.Provider value={state}>
             <UserDispatchContext.Provider value={dispatch}>
