@@ -8,7 +8,9 @@ import {UserDispatchContext, UserStateContext} from "../context/UserContext";
 import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {performLogin} from "../utils/auth-utils";
-import {Redirect} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
+import Button from "@material-ui/core/Button";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "5px",
         borderWidth: "1px",
         width: "250px"
+    },
+    link: {
+        textTransform: "none",
+        textDecoration: 'none',
+        color: 'black',
     }
 }))
 
@@ -77,7 +84,7 @@ export default function Login() {
             <Box>
             <Typography style={{fontWeight: "bold"}}>Not yet registered?</Typography>
                 <Box pt={2}>
-                    <MyButton content={"Register"}/>
+                    <Button><Link className={classes.link} to="/register">Register</Link></Button>
                 </Box>
             </Box>
         </Box>

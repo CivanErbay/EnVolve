@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import {UserDispatchContext} from "./context/UserContext";
 import UserContextProvider, {LOGIN_SUCCESS} from "./context/UserContextProvider";
 import {getDecodedJWTToken, isJWTTokenValid} from "./utils/jwt-utils";
+import Register from "./pages/Register";
 
 const theme = createMuiTheme({
     typography: {
@@ -38,6 +39,9 @@ function Navigation() {
             <Switch>
                 <Route path="/login" exact>
                     <Login/>
+                </Route>
+                <Route path="/register">
+                    <Register/>
                 </Route>
                     <PrivateRoute path="/overview" component={Dashboard} exact/>
                 <Route path="/">
