@@ -56,6 +56,7 @@ export default function Login() {
 
     const { authStatus } = useContext(UserStateContext);
     if (authStatus === 'SUCCESS') {
+        console.log(authStatus)
         return <Redirect to={'/overview'} />;
     }
 

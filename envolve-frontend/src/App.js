@@ -8,6 +8,8 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import {createMuiTheme} from "@material-ui/core";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
+import {UserDispatchContext} from "./context/UserContext";
+import UserContextProvider from "./context/UserContextProvider";
 
 const theme = createMuiTheme({
     typography: {
@@ -41,9 +43,11 @@ function App() {
 
     return (
         <div className="App">
-            <ThemeProvider theme={theme}>
-            <Navigation/>
-            </ThemeProvider>
+            <UserContextProvider>
+                <ThemeProvider theme={theme}>
+                <Navigation/>
+                </ThemeProvider>
+            </UserContextProvider>
         </div>
     );
 }

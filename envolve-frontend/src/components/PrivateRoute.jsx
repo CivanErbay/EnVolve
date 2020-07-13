@@ -9,12 +9,13 @@ export default function PrivateRoute({component: Component, ...rest}) {
     const {authStatus, userData } = useContext(UserStateContext);
     const dispatch = useContext(UserDispatchContext);
 
+
     useEffect(() => {
         if (
             authStatus === 'SUCCESS' &&
             new Date().getTime() / 1000 >= userData.exp
         ) {
-            removeJWTToken();
+            removeJWTToken();   //Take these two lines for the logout
             dispatch({type: LOGOUT});
         }
     });
@@ -27,7 +28,7 @@ export default function PrivateRoute({component: Component, ...rest}) {
             return <Redirect to={'/login'}/>}
 
 
-            if(new Date().getTime() / 100 >= userData.exp) {
+            if(new Date().getTime() / 1000 >= userData.exp) {
                 return <Redirect to ={'/login'} />;
             }
 
