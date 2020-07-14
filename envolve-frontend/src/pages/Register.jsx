@@ -51,12 +51,11 @@ export default function Register() {
                     <TextField style={{width: "150px", margin: "10px"}} onChange={handleChange} name="lastname" id="standard-basic" label="Lastname"/>
                 </Box>
                 <TextField style={{width: "320px"}} id="standard-basic" name="email" onChange={handleChange} label="Email Address"/>
-                <TextField style={{width: "320px", margin: "10px"}} id="standard-basic" onChange={handleChange} name="password" label="Password"/>
+                <TextField style={{width: "320px", margin: "10px"}} type="password" id="standard-basic" onChange={handleChange} name="password" label="Password"/>
                 <TextField style={{width: "320px"}} id="standard-basic" label="Confirm Password"/>
                 <Box mt={5}>
                     <MyButton content={"Submit"}/>
                 </Box>
-
             </Box>
         </Box>
     )
