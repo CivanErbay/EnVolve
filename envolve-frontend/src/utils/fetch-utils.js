@@ -6,7 +6,7 @@ export function postRegister(registerData){
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({registerData: registerData}),
+        body: JSON.stringify(registerData),
     }).then((response) => {
         if(response.status !== 200) {
             throw new Error('invalid response')
