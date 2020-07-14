@@ -4,6 +4,9 @@ import TextField from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {postRegister} from "../utils/fetch-utils";
 import MyButton from "../components/MyButton";
+import { useHistory } from 'react-router-dom';
+
+
 
 const useStyles = makeStyles((theme) => ({
     outer: {
@@ -26,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
 
     const classes = useStyles();
+    const history = useHistory();
 
     const [registerState, setRegisterState] = useState({
         username: '',
@@ -45,7 +49,8 @@ export default function Register() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        postRegister(registerState)
+        postRegister(registerState);
+        history.goBack();
     }
 
 
