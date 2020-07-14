@@ -1,7 +1,18 @@
-import {getJWTToken} from "./jwt-utils";
+
 
 export function postRegister(registerData){
-    const token = getJWTToken();
-    return fetch('/')
+    return fetch('/api/register', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({registerData: registerData}),
+    }).then((response) => {
+        if(response.status !== 200) {
+            throw new Error('invalid response')
+        }
+
+        return response.json();
+    })
 
 }

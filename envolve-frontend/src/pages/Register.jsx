@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import MyButton from "../components/MyButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import {postRegister} from "../utils/fetch-utils";
 
 const useStyles = makeStyles((theme) => ({
     outer: {
@@ -41,6 +42,11 @@ export default function Register() {
         });
     }
 
+    function handleSubmit(event) {
+        event.preventDefault();
+        postRegister(registerState)
+    }
+
     return (
         <Box mt={12} className={classes.outer}>
             <h2>Register</h2>
@@ -54,7 +60,7 @@ export default function Register() {
                 <TextField style={{width: "320px", margin: "10px"}} type="password" id="standard-basic" onChange={handleChange} name="password" label="Password"/>
                 <TextField style={{width: "320px"}} id="standard-basic" label="Confirm Password"/>
                 <Box mt={5}>
-                    <MyButton content={"Submit"}/>
+                    <MyButton onClick={handleSubmit} content={"Submit"}/>
                 </Box>
             </Box>
         </Box>
