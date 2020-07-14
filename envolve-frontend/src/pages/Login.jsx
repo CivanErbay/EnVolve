@@ -67,7 +67,6 @@ export default function Login() {
         return <Redirect to={'/overview'} />;
     }
 
-
     return (
 
         <Box mt={8} className={classes.centerPage}>

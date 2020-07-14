@@ -9,7 +9,6 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         position: 'fixed',
         bottom: 0,
-
     },
     footerProps: {
         height: '60px',

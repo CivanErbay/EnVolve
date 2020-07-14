@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {postRegister} from "../utils/fetch-utils";
-import Button from "@material-ui/core/Button";
 import MyButton from "../components/MyButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,10 +48,6 @@ export default function Register() {
         postRegister(registerState)
     }
 
-    /* function isFormInvalid() {
-     return registerState.username.length<1 && registerState.firstname.length<1 && registerState.lastname.length<1 && registerState.password.length<1 && registerState.email.length<1
-    }
-    */
 
     return (
         <Box mt={12} className={classes.outer}>

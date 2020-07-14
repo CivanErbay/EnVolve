@@ -1,3 +1,5 @@
+import {Redirect} from "react-router-dom";
+import React from "react";
 
 
 export function postRegister(registerData){
@@ -11,8 +13,8 @@ export function postRegister(registerData){
         if(response.status !== 200) {
             throw new Error('invalid response')
         }
-
-        return response.json();
+        console.log("success?")
+        return <Redirect to={'/overview'} />;
     })
 
 }

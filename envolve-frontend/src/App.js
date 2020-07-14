@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import {createMuiTheme} from "@material-ui/core";
 import PrivateRoute from "./components/PrivateRoute";
-import Dashboard from "./pages/Dashboard";
+import Overview from "./pages/Overview";
 import {UserDispatchContext} from "./context/UserContext";
 import UserContextProvider, {LOGIN_SUCCESS} from "./context/UserContextProvider";
 import {getDecodedJWTToken, isJWTTokenValid} from "./utils/jwt-utils";
@@ -43,7 +43,7 @@ function Navigation() {
                 <Route path="/register">
                     <Register/>
                 </Route>
-                    <PrivateRoute path="/overview" component={Dashboard} exact/>
+                    <PrivateRoute path="/overview" component={Overview} exact/>
                 <Route path="/">
                     <Landing/>
                 </Route>
