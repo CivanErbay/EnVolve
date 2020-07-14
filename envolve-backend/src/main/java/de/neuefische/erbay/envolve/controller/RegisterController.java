@@ -10,18 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("api/register")
 @RestController
-public class UserController {
+public class RegisterController {
 
     private final UserService userService;
+    private final AuthController authController;
 
     @Autowired
-    public UserController(UserService userService) {
+    public RegisterController(UserService userService, AuthController authController) {
         this.userService = userService;
+        this.authController = authController;
     }
 
     @PostMapping
     public void register(@RequestBody Teacher teacher) {
         userService.register(teacher);
+   /*    return authController.login(teacher);*/ // possible Approach?
     }
 
 }
