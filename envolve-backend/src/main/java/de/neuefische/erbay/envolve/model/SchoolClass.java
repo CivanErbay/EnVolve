@@ -6,12 +6,14 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "student")
-public class Student {
+@Data
+@Document(collection = "class")
+public class SchoolClass {
     @Id
-    private String student;
-    private String code;
+    private String classname;
+    private List<Student> classmembers;
 }
