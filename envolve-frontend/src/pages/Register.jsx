@@ -1,9 +1,10 @@
 import {Box} from "@material-ui/core";
 import React, {useState} from "react";
 import TextField from "@material-ui/core/TextField";
-import MyButton from "../components/MyButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {postRegister} from "../utils/fetch-utils";
+import Button from "@material-ui/core/Button";
+import MyButton from "../components/MyButton";
 
 const useStyles = makeStyles((theme) => ({
     outer: {
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
 
     const classes = useStyles();
+
     const [registerState, setRegisterState] = useState({
         username: '',
         password: '',
@@ -47,6 +49,11 @@ export default function Register() {
         postRegister(registerState)
     }
 
+    /* function isFormInvalid() {
+     return registerState.username.length<1 && registerState.firstname.length<1 && registerState.lastname.length<1 && registerState.password.length<1 && registerState.email.length<1
+    }
+    */
+
     return (
         <Box mt={12} className={classes.outer}>
             <h2>Register</h2>
@@ -60,7 +67,8 @@ export default function Register() {
                 <TextField style={{width: "320px", margin: "10px"}} type="password" id="standard-basic" onChange={handleChange} name="password" label="Password"/>
                 <TextField style={{width: "320px"}} id="standard-basic" label="Confirm Password"/>
                 <Box mt={5}>
-                    <MyButton onClick={handleSubmit} content={"Submit"}/>
+                    <MyButton onClick={handleSubmit} disabled={registerState.username.length<2 || registerState.firstname.length<2 || registerState.lastname.length<2 || registerState.password.length<2 || registerState.email.length<2
+                    } content={"Submit"}/>
                 </Box>
             </Box>
         </Box>
