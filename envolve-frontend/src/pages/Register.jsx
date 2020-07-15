@@ -1,5 +1,5 @@
 import {Box} from "@material-ui/core";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {postRegister} from "../utils/fetch-utils";
@@ -7,6 +7,9 @@ import MyButton from "../components/MyButton";
 import {useHistory} from 'react-router-dom';
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
+import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
+import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
+import {UserDispatchContext} from "../context/UserContext";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register() {
 
+    const dispatch = useContext(UserDispatchContext)
     const classes = useStyles();
     const history = useHistory();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -63,7 +67,15 @@ export default function Register() {
         if (registerState.confirmpassword !== registerState.password) {
             setAnchorEl(event.currentTarget);
         } else {
-            postRegister(registerState);
+            postRegister(registerState)
+                .then((response) => {
+                setJWTToken(response);
+                const userData = getDecodedJWTToken();
+                dispatch({type: LOGIN_SUCCESS, payload: userData});
+            })
+                .catch(() => {
+                    dispatch({type: LOGIN_FAILED});
+                });
             history.goBack();
         }
     }
@@ -85,7 +97,8 @@ export default function Register() {
                            label="Email Address"/>
                 <TextField style={{width: "320px", margin: "10px"}} type="password" id="standard-basic"
                            onChange={handleChange} name="password" label="Password"/>
-                <TextField style={{width: "320px"}} id="standard-basic" onChange={handleChange} name="confirmpassword" type="password" label="Confirm Password"/>
+                <TextField style={{width: "320px"}} id="standard-basic" onChange={handleChange} name="confirmpassword"
+                           type="password" label="Confirm Password"/>
                 <Box mt={5}>
                     <MyButton onClick={handleSubmit}
                               disabled={registerState.username.length < 2 || registerState.firstname.length < 2 || registerState.lastname.length < 2 || registerState.password.length < 2 || registerState.email.length < 2

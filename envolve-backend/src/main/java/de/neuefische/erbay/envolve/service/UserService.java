@@ -17,6 +17,7 @@ public class UserService {
     }
 
     public void register(Teacher teacher) {
+        Teacher tempTeacher = new Teacher(teacher.getUsername(), teacher.getPassword(),teacher.getFirstname(),teacher.getLastname(), teacher.getEmail());
         String encodedPw = encoder.encode(teacher.getPassword());
         teacher.setPassword(encodedPw);
         teacherDb.save(teacher);

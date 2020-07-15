@@ -22,9 +22,9 @@ public class RegisterController {
     }
 
     @PostMapping
-    public void register(@RequestBody Teacher teacher) {
+    public String register(@RequestBody Teacher teacher) {
         userService.register(teacher);
-   /*    return authController.login(teacher);*/ // possible Approach?
+       return authController.login(teacher); // possible Approach?
     }
 
 }
