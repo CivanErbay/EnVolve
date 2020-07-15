@@ -1,6 +1,3 @@
-import React from "react";
-
-
 export function postRegister(registerData){
     return fetch('/api/register', {
         method: 'POST',
@@ -12,7 +9,7 @@ export function postRegister(registerData){
         if(response.status !== 200) {
             throw new Error('invalid response')
         }
-
+        return response.text();
     })
 
 }

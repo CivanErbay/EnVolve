@@ -4,12 +4,12 @@ import TextField from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {postRegister} from "../utils/fetch-utils";
 import MyButton from "../components/MyButton";
-import {useHistory} from 'react-router-dom';
+import {Redirect, useHistory} from 'react-router-dom';
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
-import {UserDispatchContext} from "../context/UserContext";
+import {UserDispatchContext, UserStateContext} from "../context/UserContext";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -76,28 +76,34 @@ export default function Register() {
                 .catch(() => {
                     dispatch({type: LOGIN_FAILED});
                 });
-            history.goBack();
+         /*   history.goBack();*/
         }
+    }
+
+    const { authStatus } = useContext(UserStateContext);
+    if (authStatus === 'SUCCESS') {
+        return <Redirect to={'/overview'} />;
     }
 
 
     return (
         <Box mt={12} className={classes.outer}>
             <h2>Register</h2>
+            <form>
             <Box className={classes.inner}>
-                <TextField style={{width: "320px"}} id="standard-basic" onChange={handleChange} name="username"
+                <TextField style={{width: "320px"}} onChange={handleChange} name="username"
                            label="Username"/>
                 <Box>
                     <TextField style={{width: "150px", margin: "10px"}} onChange={handleChange} name="firstname"
-                               id="standard-basic" label="Name"/>
+                               label="Name"/>
                     <TextField style={{width: "150px", margin: "10px"}} onChange={handleChange} name="lastname"
-                               id="standard-basic" label="Lastname"/>
+                                label="Lastname"/>
                 </Box>
-                <TextField style={{width: "320px"}} id="standard-basic" name="email" onChange={handleChange}
+                <TextField style={{width: "320px"}} name="email" onChange={handleChange}
                            label="Email Address"/>
-                <TextField style={{width: "320px", margin: "10px"}} type="password" id="standard-basic"
+                <TextField style={{width: "320px", margin: "10px"}} type="password"
                            onChange={handleChange} name="password" label="Password"/>
-                <TextField style={{width: "320px"}} id="standard-basic" onChange={handleChange} name="confirmpassword"
+                <TextField style={{width: "320px"}} onChange={handleChange} name="confirmpassword"
                            type="password" label="Confirm Password"/>
                 <Box mt={5}>
                     <MyButton onClick={handleSubmit}
@@ -122,6 +128,7 @@ export default function Register() {
                     </Popover>}
                 </Box>
             </Box>
+            </form>
         </Box>
     )
 }
