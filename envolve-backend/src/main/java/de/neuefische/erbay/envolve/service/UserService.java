@@ -26,8 +26,6 @@ public class UserService {
         teacher.setFirstname(data.getFirstname());
         teacher.setLastname(data.getLastname());
         teacher.setEmail(data.getEmail());
-
-
         teacherDb.save(teacher);
     }
 }

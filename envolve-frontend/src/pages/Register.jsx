@@ -4,12 +4,13 @@ import TextField from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {postRegister} from "../utils/fetch-utils";
 import MyButton from "../components/MyButton";
-import {Redirect, useHistory} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {UserDispatchContext, UserStateContext} from "../context/UserContext";
+import Button from "@material-ui/core/Button";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +35,7 @@ export default function Register() {
 
     const dispatch = useContext(UserDispatchContext)
     const classes = useStyles();
-    const history = useHistory();
+
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const open = Boolean(anchorEl);
@@ -76,7 +77,6 @@ export default function Register() {
                 .catch(() => {
                     dispatch({type: LOGIN_FAILED});
                 });
-         /*   history.goBack();*/
         }
     }
 
@@ -129,6 +129,7 @@ export default function Register() {
                 </Box>
             </Box>
             </form>
+
         </Box>
     )
 }
