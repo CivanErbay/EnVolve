@@ -15,6 +15,19 @@ export function postRegister(registerData){
     })
 }
 
+export function postClass(schoolClass) {
+    const token = getJWTToken();
+    return fetch("api/classes/", {
+        method: 'POST',
+        headers: {
+                'Accept': "application/json, text/plain, */*",
+                'Content-Type': "application/json;charset=utf-8",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({schoolClass})
+    })
+}
+
 export async function getSchoolClasses(teacher){
     const token = getJWTToken();
     const response = await fetch(`/api/classes/${teacher}`, {

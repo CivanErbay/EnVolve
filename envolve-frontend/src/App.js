@@ -12,6 +12,7 @@ import {UserDispatchContext} from "./context/UserContext";
 import UserContextProvider, {LOGIN_SUCCESS} from "./context/UserContextProvider";
 import {getDecodedJWTToken, isJWTTokenValid} from "./utils/jwt-utils";
 import Register from "./pages/Register";
+import SchoolClassCreation from "./pages/SchoolClassCreation";
 
 const theme = createMuiTheme({
     typography: {
@@ -44,6 +45,7 @@ function Navigation() {
                     <Register/>
                 </Route>
                     <PrivateRoute path="/overview" component={Overview} exact/>
+                    <PrivateRoute path="/creation" component={SchoolClassCreation} exact/>
                 <Route path="/">
                     <Landing/>
                 </Route>
