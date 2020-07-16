@@ -5,6 +5,10 @@ import de.neuefische.erbay.envolve.service.SchoolClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.List;
+
+
 
 @RequestMapping("/api/classes")
 @RestController
@@ -18,13 +22,15 @@ public class SchoolClassController {
     }
 
     @PostMapping
-    public void addClass(@RequestBody SchoolClass schoolClass){
+    public void addClass(@RequestBody SchoolClass schoolClass, Principal teacher){
+        String teacherName = teacher.getName();
+        schoolClass.setTeacher(teacherName);
         schoolClassService.addClass(schoolClass);
     };
 
-    @GetMapping
-    public Iterable<SchoolClass> getClasses(){
-        return schoolClassService.getClasses();
+    @GetMapping("{teacher}")
+    public List<SchoolClass> getClassesByTeacher(@PathVariable String teacher){
+      return schoolClassService.getClassesById(teacher);
     }
 
 }

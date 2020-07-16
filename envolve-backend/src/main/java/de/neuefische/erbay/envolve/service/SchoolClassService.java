@@ -4,6 +4,8 @@ import de.neuefische.erbay.envolve.db.SchoolClassDb;
 import de.neuefische.erbay.envolve.model.SchoolClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
+
 
 @Service
 public class SchoolClassService {
@@ -19,8 +21,8 @@ public class SchoolClassService {
     schoolClassDb.save(schoolClass);
     }
 
-    public Iterable<SchoolClass> getClasses() {
-       return schoolClassDb.findAll();
+    public List<SchoolClass> getClassesById(String teacher) {
+       return schoolClassDb.findByTeacher(teacher);
     }
 }
 

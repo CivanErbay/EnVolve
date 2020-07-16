@@ -15,9 +15,9 @@ export function postRegister(registerData){
     })
 }
 
-export async function getSchoolClasses(){
+export async function getSchoolClasses(teacher){
     const token = getJWTToken();
-    const response = await fetch('/api/classes/', {
+    const response = await fetch(`/api/classes/${teacher}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
