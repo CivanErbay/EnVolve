@@ -2,7 +2,7 @@ package de.neuefische.erbay.envolve.service;
 
 import de.neuefische.erbay.envolve.db.TeacherDb;
 import de.neuefische.erbay.envolve.model.Teacher;
-import de.neuefische.erbay.envolve.model.TeacherDto;
+import de.neuefische.erbay.envolve.model.dto.TeacherDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package de.neuefische.erbay.envolve.model;
+package de.neuefische.erbay.envolve.model.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@NotEmpty
 public class TeacherDto {
 
     @Size(min = 5, message = "user mind length 5")

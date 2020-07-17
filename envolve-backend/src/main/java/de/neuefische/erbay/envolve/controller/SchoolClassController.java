@@ -1,10 +1,12 @@
 package de.neuefische.erbay.envolve.controller;
 
 import de.neuefische.erbay.envolve.model.SchoolClass;
+import de.neuefische.erbay.envolve.model.dto.AddSchoolClassDto;
 import de.neuefische.erbay.envolve.service.SchoolClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -22,10 +24,9 @@ public class SchoolClassController {
     }
 
     @PostMapping
-    public void addClass(@RequestBody SchoolClass schoolClass, Principal teacher){
+    public void addClass(@RequestBody @Valid AddSchoolClassDto tempSchoolClass, Principal teacher){
         String teacherName = teacher.getName();
-        schoolClass.setTeacher(teacherName);
-        schoolClassService.addClass(schoolClass);
+        schoolClassService.addClass(tempSchoolClass, teacherName);
     };
 
     @GetMapping("{teacher}")

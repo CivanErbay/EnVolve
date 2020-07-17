@@ -31,50 +31,42 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SchoolClassCreation() {
     const classes = useStyles();
-    //get the actual logged in userContext
-    const userState = useContext(UserStateContext)
-    //get the teacher out of the context
-    const teacher = userState.userData.sub
 
 
-    const [student, setStudent] = useState("")
+    const [singleStudent, setSingleStudent] = useState("")
     const [studentlist, setStudentlist] = useState([])
-
     const [cname, setCName] = useState("")
 
     const [schoolClass, setSchoolClass] = useState({
-        teacher: teacher,
         classname: '',
         classmembers: []
     })
 
 
     function addStudent() {
-        setStudentlist(studentlist.concat(student))
+        setStudentlist(studentlist.concat(singleStudent))
     }
 
 
     useEffect(() =>{
-
         setSchoolClass({...schoolClass, classmembers: studentlist})
     },[studentlist])
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        setSchoolClass({...schoolClass, classname: cname})
-        postClass(schoolClass)
+    function handleSubmit() {
+        postClass( {...schoolClass, classname: cname});
     }
+
     console.log(schoolClass)
     return (
         <Box mt={3} className={classes.column}>
             <h4>Classname</h4>
             <TextField placeholder="Enter Classname" onChange={(event) => setCName(event.target.value)} value={cname}/>
 
-            <Box m={2}>{schoolClass.classmembers.map(singleStudent => <Typography>{singleStudent}</Typography>)}</Box>
+            <Box m={2}>{schoolClass.classmembers.map(singleStudent => <Typography key={singleStudent}>{singleStudent}</Typography>)}</Box>
 
             <Box mt={4}>
             <h4>Students</h4>
-            <TextField onChange={(event) => setStudent(event.target.value)} value={student}/>
+            <TextField onChange={(event) => setSingleStudent(event.target.value)} value={singleStudent}/>
             </Box>
             <Box mt={2}>
                 <MyButton onClick={addStudent} content={"Add new Student"}/>

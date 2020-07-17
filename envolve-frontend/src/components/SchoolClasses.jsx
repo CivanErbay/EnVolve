@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {getSchoolClasses} from "../utils/fetch-utils";
 import Box from "@material-ui/core/Box";
 import {UserStateContext} from "../context/UserContext";
@@ -26,20 +26,22 @@ export default function SchoolClasses() {
     const teacher = userState.userData.sub
 
     //get classes out of this teacher
-    getSchoolClasses(teacher).then(response => {
-        if (response) {
-            const classes = response.map(schoolClass => {
-                return {...schoolClass}
-            })
-            setSchoolClasses(classes)
-        }
-    });
+    useEffect(()=> {
+        getSchoolClasses(teacher).then(response => {
+            if (response) {
+                const classes = response.map(schoolClass => {
+                    return {...schoolClass}
+                })
+                setSchoolClasses(classes)
+            }
+        });
+    },[])
 
     return (
         <>
             <Box>
                 <h3>Choose class:</h3>
-                <Box>{schoolClasses.map((schoolClass) => <Box> {schoolClass.classname}</Box>)}</Box>
+                <Box>{schoolClasses.map((schoolClass) => <Box key={schoolClasses.id}> {schoolClass.classname}</Box>)}</Box>
             </Box>
             <Button><Link className={classes.link} to="/creation">Add new class</Link></Button>
         </>

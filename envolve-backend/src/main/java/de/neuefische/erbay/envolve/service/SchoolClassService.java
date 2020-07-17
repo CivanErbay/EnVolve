@@ -2,8 +2,12 @@ package de.neuefische.erbay.envolve.service;
 
 import de.neuefische.erbay.envolve.db.SchoolClassDb;
 import de.neuefische.erbay.envolve.model.SchoolClass;
+import de.neuefische.erbay.envolve.model.Student;
+import de.neuefische.erbay.envolve.model.dto.AddSchoolClassDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,7 +21,18 @@ public class SchoolClassService {
         this.schoolClassDb = schoolClassDb;
     }
 
-    public void addClass(SchoolClass schoolClass) {
+    public void addClass(AddSchoolClassDto tempSchoolClass, String teacherName) {
+     SchoolClass schoolClass = new SchoolClass();
+     List<Student> tempList = new ArrayList<>();
+     schoolClass.setTeacher(teacherName);
+        for (int i = 0; i < tempSchoolClass.getClassmembers().size(); i++) {
+            String singleClassmemberName = tempSchoolClass.getClassmembers().get(i);
+            String code = "123";
+            Student singleClassmember = new Student(singleClassmemberName,code);
+            tempList.add(singleClassmember);
+        }
+        schoolClass.setClassmembers(tempList);
+        schoolClass.setClassname(tempSchoolClass.getClassname());
     schoolClassDb.save(schoolClass);
     }
 

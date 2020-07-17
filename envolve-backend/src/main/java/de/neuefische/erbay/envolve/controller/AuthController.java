@@ -2,7 +2,6 @@ package de.neuefische.erbay.envolve.controller;
 
 import de.neuefische.erbay.envolve.db.TeacherDb;
 import de.neuefische.erbay.envolve.model.Teacher;
-import de.neuefische.erbay.envolve.model.TeacherDto;
 import de.neuefische.erbay.envolve.security.JWTUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

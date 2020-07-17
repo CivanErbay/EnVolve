@@ -1,7 +1,7 @@
 package de.neuefische.erbay.envolve.controller;
 
 import de.neuefische.erbay.envolve.model.Teacher;
-import de.neuefische.erbay.envolve.model.TeacherDto;
+import de.neuefische.erbay.envolve.model.dto.TeacherDto;
 import de.neuefische.erbay.envolve.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

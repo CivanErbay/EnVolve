@@ -6,7 +6,7 @@ export function postRegister(registerData){
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(registerData),
+        body: JSON.stringify({registerData}),
     }).then((response) => {
         if(response.status !== 200) {
             throw new Error('invalid response')
@@ -17,14 +17,13 @@ export function postRegister(registerData){
 
 export function postClass(schoolClass) {
     const token = getJWTToken();
-    return fetch("api/classes/", {
+    return fetch("api/classes", {
         method: 'POST',
         headers: {
-                'Accept': "application/json, text/plain, */*",
-                'Content-Type': "application/json;charset=utf-8",
+            'Content-Type': "application/json",
             Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({schoolClass})
+        body: JSON.stringify(schoolClass)
     })
 }
 
