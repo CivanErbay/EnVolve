@@ -13,5 +13,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Student {
     @Id
     private String student;
-    private String loginCode;
+    private String code;
 }

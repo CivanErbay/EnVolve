@@ -3,22 +3,21 @@ package de.neuefische.erbay.envolve.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 
-
-
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "teacher")
-public class Teacher {
+@Data
+@Document(collection = "class")
+public class SchoolClass {
 
     @Id
-    private String username;
-    private String password;
-    private String firstname;
-    private String lastname;
-    private String email;
+    private String id;
+    private String teacher;
+    private String classname;
+    private List<Student> classmembers;
 }

@@ -1,9 +1,11 @@
 package de.neuefische.erbay.envolve.controller;
 
+import de.neuefische.erbay.envolve.db.TeacherDb;
 import de.neuefische.erbay.envolve.model.Teacher;
+import de.neuefische.erbay.envolve.model.dto.LoginDto;
 import de.neuefische.erbay.envolve.security.JWTUtils;
+import de.neuefische.erbay.envolve.service.TokenService;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,29 +14,26 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 
-import java.util.HashMap;
-
-
 @RequestMapping("auth/login")
 @RestController
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
-    private final JWTUtils jwtUtils;
 
-    public AuthController(AuthenticationManager authenticationManager, JWTUtils jwtUtils) {
-        this.authenticationManager = authenticationManager;
-        this.jwtUtils = jwtUtils;
+
+    private final TokenService tokenService;
+
+    public AuthController(TokenService tokenService) {
+        this.tokenService = tokenService;
     }
 
     @PostMapping
-    public String login(@RequestBody Teacher teacher) {
+    public String login(@RequestBody LoginDto teacher) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(teacher.getUsername(), teacher.getPassword()));
-            return jwtUtils.createToken(new HashMap<>(), teacher.getUsername());
-
+            return tokenService.getToken(teacher);
+            //Optional tempTeacher to store firstname and lastname of the currently logged in Teacher into the generated token.
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid credentials");
         }
     }
+
 }

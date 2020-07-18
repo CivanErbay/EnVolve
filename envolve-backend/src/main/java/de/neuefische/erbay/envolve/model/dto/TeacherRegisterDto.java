@@ -1,22 +1,21 @@
-package de.neuefische.erbay.envolve.model;
+package de.neuefische.erbay.envolve.model.dto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "teacher")
-public class Teacher {
+public class TeacherRegisterDto {
 
-    @Id
+    @Size(min = 5, message = "user mind length 5")
     private String username;
+    @Size(min = 5, message = "password min length 5")
     private String password;
     private String firstname;
     private String lastname;
