@@ -2,6 +2,7 @@ package de.neuefische.erbay.envolve.service;
 
 import de.neuefische.erbay.envolve.db.TeacherDb;
 import de.neuefische.erbay.envolve.model.Teacher;
+import de.neuefische.erbay.envolve.model.dto.LoginDto;
 import de.neuefische.erbay.envolve.security.JWTUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,7 +28,7 @@ public class TokenService {
     }
 
 
-    public String getToken(@RequestBody Teacher teacher) {
+    public String getToken(@RequestBody LoginDto teacher) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(teacher.getUsername(), teacher.getPassword()));
         final Optional<Teacher> tempTeacher = teacherDb.findById(teacher.getUsername());
         return jwtUtils.createToken(new HashMap<>(Map.of("firstname", tempTeacher.get().getFirstname(),"lastname", tempTeacher.get().getLastname())), teacher.getUsername());
