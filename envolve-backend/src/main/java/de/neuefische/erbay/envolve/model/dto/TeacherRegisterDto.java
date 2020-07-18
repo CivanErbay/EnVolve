@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeacherDto {
+public class TeacherRegisterDto {
 
     @Size(min = 5, message = "user mind length 5")
     private String username;

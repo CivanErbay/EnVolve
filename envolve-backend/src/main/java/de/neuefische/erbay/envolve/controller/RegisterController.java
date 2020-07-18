@@ -1,7 +1,7 @@
 package de.neuefische.erbay.envolve.controller;
 
 import de.neuefische.erbay.envolve.model.Teacher;
-import de.neuefische.erbay.envolve.model.dto.TeacherDto;
+import de.neuefische.erbay.envolve.model.dto.TeacherRegisterDto;
 import de.neuefische.erbay.envolve.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +23,7 @@ public class RegisterController {
     }
 
     @PostMapping
-    public String register(@RequestBody TeacherDto data) {
+    public String register(@RequestBody TeacherRegisterDto data) {
         userService.register(data);
         Teacher teacher = new Teacher();
         teacher.setPassword(data.getPassword());

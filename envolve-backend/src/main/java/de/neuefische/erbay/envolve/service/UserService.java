@@ -2,7 +2,7 @@ package de.neuefische.erbay.envolve.service;
 
 import de.neuefische.erbay.envolve.db.TeacherDb;
 import de.neuefische.erbay.envolve.model.Teacher;
-import de.neuefische.erbay.envolve.model.dto.TeacherDto;
+import de.neuefische.erbay.envolve.model.dto.TeacherRegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class UserService {
         this.teacherDb = teacherDb;
     }
 
-    public void register(TeacherDto data) {
+    public void register(TeacherRegisterDto data) {
 
         Teacher teacher = new Teacher();
         teacher.setUsername(data.getUsername());
@@ -28,4 +28,6 @@ public class UserService {
         teacher.setEmail(data.getEmail());
         teacherDb.save(teacher);
     }
+
+
 }
