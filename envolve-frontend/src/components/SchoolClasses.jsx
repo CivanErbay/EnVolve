@@ -28,12 +28,8 @@ export default function SchoolClasses() {
     //get classes out of this teacher
     useEffect(()=> {
         getSchoolClasses(teacher).then(response => {
-            if (response) {
-                const classes = response.map(schoolClass => {
-                    return {...schoolClass}
-                })
-                setSchoolClasses(classes)
-            }
+
+            setSchoolClasses(response)
         });
     },[])
 

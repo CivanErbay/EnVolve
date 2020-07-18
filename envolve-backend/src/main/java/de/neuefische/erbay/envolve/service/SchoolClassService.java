@@ -24,13 +24,19 @@ public class SchoolClassService {
     public void addClass(AddSchoolClassDto tempSchoolClass, String teacherName) {
      SchoolClass schoolClass = new SchoolClass();
      List<Student> tempList = new ArrayList<>();
-     schoolClass.setTeacher(teacherName);
-        for (int i = 0; i < tempSchoolClass.getClassmembers().size(); i++) {
+
+        List<String> studentNames = tempSchoolClass.getClassmembers();
+
+        schoolClass.setTeacher(teacherName);
+
+        for (int i = 0; i < studentNames.size(); i++) {
             String singleClassmemberName = tempSchoolClass.getClassmembers().get(i);
             String code = "123";
             Student singleClassmember = new Student(singleClassmemberName,code);
             tempList.add(singleClassmember);
         }
+
+
         schoolClass.setClassmembers(tempList);
         schoolClass.setClassname(tempSchoolClass.getClassname());
     schoolClassDb.save(schoolClass);
