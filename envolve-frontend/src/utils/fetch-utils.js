@@ -40,3 +40,17 @@ export async function getSchoolClasses(teacher){
     }
     return await response.json();
 }
+
+export async function getClassById(id) {
+    const token = getJWTToken();
+    const response = await fetch(`/api/classes/${id}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+    if (response.status !== 200) {
+        throw new Error('something went wrong!');
+    }
+    return await response.json();
+}

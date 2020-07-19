@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -44,6 +45,10 @@ public class SchoolClassService {
 
     public List<SchoolClass> getClassesById(String teacher) {
        return schoolClassDb.findByTeacher(teacher);
+    }
+
+    public Optional<SchoolClass> getClassById(String id) {
+      return schoolClassDb.findById(id);
     }
 }
 

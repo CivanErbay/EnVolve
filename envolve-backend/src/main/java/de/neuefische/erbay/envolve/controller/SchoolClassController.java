@@ -4,12 +4,14 @@ import de.neuefische.erbay.envolve.model.SchoolClass;
 import de.neuefische.erbay.envolve.model.dto.AddSchoolClassDto;
 import de.neuefische.erbay.envolve.service.SchoolClassService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
-
+import java.util.Optional;
 
 
 @RequestMapping("/api/classes")
@@ -34,4 +36,12 @@ public class SchoolClassController {
       return schoolClassService.getClassesById(teacher);
     }
 
+    @GetMapping("{id}")
+    public SchoolClass getClassById(@PathVariable String id) {
+        Optional<SchoolClass> tempSchoolClass = schoolClassService.getClassById(id);
+        if (tempSchoolClass.isPresent()) {
+            return tempSchoolClass.get();
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "School with " + id + " not exists");
+    }
 }

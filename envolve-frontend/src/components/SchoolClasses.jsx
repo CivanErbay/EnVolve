@@ -28,7 +28,6 @@ export default function SchoolClasses() {
     //get classes out of this teacher
     useEffect(()=> {
         getSchoolClasses(teacher).then(response => {
-
             setSchoolClasses(response)
         });
     },[])
@@ -37,8 +36,8 @@ export default function SchoolClasses() {
         <>
             <Box>
                 <h3>Choose class:</h3>
-                <Box>{schoolClasses.map((schoolClass) => <Box key={schoolClasses.id}> {schoolClass.classname}</Box>)}</Box>
-            </Box>
+                <Box key={schoolClasses.id}>{schoolClasses.map((schoolClass) => <Link className={classes.link} to="/singleclass/{schoolClass.id}" key={schoolClasses.id}> {schoolClass.classname}</Link>)}</Box>
+            </Box>s
             <Button><Link className={classes.link} to="/creation">Add new class</Link></Button>
         </>
     )
