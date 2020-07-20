@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
-
     }
 }));
 
@@ -37,9 +36,8 @@ export default function SingleClass() {
 
     return (
         <Box className={classes.center}>
-
                             {schoolClass &&  ( <>
-                                <Box mt={4}> I am class: {schoolClass.classname} </Box>
+                                <Box mt={4}>{schoolClass.classname} </Box>
                                 {schoolClass.classmembers.map((member) =>
                                 <h4 key={member.student}>{member.student}</h4>)} </> )
                                  }

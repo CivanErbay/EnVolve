@@ -20,7 +20,10 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: 'black',
         textTransform: 'none'
-}
+}   ,
+    bg: {
+        backgroundColor: "#F7F7F7"
+    }
 }));
 
 export default function Footer()
@@ -28,7 +31,7 @@ export default function Footer()
     const classes = useStyles();
 
     return (
-        <div className={classNames(classes.stickToBottom, classes.footerProps)}>
+        <div className={classNames(classes.stickToBottom, classes.footerProps, classes.bg)}>
             <Button><Link className={classes.link} to="/">Terms</Link></Button>
             <Button><Link className={classes.link} to="/login">Teacher?</Link></Button>
         </div>

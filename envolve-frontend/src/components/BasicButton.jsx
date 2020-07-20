@@ -5,12 +5,13 @@ import classNames from 'classnames';
 
 const useStyles = makeStyles((theme) => ({
     buttonStyle : {
-        textTransform: 'none'
+        textTransform: 'none',
+        backgroundColor: "white",
     }
 }))
 
 
-export default function MyButton({className, disabled, content, onClick, to}) {
+export default function BasicButton({className, disabled, content, onClick, to}) {
 
     const classes = useStyles();
     return(

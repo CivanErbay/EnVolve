@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import {UserDispatchContext} from "../context/UserContext";
 import {removeJWTToken} from "../utils/jwt-utils";
 import {LOGOUT} from "../context/UserContextProvider";
-import MyButton from "./MyButton";
+import BasicButton from "./BasicButton";
 import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 
@@ -26,8 +26,8 @@ export default function LogoutButton() {
     }
 
     return (
-        <Box mb={4} className={classes.stickToBottom}>
-        <MyButton onClick={logout} content={"Logout"}/>
+        <Box mt={4} /*className={classes.stickToBottom}*/>
+        <BasicButton onClick={logout} content={"Logout"}/>
         </Box>
     )
 }

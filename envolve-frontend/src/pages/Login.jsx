@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import TextField from '@material-ui/core/TextField';
 import Box from "@material-ui/core/Box";
-import MyButton from "../components/MyButton";
+import BasicButton from "../components/BasicButton";
 import {UserDispatchContext, UserStateContext} from "../context/UserContext";
 import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
@@ -75,7 +75,7 @@ export default function Login() {
                 <TextField onChange={(event) => setUsername(event.target.value)} id="standard-basic" label="Username" value={username}/>
                 <TextField onChange={(event) => setPassword(event.target.value)} id="standard-basic" type="password" label="Password" value={password}/>
                 <Box pt={2}>
-                    <MyButton onClick={login} content={"Submit"}/>
+                    <BasicButton onClick={login} content={"Submit"}/>
                 </Box>
             </form>
             </Box>
