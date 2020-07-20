@@ -36,14 +36,12 @@ public class SchoolClassService {
             Student singleClassmember = new Student(singleClassmemberName,code);
             tempList.add(singleClassmember);
         }
-
-
         schoolClass.setClassmembers(tempList);
         schoolClass.setClassname(tempSchoolClass.getClassname());
     schoolClassDb.save(schoolClass);
     }
 
-    public List<SchoolClass> getClassesById(String teacher) {
+    public List<SchoolClass> getClassesByTeacher(String teacher) {
        return schoolClassDb.findByTeacher(teacher);
     }
 

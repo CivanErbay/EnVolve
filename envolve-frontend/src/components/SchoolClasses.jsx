@@ -1,17 +1,35 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {getSchoolClasses} from "../utils/fetch-utils";
+import {getSchoolClassesByTeacher} from "../utils/fetch-utils";
 import Box from "@material-ui/core/Box";
 import {UserStateContext} from "../context/UserContext";
-
-import Button from "@material-ui/core/Button";
+import classNames from 'classnames';
 import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
     link: {
         textDecoration: 'none',
         color: 'black',
         textTransform: 'none'
+    },
+    center: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    border: {
+        border: "solid",
+        borderRadius: "10px",
+        borderWidth: "1px",
+        padding: "0.5em"
+    },
+    paperColor: {
+        backgroundColor: "#F7F7F7",
+        padding: ".75em",
+        display: "flex",
+        flexDirection: "row"
     }
 }));
 
@@ -26,19 +44,24 @@ export default function SchoolClasses() {
     const teacher = userState.userData.sub
 
     //get classes out of this teacher
-    useEffect(()=> {
-        getSchoolClasses(teacher).then(response => {
+    useEffect(() => {
+        getSchoolClassesByTeacher(teacher).then(response => {
             setSchoolClasses(response)
         });
-    },[])
+    }, [])
+
 
     return (
         <>
             <Box>
-                <h3>Choose class:</h3>
-                <Box key={schoolClasses.id}>{schoolClasses.map((schoolClass) => <Link className={classes.link} to="/singleclass/{schoolClass.id}" key={schoolClasses.id}> {schoolClass.classname}</Link>)}</Box>
-            </Box>s
-            <Button><Link className={classes.link} to="/creation">Add new class</Link></Button>
+                <h3>Your current Classes</h3>
+                <Box key={schoolClasses.id} className={classNames(classes.center)}>{schoolClasses.map((schoolClass) =>
+                    <Box className={classes.paperColor} m={1}> <h4>{schoolClass.classname} </h4><Link className={classes.link}
+                                                                  to={`/singleclass/${schoolClass.id}`}
+                                                                  key={schoolClasses.id}> Details </Link>
+                    </Box>)}</Box>
+            </Box>
+            <Button className={classes.border}><Link className={classes.link} to="/creation">Add new class</Link></Button>
         </>
     )
 }

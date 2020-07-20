@@ -33,15 +33,15 @@ public class SchoolClassController {
 
     @GetMapping("{teacher}")
     public List<SchoolClass> getClassesByTeacher(@PathVariable String teacher){
-      return schoolClassService.getClassesById(teacher);
+      return schoolClassService.getClassesByTeacher(teacher);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/class/{id}")
     public SchoolClass getClassById(@PathVariable String id) {
         Optional<SchoolClass> tempSchoolClass = schoolClassService.getClassById(id);
         if (tempSchoolClass.isPresent()) {
             return tempSchoolClass.get();
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "School with " + id + " not exists");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Schoolclass with " + id + " not exists");
     }
 }
