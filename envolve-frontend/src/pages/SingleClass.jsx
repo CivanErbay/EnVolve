@@ -28,9 +28,9 @@ export default function SingleClass() {
 
     useEffect(()=> {
         getClassById(id).then(response => {
-            console.log(response)
             setSchoolClass(response)
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
 
@@ -38,14 +38,11 @@ export default function SingleClass() {
     return (
         <Box className={classes.center}>
 
-
                             {schoolClass &&  ( <>
                                 <Box mt={4}> I am class: {schoolClass.classname} </Box>
                                 {schoolClass.classmembers.map((member) =>
-                                <h4>{member.student}</h4>)} </> )
+                                <h4 key={member.student}>{member.student}</h4>)} </> )
                                  }
-
-
 
             <BackButton/>
             </Box>

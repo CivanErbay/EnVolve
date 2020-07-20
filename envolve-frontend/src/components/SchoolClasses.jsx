@@ -11,7 +11,9 @@ const useStyles = makeStyles((theme) => ({
     link: {
         textDecoration: 'none',
         color: 'black',
-        textTransform: 'none'
+        textTransform: 'none',
+        fontSize: '10px',
+        padding: "0.4em"
     },
     center: {
         display: "flex",
@@ -19,17 +21,32 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         alignItems: "center"
     },
-    border: {
-        border: "solid",
-        borderRadius: "10px",
-        borderWidth: "1px",
-        padding: "0.5em"
-    },
     paperColor: {
         backgroundColor: "#F7F7F7",
-        padding: ".75em",
-        display: "flex",
-        flexDirection: "row"
+        width: "200px",
+        borderRadius: "5px"
+    },
+    magicHover: {
+        backgroundSize: "100% 200%",
+        textDecoration: "none",
+        listStyleType: "none",
+        backgroundImage: "linear-gradient(to bottom, #fff 50%, #f9ce21 50%)",
+        transition: "background-position 0.5s ease-in-out, color 0.5s ease-in-out",
+        color: "black",
+        borderBottom: "solid",
+        borderColor: "#f9ce21",
+        '&:hover': {
+            backgroundPosition: "0 100%",
+            color: "black",
+            textDecoration: "none",
+            listStyleType: "none",
+        },
+        '&:focus': {
+            backgroundPosition: "0 100%",
+            color: "black",
+            textDecoration: "none",
+            listStyleType: "none",
+        }
     }
 }));
 
@@ -48,20 +65,23 @@ export default function SchoolClasses() {
         getSchoolClassesByTeacher(teacher).then(response => {
             setSchoolClasses(response)
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
     return (
         <>
             <Box>
-                <h3>Your current Classes</h3>
-                <Box key={schoolClasses.id} className={classNames(classes.center)}>{schoolClasses.map((schoolClass) =>
-                    <Box className={classes.paperColor} m={1}> <h4>{schoolClass.classname} </h4><Link className={classes.link}
-                                                                  to={`/singleclass/${schoolClass.id}`}
-                                                                  key={schoolClasses.id}> Details </Link>
-                    </Box>)}</Box>
+                <h3>Your current classes</h3>
+                <Box key={schoolClasses.id} className={classes.center}>{schoolClasses.map((schoolClass) =>
+                    <Box className={classes.paperColor} boxShadow={3} key={schoolClass.id} m={1}><h1>{schoolClass.classname} </h1>  <Link
+                        className={classNames(classes.link, classes.magicHover)}
+                        to={`/singleclass/${schoolClass.id}`}
+                        key={schoolClasses.id}> Show Details </Link></Box>
+                )}</Box>
             </Box>
-            <Button className={classes.border}><Link className={classes.link} to="/creation">Add new class</Link></Button>
+            <Button className={classes.border}><Link className={classes.link} to="/creation">Add new
+                class</Link></Button>
         </>
     )
 }

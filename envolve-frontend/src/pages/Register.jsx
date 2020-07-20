@@ -10,7 +10,6 @@ import Typography from "@material-ui/core/Typography";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {UserDispatchContext, UserStateContext} from "../context/UserContext";
-import Button from "@material-ui/core/Button";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     },
 
 }));
-
 
 export default function Register() {
 

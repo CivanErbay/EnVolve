@@ -38,6 +38,7 @@ export default function SchoolClassCreation() {
 
     useEffect(() =>{
         setSchoolClass({...schoolClass, classmembers: studentlist})
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[studentlist])
 
     function handleSubmit() {
