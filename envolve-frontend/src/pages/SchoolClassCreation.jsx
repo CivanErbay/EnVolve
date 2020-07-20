@@ -1,31 +1,19 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import TextField from "@material-ui/core/TextField";
 import MyButton from "../components/MyButton";
-import Button from "@material-ui/core/Button";
-import {Link} from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import {makeStyles} from "@material-ui/core/styles";
-import classNames from 'classnames';
 import {postClass} from "../utils/fetch-utils";
-import {UserStateContext} from "../context/UserContext";
 import Typography from "@material-ui/core/Typography";
+import BackButton from "../components/BackButton";
 
 const useStyles = makeStyles((theme) => ({
-    stickToBottom: {
-        position: 'fixed',
-        bottom: '30px',
-    },
     column: {
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    link: {
-        textDecoration: 'none',
-        color: 'black',
-        textTransform: 'none'
     }
 }));
 
@@ -50,6 +38,7 @@ export default function SchoolClassCreation() {
 
     useEffect(() =>{
         setSchoolClass({...schoolClass, classmembers: studentlist})
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[studentlist])
 
     function handleSubmit() {
@@ -75,9 +64,7 @@ export default function SchoolClassCreation() {
                 <MyButton onClick={handleSubmit} content={"Submit"}/>
             </Box>
 
-            <Button><
-                Link className={classNames(classes.stickToBottom, classes.link)} to="/overview">Back</Link>
-            </Button>
+            <BackButton/>
 
         </Box>
     )
