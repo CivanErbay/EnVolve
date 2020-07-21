@@ -40,6 +40,7 @@ export default function SchoolClassCreation() {
 
     function addStudent() {
         setStudentlist(studentlist.concat(singleStudent))
+        setSingleStudent("")
     }
 
 

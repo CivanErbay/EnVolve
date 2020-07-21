@@ -3,7 +3,6 @@ import {Box} from "@material-ui/core";
 import {useParams} from 'react-router-dom';
 import BackButton from "../components/BackButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import Wrapper from "../components/Wrapper";
 import {StudentList} from "../components/StudentList";
 import {getClassById} from "../utils/fetch-utils";
 import classNames from "classnames";
