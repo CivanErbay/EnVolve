@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react'
 import {UserDispatchContext} from "../context/UserContext";
 import {getDecodedJWTToken, isJWTTokenValid} from "../utils/jwt-utils";
-import {LOGIN_SUCCESS} from "../context/UserContextProvider";
+import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Header from "./Header";
 import Login from "../pages/Login";
@@ -33,6 +33,8 @@ export default function Navigation() {
     useEffect(() => {           //Keep Login status after Refresh
         if (isJWTTokenValid()) {
             dispatch({ type: LOGIN_SUCCESS, payload: getDecodedJWTToken() });
+        } else {
+            dispatch({type: LOGIN_FAILED})
         }
     }, [dispatch]);
 

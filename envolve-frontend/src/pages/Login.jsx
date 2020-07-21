@@ -8,7 +8,7 @@ import {UserDispatchContext, UserStateContext} from "../context/UserContext";
 import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {performLogin} from "../utils/auth-utils";
-import {Link, Redirect} from "react-router-dom";
+import {Link, Redirect, useLocation} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 
 
@@ -62,8 +62,10 @@ export default function Login() {
     }
 
     const { authStatus } = useContext(UserStateContext);
+    const location = useLocation();
     if (authStatus === 'SUCCESS') {
-        return <Redirect to={'/overview'} />;
+        let locationState = location.state || {from:{pathname: "/overview"}}
+        return <Redirect to={locationState.from.pathname} />;
     }
 
     return (

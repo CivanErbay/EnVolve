@@ -16,7 +16,6 @@ const theme = createMuiTheme({
 
 function App() {
 
-
     return (
         <div className="App">
             <UserContextProvider>
