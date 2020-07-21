@@ -9,6 +9,7 @@ import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {performLogin} from "../utils/auth-utils";
 import {Link, Redirect, useLocation} from "react-router-dom";
+import {About} from "../components/About";
 
 
 
@@ -69,7 +70,7 @@ export default function Login() {
     }
 
     return (
-
+        <>
         <Box mt={5} className={classes.centerPage}>
             <Box boxShadow={2} className={classes.border}>
             <form className={classes.center}>
@@ -88,6 +89,9 @@ export default function Login() {
                 </Box>
             </Box>
         </Box>
+            <img style={{height: "5vh", padding: "0.5em"}} src="./images/arrowDown.svg" alt=""/>
+        <About/>
+        </>
 
     )
 }

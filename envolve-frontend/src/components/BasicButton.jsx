@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-export default function BasicButton({className, disabled, content, onClick, to}) {
+export default function BasicButton({className, disabled, content, onClick,}) {
 
     const classes = useStyles();
     return(

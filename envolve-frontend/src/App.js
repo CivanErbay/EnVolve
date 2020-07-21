@@ -7,7 +7,7 @@ import Navigation from "./components/Navigation";
 
 const theme = createMuiTheme({
     typography: {
-        fontFamily: ['"Open Sans"', 'sans-serif'].join(','),
+        fontFamily: ['"Open Sans"', 'sans-serif', 'Modak', 'cursive'].join(','),
     },
 });
 
