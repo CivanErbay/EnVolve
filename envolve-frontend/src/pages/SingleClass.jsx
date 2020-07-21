@@ -5,6 +5,7 @@ import BackButton from "../components/BackButton";
 import {getClassById} from "../utils/fetch-utils";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Wrapper from "../components/Wrapper";
+import {StudentList} from "../components/StudentList";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,25 +25,11 @@ export default function SingleClass() {
     const classes = useStyles();
     const { id } = useParams();
 
-    const [schoolClass, setSchoolClass] = useState(null);
-
-    useEffect(()=> {
-        getClassById(id).then(response => {
-            setSchoolClass(response)
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
-
-
 
     return (
         <Box className={classes.center}>
             <Wrapper>
-                            {schoolClass &&  ( <>
-                                <Box mt={4}>{schoolClass.classname} </Box>
-                                {schoolClass.classmembers.map((member) =>
-                                <h4 key={member.student}>{member.student}</h4>)} </> )
-                                 }
+                           <StudentList id={id}/>
             </Wrapper>
             <BackButton/>
             </Box>
