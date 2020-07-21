@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import BackButton from "../components/BackButton";
 import {getClassById} from "../utils/fetch-utils";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Wrapper from "../components/Wrapper";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,12 +37,13 @@ export default function SingleClass() {
 
     return (
         <Box className={classes.center}>
+            <Wrapper>
                             {schoolClass &&  ( <>
                                 <Box mt={4}>{schoolClass.classname} </Box>
                                 {schoolClass.classmembers.map((member) =>
                                 <h4 key={member.student}>{member.student}</h4>)} </> )
                                  }
-
+            </Wrapper>
             <BackButton/>
             </Box>
     )

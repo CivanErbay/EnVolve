@@ -3,12 +3,11 @@ import './App.css';
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 import UserContextProvider from "./context/UserContextProvider";
 import Navigation from "./components/Navigation";
-import {makeStyles} from "@material-ui/core/styles";
 
 
 const theme = createMuiTheme({
     typography: {
-        fontFamily: ['"Rowdies"', 'cursive'].join(','),
+        fontFamily: ['"Open Sans"', 'sans-serif'].join(','),
     },
 });
 

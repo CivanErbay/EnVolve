@@ -6,6 +6,8 @@ import {makeStyles} from "@material-ui/core/styles";
 import {postClass} from "../utils/fetch-utils";
 import Typography from "@material-ui/core/Typography";
 import BackButton from "../components/BackButton";
+import Wrapper from "../components/Wrapper";
+import {Redirect} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     column: {
@@ -24,6 +26,8 @@ export default function SchoolClassCreation() {
     const [singleStudent, setSingleStudent] = useState("")
     const [studentlist, setStudentlist] = useState([])
     const [cname, setCName] = useState("")
+    const [creationSuccess, setCreationSuccess] = useState(false)
+
 
     const [schoolClass, setSchoolClass] = useState({
         classname: '',
@@ -44,13 +48,20 @@ export default function SchoolClassCreation() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[studentlist])
 
-    function handleSubmit() {
-        postClass( {...schoolClass, classname: cname});
+    async function handleSubmit() {
+        const postResult = await postClass({...schoolClass, classname: cname});
+        setCreationSuccess(postResult);
     }
 
-    console.log(schoolClass)
+    if (creationSuccess) {
+        return (
+            <Redirect to={"/overview"} />
+        )
+    }
+
     return (
         <Box mt={3} className={classes.column}>
+            <Wrapper>
             <h4>Classname</h4>
             <TextField placeholder="Enter Classname" onChange={(event) => setCName(event.target.value)} value={cname} required/>
 
@@ -67,7 +78,7 @@ export default function SchoolClassCreation() {
 
             <BasicButton disabled={isDisabled()} onClick={handleSubmit} content={"Create"}/>
             </Box>
-
+            </Wrapper>
             <BackButton/>
 
         </Box>

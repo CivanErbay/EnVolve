@@ -2,7 +2,6 @@ import {Link} from "react-router-dom";
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
-import classNames from 'classnames';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -10,23 +9,19 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: 'black',
     },
-    newFont: {
-        fontFamily: 'Rowdies'
-    },
     image: {
-        height: "25vh"
+        width: "100%",
+        maxWidth: "550px"
     },
-    bg: {
-        backgroundColor: "#F7F7F7"
-    }
+
 }))
 
 export default function Header() {
     const classes = useStyles();
     return (
-        <Box pt={4} className={classNames(classes.newFont, classes.bg)}>
+        <Box p={4}>
         <div><Link className={classes.link} to="/">
-            <img className={classes.image} src="./envolveLogo.svg" alt=""/>
+            <img className={classes.image} src="./images/envolveLogoNew.svg" alt=""/>
         </Link>
         </div>
         </Box>

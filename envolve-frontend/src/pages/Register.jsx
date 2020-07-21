@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {UserDispatchContext, UserStateContext} from "../context/UserContext";
+import Wrapper from "../components/Wrapper";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -85,7 +86,9 @@ export default function Register() {
 
 
     return (
-        <Box mt={12} className={classes.outer}>
+        <Box className={classes.inner}>
+        <Wrapper>
+        <Box className={classes.outer}>
             <h2>Register</h2>
             <form>
             <Box className={classes.inner}>
@@ -106,7 +109,7 @@ export default function Register() {
                 <Box mt={5}>
                     <BasicButton onClick={handleSubmit}
                                  disabled={registerState.username.length < 2 || registerState.firstname.length < 2 || registerState.lastname.length < 2 || registerState.password.length < 2 || registerState.email.length < 2
-                              } content={"Submit"}/>
+                              } content={"Register"}/>
                     {registerState.confirmpassword !== registerState.password &&
                     <Popover
                         id={id}
@@ -127,7 +130,8 @@ export default function Register() {
                 </Box>
             </Box>
             </form>
-
+        </Box>
+        </Wrapper>
         </Box>
     )
 }

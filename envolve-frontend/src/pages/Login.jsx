@@ -9,7 +9,6 @@ import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {performLogin} from "../utils/auth-utils";
 import {Link, Redirect, useLocation} from "react-router-dom";
-import Button from "@material-ui/core/Button";
 
 
 
@@ -30,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
         padding: "1.5em",
         borderRadius: "5px",
         borderWidth: "1px",
-        width: "250px"
+        width: "250px",
+        backgroundColor: "#F7F7F7"
     },
     link: {
         textTransform: "none",
@@ -70,21 +70,21 @@ export default function Login() {
 
     return (
 
-        <Box mt={8} className={classes.centerPage}>
+        <Box mt={5} className={classes.centerPage}>
             <Box boxShadow={2} className={classes.border}>
             <form className={classes.center}>
                 <Typography style={{fontWeight: "bold"}}>Teacher Login</Typography>
                 <TextField onChange={(event) => setUsername(event.target.value)} id="standard-basic" label="Username" value={username}/>
                 <TextField onChange={(event) => setPassword(event.target.value)} id="standard-basic" type="password" label="Password" value={password}/>
                 <Box pt={2}>
-                    <BasicButton onClick={login} content={"Submit"}/>
+                    <BasicButton onClick={login} content={"Login"}/>
                 </Box>
             </form>
             </Box>
             <Box>
             <Typography style={{fontWeight: "bold"}}>Not yet registered?</Typography>
-                <Box pt={2}>
-                    <Button><Link className={classes.link} to="/register">Register</Link></Button>
+                <Box mt={2} boxShadow={2} p={1} style={{border: "solid", borderRadius: "5px", borderWidth: "1px", backgroundColor: "#F7F7F7"}}>
+                    <Link className={classes.link} to="/register">Register</Link>
                 </Box>
             </Box>
         </Box>

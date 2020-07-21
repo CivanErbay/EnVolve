@@ -4,19 +4,10 @@ import {UserStateContext} from "../context/UserContext";
 import SchoolClasses from "../components/SchoolClasses";
 import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import classNames from 'classnames';
+import Wrapper from "../components/Wrapper";
 
 
 const useStyles = makeStyles((theme) => ({
-    newFont : {
-        fontFamily: "Rowdies",
-        fontWeight: "300"
-    },
-    whiteWrapper: {
-        backgroundColor: "white",
-        width: "75%",
-        borderRadius: "10px"
-    },
     center: {
         display: "flex",
         flexDirection: "column",
@@ -26,19 +17,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Overview () {
+export default function Overview() {
 
     const userState = useContext(UserStateContext)
     const classes = useStyles();
+
     return (
         <Box className={classes.center}>
-        <Box mt={4} boxShadow={2} className={classNames (classes.newFont, classes.whiteWrapper)}>
-        <h2>Hello {userState.userData.firstname}</h2>
-            <SchoolClasses/>
-        </Box>
+
+            <Wrapper>
+                <h1>Heyho {userState.userData.firstname}!</h1>
+                <h4 style={{fontWeight: "600"}}>Manage your classes and check the latest survey results</h4>
+                <SchoolClasses/>
+            </Wrapper>
+
             <Box p={2}>
-    <LogoutButton/>
+                <LogoutButton/>
             </Box>
-    </Box>
+
+        </Box>
     )
 }

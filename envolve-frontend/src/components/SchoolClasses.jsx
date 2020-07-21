@@ -5,8 +5,8 @@ import {UserStateContext} from "../context/UserContext";
 import classNames from 'classnames';
 import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import {AddClassButton} from "./AddClassButton";
 
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -23,18 +23,18 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center"
     },
     boxStyle: {
-        backgroundColor: "#4FD13A",
         width: "40%",
-        height: "100px",
+        height: "80px",
         borderRadius: "10px"
     },
     details: {
         color: "white",
         fontSize: "10px"
-    } ,cNames: {
+    } ,
+    cNames: {
         color: "white",
-        fontSize: "25px"
-    }
+        fontSize: "35px"
+    },
 
 }));
 
@@ -60,16 +60,15 @@ export default function SchoolClasses() {
     return (
         <>
 
-                <h3>Your current classes</h3>
-                <Box key={schoolClasses.id} className={classes.center}>{schoolClasses.map((schoolClass) =>
-                    <Box className={classNames(classes.boxStyle, classes.center)} boxShadow={3} key={schoolClass.id} m={1}><Typography className={classes.cNames}>{schoolClass.classname} </Typography>  <Link
+                <Box mt={2} key={schoolClasses.id} className={classes.center}>{schoolClasses.map((schoolClass) =>
+                    <Box mt={2} style={{background: 'linear-gradient(to right top, #3AD19B, #44B931)'}} className={classNames(classes.boxStyle, classes.center)} boxShadow={6} key={schoolClass.id} m={1}>  <Link
                         className={classNames(classes.link, classes.details)}
                         to={`/singleclass/${schoolClass.id}`}
-                        key={schoolClasses.id}> Show Details </Link></Box>
+                        key={schoolClasses.id}> <Typography style={{fontWeight: "800"}} className={classes.cNames}>{schoolClass.classname} </Typography> </Link></Box>
                 )}</Box>
 
-            <Button className={classes.border}><Link className={classes.link} to="/creation">Add new
-                class</Link></Button>
+                <AddClassButton/>
+
         </>
     )
 }
