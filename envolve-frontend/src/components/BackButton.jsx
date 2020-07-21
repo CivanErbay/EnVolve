@@ -1,14 +1,11 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import classNames from "classnames";
-import Button from "@material-ui/core/Button";
 import {makeStyles} from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
-    stickToBottom: {
-        position: 'fixed',
-        bottom: '30px',
-    },
+
     link: {
         textDecoration: 'none',
         color: 'black',
@@ -20,9 +17,10 @@ export default function BackButton() {
     const classes = useStyles();
     return (
 
+        <Box pt={6} pb={2}>
         <Button><
-            Link className={classNames(classes.stickToBottom, classes.link)} to="/overview">Back</Link>
+            Link className={ classes.link} to="/overview">Back</Link>
         </Button>
-
+        </Box>
     )
 }

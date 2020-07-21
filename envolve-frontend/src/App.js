@@ -7,9 +7,10 @@ import Navigation from "./components/Navigation";
 
 const theme = createMuiTheme({
     typography: {
-        fontFamily: ['"Rowdies"', 'cursive'].join(','),
+        fontFamily: ['"Open Sans"', 'sans-serif', 'Modak', 'cursive'].join(','),
     },
 });
+
 
 
 function App() {

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: 'black',
         textTransform: 'none'
-}
+}   ,
 }));
 
 export default function Footer()

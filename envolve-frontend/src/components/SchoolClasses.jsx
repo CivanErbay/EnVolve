@@ -5,7 +5,8 @@ import {UserStateContext} from "../context/UserContext";
 import classNames from 'classnames';
 import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import {AddClassButton} from "./AddClassButton";
 
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -21,33 +22,21 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         alignItems: "center"
     },
-    paperColor: {
-        backgroundColor: "#F7F7F7",
-        width: "200px",
-        borderRadius: "5px"
+    boxStyle: {
+        width: "40%",
+        height: "80px",
+        borderRadius: "10px",
+        background: 'linear-gradient(to right top, #3AD19B, #44B931)', border: "solid", borderWidth: "5px"
     },
-    magicHover: {
-        backgroundSize: "100% 200%",
-        textDecoration: "none",
-        listStyleType: "none",
-        backgroundImage: "linear-gradient(to bottom, #fff 50%, #f9ce21 50%)",
-        transition: "background-position 0.5s ease-in-out, color 0.5s ease-in-out",
-        color: "black",
-        borderBottom: "solid",
-        borderColor: "#f9ce21",
-        '&:hover': {
-            backgroundPosition: "0 100%",
-            color: "black",
-            textDecoration: "none",
-            listStyleType: "none",
-        },
-        '&:focus': {
-            backgroundPosition: "0 100%",
-            color: "black",
-            textDecoration: "none",
-            listStyleType: "none",
-        }
-    }
+    details: {
+        color: "white",
+        fontSize: "10px"
+    },
+    cNames: {
+        color: "white",
+        fontSize: "35px"
+    },
+
 }));
 
 
@@ -71,17 +60,19 @@ export default function SchoolClasses() {
 
     return (
         <>
-            <Box>
-                <h3>Your current classes</h3>
-                <Box key={schoolClasses.id} className={classes.center}>{schoolClasses.map((schoolClass) =>
-                    <Box className={classes.paperColor} boxShadow={3} key={schoolClass.id} m={1}><h1>{schoolClass.classname} </h1>  <Link
-                        className={classNames(classes.link, classes.magicHover)}
-                        to={`/singleclass/${schoolClass.id}`}
-                        key={schoolClasses.id}> Show Details </Link></Box>
-                )}</Box>
-            </Box>
-            <Button className={classes.border}><Link className={classes.link} to="/creation">Add new
-                class</Link></Button>
+
+            <Box mt={2} key={schoolClasses.id} className={classes.center}>{schoolClasses.map((schoolClass) =>
+                <Box mt={2} className={classNames(classes.boxStyle, classes.center)} boxShadow={6}
+                     key={schoolClass.id} m={1}> <Link
+                    className={classNames(classes.link, classes.details)}
+                    to={`/singleclass/${schoolClass.id}`}
+                    key={schoolClasses.id}> <Typography style={{fontWeight: "800"}}
+                                                        className={classes.cNames}>{schoolClass.classname} </Typography>
+                </Link></Box>
+            )}</Box>
+
+            <AddClassButton/>
+
         </>
     )
 }

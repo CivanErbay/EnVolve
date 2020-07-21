@@ -3,13 +3,14 @@ import React, {useContext, useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {postRegister} from "../utils/fetch-utils";
-import MyButton from "../components/MyButton";
+import BasicButton from "../components/BasicButton";
 import {Redirect} from 'react-router-dom';
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {UserDispatchContext, UserStateContext} from "../context/UserContext";
+import Wrapper from "../components/Wrapper";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -85,7 +86,9 @@ export default function Register() {
 
 
     return (
-        <Box mt={12} className={classes.outer}>
+        <Box className={classes.inner}>
+        <Wrapper>
+        <Box className={classes.outer}>
             <h2>Register</h2>
             <form>
             <Box className={classes.inner}>
@@ -104,9 +107,9 @@ export default function Register() {
                 <TextField style={{width: "320px"}} onChange={handleChange} name="confirmpassword"
                            type="password" label="Confirm Password"/>
                 <Box mt={5}>
-                    <MyButton onClick={handleSubmit}
-                              disabled={registerState.username.length < 2 || registerState.firstname.length < 2 || registerState.lastname.length < 2 || registerState.password.length < 2 || registerState.email.length < 2
-                              } content={"Submit"}/>
+                    <BasicButton onClick={handleSubmit}
+                                 disabled={registerState.username.length < 2 || registerState.firstname.length < 2 || registerState.lastname.length < 2 || registerState.password.length < 2 || registerState.email.length < 2
+                              } content={"Register"}/>
                     {registerState.confirmpassword !== registerState.password &&
                     <Popover
                         id={id}
@@ -127,7 +130,8 @@ export default function Register() {
                 </Box>
             </Box>
             </form>
-
+        </Box>
+        </Wrapper>
         </Box>
     )
 }

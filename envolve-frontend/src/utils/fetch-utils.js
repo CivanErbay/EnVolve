@@ -1,6 +1,6 @@
 import {getJWTToken} from "./jwt-utils";
 
-export function postRegister(registerData){
+export function postRegister(registerData) {
     return fetch('/api/register', {
         method: 'POST',
         headers: {
@@ -8,7 +8,7 @@ export function postRegister(registerData){
         },
         body: JSON.stringify({registerData}),
     }).then((response) => {
-        if(response.status !== 200) {
+        if (response.status !== 200) {
             throw new Error('invalid response')
         }
         return response.text(); //necessary to handle token in the Browser, which comes with the Fetch from the backend
@@ -24,10 +24,16 @@ export function postClass(schoolClass) {
             Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(schoolClass)
-    })
+    }).then(() => {
+            return true;
+        }
+    ).catch(() => {
+            return false;
+        }
+    )
 }
 
-export async function getSchoolClassesByTeacher(teacher){
+export async function getSchoolClassesByTeacher(teacher) {
     const token = getJWTToken();
     const response = await fetch(`/api/classes/${teacher}`, {
         method: 'GET',

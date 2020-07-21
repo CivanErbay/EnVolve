@@ -4,7 +4,8 @@ import Footer from "../components/Footer";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import MyButton from "../components/MyButton";
+import BasicButton from "../components/BasicButton";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '50vh'
+        height: '65vh'
     },
 }))
 
@@ -25,7 +26,6 @@ export default function Landing() {
     return (
         <>
             <div className={classes.center}>
-
                 <form>
                     <Typography style={{fontWeight: "bold", fontSize:"1.5em"}}>Start Survey</Typography>
                     <Box mt={2}>
@@ -34,7 +34,7 @@ export default function Landing() {
                 </form>
 
                 <Box mt={4}>
-                    <MyButton content={"Submit"}/>
+                    <BasicButton content={"Submit"}/>
                 </Box>
             </div>
             <Footer/>

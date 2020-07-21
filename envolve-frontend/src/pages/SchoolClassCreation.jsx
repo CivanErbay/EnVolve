@@ -1,11 +1,13 @@
 import React, { useEffect, useState} from 'react'
 import TextField from "@material-ui/core/TextField";
-import MyButton from "../components/MyButton";
+import BasicButton from "../components/BasicButton";
 import Box from "@material-ui/core/Box";
 import {makeStyles} from "@material-ui/core/styles";
 import {postClass} from "../utils/fetch-utils";
 import Typography from "@material-ui/core/Typography";
 import BackButton from "../components/BackButton";
+import Wrapper from "../components/Wrapper";
+import {Redirect} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     column: {
@@ -24,12 +26,17 @@ export default function SchoolClassCreation() {
     const [singleStudent, setSingleStudent] = useState("")
     const [studentlist, setStudentlist] = useState([])
     const [cname, setCName] = useState("")
+    const [creationSuccess, setCreationSuccess] = useState(false)
+
 
     const [schoolClass, setSchoolClass] = useState({
         classname: '',
         classmembers: []
     })
 
+    function isDisabled(){
+        return !(schoolClass.classname.length >= 2 || schoolClass.classmembers.length >= 5);
+    }
 
     function addStudent() {
         setStudentlist(studentlist.concat(singleStudent))
@@ -41,15 +48,22 @@ export default function SchoolClassCreation() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[studentlist])
 
-    function handleSubmit() {
-        postClass( {...schoolClass, classname: cname});
+    async function handleSubmit() {
+        const postResult = await postClass({...schoolClass, classname: cname});
+        setCreationSuccess(postResult);
     }
 
-    console.log(schoolClass)
+    if (creationSuccess) {
+        return (
+            <Redirect to={"/overview"} />
+        )
+    }
+
     return (
         <Box mt={3} className={classes.column}>
+            <Wrapper>
             <h4>Classname</h4>
-            <TextField placeholder="Enter Classname" onChange={(event) => setCName(event.target.value)} value={cname}/>
+            <TextField placeholder="Enter Classname" onChange={(event) => setCName(event.target.value)} value={cname} required/>
 
             <Box m={2}>{schoolClass.classmembers.map(singleStudent => <Typography key={singleStudent}>{singleStudent}</Typography>)}</Box>
 
@@ -58,12 +72,13 @@ export default function SchoolClassCreation() {
             <TextField onChange={(event) => setSingleStudent(event.target.value)} value={singleStudent}/>
             </Box>
             <Box mt={2}>
-                <MyButton onClick={addStudent} content={"Add new Student"}/>
+                <BasicButton onClick={addStudent} content={"Add new Student"}/>
             </Box>
-            <Box mt={6}>
-                <MyButton onClick={handleSubmit} content={"Submit"}/>
-            </Box>
+            <Box mt={4}>
 
+            <BasicButton disabled={isDisabled()} onClick={handleSubmit} content={"Create"}/>
+            </Box>
+            </Wrapper>
             <BackButton/>
 
         </Box>

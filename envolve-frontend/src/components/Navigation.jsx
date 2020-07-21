@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react'
 import {UserDispatchContext} from "../context/UserContext";
 import {getDecodedJWTToken, isJWTTokenValid} from "../utils/jwt-utils";
-import {LOGIN_SUCCESS} from "../context/UserContextProvider";
+import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Header from "./Header";
 import Login from "../pages/Login";
@@ -11,18 +11,23 @@ import Overview from "../pages/Overview";
 import SchoolClassCreation from "../pages/SchoolClassCreation";
 import SingleClass from "../pages/SingleClass";
 import Landing from "../pages/Landing";
+import {Box} from "@material-ui/core";
 
 export default function Navigation() {
+
 
     const dispatch = useContext(UserDispatchContext);
 
     useEffect(() => {           //Keep Login status after Refresh
         if (isJWTTokenValid()) {
             dispatch({ type: LOGIN_SUCCESS, payload: getDecodedJWTToken() });
+        } else {
+            dispatch({type: LOGIN_FAILED})
         }
     }, [dispatch]);
 
     return (
+        <Box>
         <Router>
             <Header/>
             <Switch>
@@ -40,5 +45,6 @@ export default function Navigation() {
                 </Route>
             </Switch>
         </Router>
+        </Box>
     )
 }
