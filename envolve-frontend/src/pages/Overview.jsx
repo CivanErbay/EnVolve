@@ -27,7 +27,7 @@ export default function Overview() {
 
             <Wrapper>
                 <h1>Heyho {userState.userData.firstname}!</h1>
-                <h4 style={{fontWeight: "600"}}>Manage your classes and check the latest survey results</h4>
+                <h4 style={{fontWeight: "600"}}>Check the latest survey results</h4>
                 <SchoolClasses/>
             </Wrapper>
 

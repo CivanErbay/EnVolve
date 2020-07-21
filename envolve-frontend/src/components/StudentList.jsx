@@ -1,13 +1,35 @@
 import {Box} from "@material-ui/core";
-import Wrapper from "./Wrapper";
 import React, {useEffect, useState} from "react";
 import {getClassById} from "../utils/fetch-utils";
+import classNames from "classnames";
+import {makeStyles} from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 
 
+const useStyles = makeStyles((theme) => ({
+    link: {
+        textDecoration: 'none',
+        color: 'black',
+        textTransform: 'none',
+        fontSize: '10px',
+        padding: "0.4em"
+    },
+    center: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    cName: {
+        fontSize: "4em"
+    }
+
+}));
 
 
 export const StudentList = ({id}) => {
 
+    const classes = useStyles();
     const [schoolClass, setSchoolClass] = useState(null)
 
 
@@ -20,13 +42,12 @@ export const StudentList = ({id}) => {
 
     return (
 
-        <>
+        <Box>
         {schoolClass &&  ( <>
-            <Box mt={4}>{schoolClass.classname} </Box>
             {schoolClass.classmembers.map((member) =>
                 <h4 key={member.student}>{member.student}</h4>)} </> )
         }
-        </>
+        </Box>
 
     )
 }
