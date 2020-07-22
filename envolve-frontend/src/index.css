@@ -8,6 +8,12 @@ body {
 /*  background-color: #F7F7F7;*/
 }
 
+.MuiDrawer-paper {
+  justify-content: center;
+  align-items: center;
+  background-Color: #3AD19B!important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

@@ -61,7 +61,7 @@ export default function SchoolClasses() {
     return (
         <>
 
-            <Box mt={2} key={schoolClasses.id} className={classes.center}>{schoolClasses.map((schoolClass) =>
+            <Box mt={2} key={schoolClasses.id} className={classes.center}>{schoolClasses.map(schoolClass =>
                 <Box mt={2} className={classNames(classes.boxStyle, classes.center)} boxShadow={6}
                      key={schoolClass.id} m={1}> <Link
                     className={classNames(classes.link, classes.details)}
