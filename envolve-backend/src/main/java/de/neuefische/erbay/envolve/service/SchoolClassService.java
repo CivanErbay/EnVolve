@@ -40,13 +40,16 @@ public class SchoolClassService {
         schoolClass.setClassname(tempSchoolClass.getClassname());
     schoolClassDb.save(schoolClass);
     }
-
     public List<SchoolClass> getClassesByTeacher(String teacher) {
        return schoolClassDb.findByTeacher(teacher);
     }
 
     public Optional<SchoolClass> getClassById(String id) {
       return schoolClassDb.findById(id);
+    }
+
+    public void deleteClassById(String id) {
+        schoolClassDb.deleteById(id);
     }
 }
 

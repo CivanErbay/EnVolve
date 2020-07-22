@@ -83,7 +83,7 @@ export default function Login() {
             </Box>
             <Box>
             <Typography style={{fontWeight: "bold"}}>Not yet registered?</Typography>
-                <Box mt={2} boxShadow={2} p={1} style={{ borderRadius: "5px"git, background: "rgba(58, 209, 155, 0.5)"}}>
+                <Box mt={2} boxShadow={2} p={1} style={{ borderRadius: "5px", borderWidth: "1px", background: "rgba(58, 209, 155, 0.5)"}}>
                     <Link className={classes.link} to="/register">Register</Link>
                 </Box>
             </Box>

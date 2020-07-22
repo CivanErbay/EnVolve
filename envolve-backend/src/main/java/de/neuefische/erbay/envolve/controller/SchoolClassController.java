@@ -44,4 +44,10 @@ public class SchoolClassController {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Schoolclass with " + id + " not exists");
     }
+
+    @DeleteMapping("/class/{id}")
+    public void deleteClassById(@PathVariable String id) {
+        schoolClassService.deleteClassById(id);
+    }
+
 }
