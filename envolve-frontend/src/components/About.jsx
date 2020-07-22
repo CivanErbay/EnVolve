@@ -5,16 +5,26 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
     about: {
-        backgroundColor: "#3AD19B",
+        backgroundImage: `url(${"./images/greenback3.svg"})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        minHeight: "100%",
         display: "flex",
-        width: "100%",
         flexDirection: "column",
         alignItems: "center"
     },
     headline: {
         fontFamily: "Modak",
         fontSize: "4.5em",
-        padding: "1em 1em 0.5em 1em"
+
+    },
+    textTypo: {
+        textAlign: "left",
+        padding: "1em",
+        fontSize:"1rem",
+        lineHeight:"1.75",
+      /*  background: "rgba(247, 247, 247, .7)"*/
     }
 }))
 
@@ -25,11 +35,12 @@ export const About = () => {
     return (
 
         <Box pb={2} className={classes.about}>
+
             <Typography className={classes.headline}>About</Typography>
 
             <Box px={3} py={4} m={5} boxShadow={3} style={{maxWidth: "600px", backgroundColor:  "#F7F7F7"}}>
                 <img style={{height: "25vh"}} src="./images/twoPersons.png" alt=""/>
-                <Typography style={{ textAlign: "left", padding: "1em", fontSize:"1rem", lineHeight:"1.75"}}><span style={{fontFamily:"Modak", fontSize:"1.5em", lineHeight:".75"}}>EnVolve </span> is an app to <b>improve communication between students and their teachers </b>.
+                <Typography className={classes.textTypo}><span style={{fontFamily:"Modak", fontSize:"1.5em", lineHeight:".75"}}>EnVolve </span> is an app to <b>improve communication between students and their teachers </b>.
                     <br /> The approach is to
                 establish a <b>continuous student-side feedback loop</b> to allow students to share their interests, ideas,
                 wishes, criticisms and so on.

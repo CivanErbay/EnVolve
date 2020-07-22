@@ -87,7 +87,7 @@ export default function Register() {
 
     return (
         <Box className={classes.inner}>
-        <Wrapper>
+        <Wrapper style={{background: "rgba(58, 209, 155, 0.5)", padding: "3em 2.25em 4em 2.25em"}}>
         <Box className={classes.outer}>
             <h2>Register</h2>
             <form>

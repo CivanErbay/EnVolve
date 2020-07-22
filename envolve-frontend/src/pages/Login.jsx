@@ -26,12 +26,11 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
     },
     border: {
-        border: "solid",
         padding: "1.5em",
         borderRadius: "5px",
         borderWidth: "1px",
         width: "250px",
-        backgroundColor: "#F7F7F7"
+        background: "rgba(58, 209, 155, 0.5)"
     },
     link: {
         textTransform: "none",
@@ -84,7 +83,7 @@ export default function Login() {
             </Box>
             <Box>
             <Typography style={{fontWeight: "bold"}}>Not yet registered?</Typography>
-                <Box mt={2} boxShadow={2} p={1} style={{border: "solid", borderRadius: "5px", borderWidth: "1px", backgroundColor: "#F7F7F7"}}>
+                <Box mt={2} boxShadow={2} p={1} style={{ borderRadius: "5px"git, background: "rgba(58, 209, 155, 0.5)"}}>
                     <Link className={classes.link} to="/register">Register</Link>
                 </Box>
             </Box>

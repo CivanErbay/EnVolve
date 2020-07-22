@@ -18,14 +18,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Wrapper ({children}){
+export default function Wrapper ({children, style}){
 
     const classes = useStyles();
 
 
     return (
 
-        <Box mt={4} p={4} boxShadow={2} className={classNames (classes.newFont, classes.wrapper)}>
+        <Box mt={4} p={4} style={style} boxShadow={2} className={classNames (classes.newFont, classes.wrapper)}>
             {children}
         </Box>
     )
