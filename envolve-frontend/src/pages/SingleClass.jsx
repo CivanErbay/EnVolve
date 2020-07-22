@@ -76,8 +76,9 @@ export default function SingleClass() {
         setShowStudents(false)
     }
 
-    const deleteClass = (id) => {
-        const boolResponse= deleteClassById(id);
+    const deleteClass = async (id) => {
+        console.log(id)
+        const boolResponse= await deleteClassById(id);
         setDeleteSuccess(boolResponse)
     }
 

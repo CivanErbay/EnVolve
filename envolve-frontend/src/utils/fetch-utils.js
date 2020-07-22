@@ -63,12 +63,13 @@ export async function getClassById(id) {
 
 export function deleteClassById(id) {
     const token = getJWTToken();
-    return fetch(`api/classes/class/${id}`, {
+    return fetch(`/api/classes/class/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': "application/json",
             Authorization: `Bearer ${token}`,
-        }
+        },
+
     }).then(() => {
         return true
     }).catch(() => {
