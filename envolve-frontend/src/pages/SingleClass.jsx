@@ -56,7 +56,7 @@ export default function SingleClass() {
     const [showStudents, setShowStudents] = useState(false);
     const {id} = useParams();
     const [schoolClass, setSchoolClass] = useState(null)
-    const [deleteSuccess, setDeleteSuccess] = useState(false)
+    const [redirectTrigger, setRedirectTrigger] = useState(false)
 
     useEffect(() => {
         getClassById(id).then(response => {
@@ -72,16 +72,18 @@ export default function SingleClass() {
         setShowStudents(false)
     }
 
-
-    const deleteClass = async () => {
-        console.log(id)
-        const boolResponse= await deleteClassById(id);
-        setDeleteSuccess(boolResponse)
+    const redirectOverview = () => {
+        setRedirectTrigger(true)
     }
 
-    if(deleteSuccess) {
+    const deleteClass = async () => {
+        const boolResponse = await deleteClassById(id);
+        setRedirectTrigger(boolResponse)
+    }
+
+    if (redirectTrigger) {
         return (
-            <Redirect to={"/overview"} />
+            <Redirect to={"/overview"}/>
         )
     }
 
@@ -96,18 +98,25 @@ export default function SingleClass() {
         >
             <List>
 
-{/*
+                {/*
             BackgroundColor defined in index.css
 */}
-                    {!showStudents ?
-                        <Box boxShadow={3} mb={2} className={classes.centerRow} onClick={showStudentList}>  <img style={{height: "4vh"}} src="../images/classIcon.svg" alt=""/> <Typography style={{marginLeft: "5px"}}>Show Students</Typography> </Box> :
-                      <Box boxShadow={3} mb={2} className={classes.centerRow} onClick={hideStudentList}>  <img style={{height: "4vh"}} src="../images/hide.svg" alt=""/> <Typography style={{marginLeft: "5px"}}>Hide Students</Typography> </Box>}
+                {!showStudents ?
+                    <Box boxShadow={3} mb={2} className={classes.centerRow} onClick={showStudentList}> <img
+                        style={{height: "4vh"}} src="../images/classIcon.svg" alt=""/> <Typography
+                        style={{marginLeft: "5px"}}>Show Students</Typography> </Box> :
+                    <Box boxShadow={3} mb={2} className={classes.centerRow} onClick={hideStudentList}> <img
+                        style={{height: "4vh"}} src="../images/hide.svg" alt=""/> <Typography
+                        style={{marginLeft: "5px"}}>Hide Students</Typography> </Box>}
 
-                <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={deleteClass} >
+                <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={deleteClass}>
                     <img src="../images/delete.svg" alt="" style={{height: "4vh"}}/>
                     <Typography style={{marginLeft: "5px"}}>Delete Class</Typography>
                 </Box>
-                <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={deleteClass} >
+                {/*
+                Usehistory
+*/}/*
+                <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={redirectOverview}>
                     <img src="../images/back.svg" alt="" style={{height: "4vh"}}/>
                     <Typography style={{marginLeft: "5px"}}>Overview</Typography>
                 </Box>
@@ -137,7 +146,8 @@ export default function SingleClass() {
 
             <div> {/*Swipe able Drawer*/}
                 <React.Fragment key={"bottom"}>
-                    <Box  onClick={toggleDrawer("bottom", true)} ><img style={{height: "8vh"}}  src="/images/menu.svg" alt=""/></Box>
+                    <Box onClick={toggleDrawer("bottom", true)}><img style={{height: "8vh"}} src="/images/menu.svg"
+                                                                     alt=""/></Box>
                     <SwipeableDrawer
                         anchor={"bottom"}
                         open={swipe["bottom"]}
