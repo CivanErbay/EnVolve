@@ -8,8 +8,9 @@ import {UserDispatchContext, UserStateContext} from "../context/UserContext";
 import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {performLogin} from "../utils/auth-utils";
-import {Link, Redirect, useLocation} from "react-router-dom";
+import { Redirect, useLocation} from "react-router-dom";
 import {About} from "../components/About";
+import {RegisterButton} from "../components/RegisterButton";
 
 
 
@@ -25,18 +26,14 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
     },
-    border: {
+    loginBox: {
         padding: "1.5em",
         borderRadius: "5px",
         borderWidth: "1px",
         width: "250px",
-        background: "rgba(58, 209, 155, 0.5)"
+        background: "#F7F7F7"
     },
-    link: {
-        textTransform: "none",
-        textDecoration: 'none',
-        color: 'black',
-    }
+
 }))
 
 
@@ -71,9 +68,9 @@ export default function Login() {
     return (
         <>
         <Box mt={5} className={classes.centerPage}>
-            <Box boxShadow={2} className={classes.border}>
+            <Box boxShadow={2} className={classes.loginBox}>
             <form className={classes.center}>
-                <Typography style={{fontWeight: "bold"}}>Teacher Login</Typography>
+                <Typography style={{fontWeight: "bold", fontSize: "1.5em"}}>Teacher Login</Typography>
                 <TextField onChange={(event) => setUsername(event.target.value)} id="standard-basic" label="Username" value={username}/>
                 <TextField onChange={(event) => setPassword(event.target.value)} id="standard-basic" type="password" label="Password" value={password}/>
                 <Box pt={2}>
@@ -81,12 +78,9 @@ export default function Login() {
                 </Box>
             </form>
             </Box>
-            <Box>
-            <Typography style={{fontWeight: "bold"}}>Not yet registered?</Typography>
-                <Box mt={2} boxShadow={2} p={1} style={{ borderRadius: "5px", borderWidth: "1px", background: "rgba(58, 209, 155, 0.5)"}}>
-                    <Link className={classes.link} to="/register">Register</Link>
-                </Box>
-            </Box>
+
+            <RegisterButton/>
+
         </Box>
             <img style={{height: "5vh", padding: "0.5em"}} src="./images/arrowDown.svg" alt=""/>
         <About/>

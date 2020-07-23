@@ -33,9 +33,10 @@ const useStyles = makeStyles((theme) => ({
        /* background: "rgba(58, 209, 155, 0.5)",*/
         backgroundColor: "#F7F7F7"
     },
+
     cName: {
         fontSize: "5em",
-        fontWeight: "bold"
+        fontWeight: "bold",
     },
     list: {
         width: 250,
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SingleClass() {
 
-    const [swipe, setSwipe] = useState({left: false})
+    const [swipe, setSwipe] = useState({bottomt: false})
     const toggleDrawer = (anchor, open) => (event) => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
@@ -76,7 +77,8 @@ export default function SingleClass() {
         setShowStudents(false)
     }
 
-    const deleteClass = async (id) => {
+
+    const deleteClass = async () => {
         console.log(id)
         const boolResponse= await deleteClassById(id);
         setDeleteSuccess(boolResponse)
@@ -122,8 +124,9 @@ export default function SingleClass() {
 
             <Box className={classes.center}>
                 {schoolClass && (
-                    <Box mt={2} className={classNames(classes.boxStyle)}> <Typography
-                        className={classes.cName}>{schoolClass.classname} </Typography></Box>)}
+                    <Box mt={2}> <Typography
+                        className={classes.cName}>{schoolClass.classname} </Typography></Box>
+                )}
                 <Dashboard/>
 
                 {showStudents ? <StudentList id={id}/> : null}
@@ -134,15 +137,15 @@ export default function SingleClass() {
             </Box>
 
             <div> {/*Swipe able Drawer*/}
-                <React.Fragment key={"left"}>
-                    <BasicButton onClick={toggleDrawer("left", true)} content={"Options"}/>
+                <React.Fragment key={"bottom"}>
+                    <BasicButton onClick={toggleDrawer("bottom", true)} content={"Options"}/>
                     <SwipeableDrawer
-                        anchor={"left"}
-                        open={swipe["left"]}
-                        onClose={toggleDrawer("left", false)}
-                        onOpen={toggleDrawer("left", true)}
+                        anchor={"bottom"}
+                        open={swipe["bottom"]}
+                        onClose={toggleDrawer("bottom", false)}
+                        onOpen={toggleDrawer("bottom", true)}
                     >
-                        {list("left")}
+                        {list("bottom")}
                     </SwipeableDrawer>
                 </React.Fragment>
 

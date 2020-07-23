@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         width: "40%",
         height: "80px",
         borderRadius: "10px",
-        background: 'linear-gradient(to right top, #3AD19B, #44B931)', border: "solid", borderWidth: "5px"
+        background: 'linear-gradient(to right top, #0071A0, #39A4D1)', border: "solid", borderWidth: "5px"
     },
     details: {
         color: "white",
