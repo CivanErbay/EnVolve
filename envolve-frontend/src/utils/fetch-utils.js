@@ -60,3 +60,20 @@ export async function getClassById(id) {
     }
     return await response.json();
 }
+
+export function deleteClassById(id) {
+    const token = getJWTToken();
+    return fetch(`/api/classes/class/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+
+    }).then(() => {
+        return true
+    }).catch(() => {
+        return false
+    })
+
+}

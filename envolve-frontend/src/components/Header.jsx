@@ -13,13 +13,6 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         maxWidth: "550px"
     },
-/*    bgImage: {
-        backgroundImage: `url(${"./images/blueheader.svg"})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        minHeight: "100%",
-    }*/
 
 }))
 

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         width: "40%",
         height: "80px",
         borderRadius: "10px",
-        background: 'linear-gradient(to right top, #3AD19B, #44B931)', border: "solid", borderWidth: "5px"
+        background: 'linear-gradient(to right top, #0071A0, #39A4D1)', border: "solid", borderWidth: "5px"
     },
     details: {
         color: "white",
@@ -61,7 +61,7 @@ export default function SchoolClasses() {
     return (
         <>
 
-            <Box mt={2} key={schoolClasses.id} className={classes.center}>{schoolClasses.map((schoolClass) =>
+            <Box mt={2} key={schoolClasses.id} className={classes.center}>{schoolClasses.map(schoolClass =>
                 <Box mt={2} className={classNames(classes.boxStyle, classes.center)} boxShadow={6}
                      key={schoolClass.id} m={1}> <Link
                     className={classNames(classes.link, classes.details)}
