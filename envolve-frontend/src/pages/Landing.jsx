@@ -27,7 +27,7 @@ export default function Landing() {
         <>
             <div className={classes.center}>
                 <form>
-                    <Typography style={{fontWeight: "bold", fontSize:"1.5em"}}>Start Survey</Typography>
+                    <Typography color="primary" style={{fontWeight: "bold", fontSize:"1.5em"}}>Start Survey</Typography>
                     <Box mt={2}>
                     <TextField id="outlined-basic" label="Enter Code" variant="outlined"/>
                     </Box>

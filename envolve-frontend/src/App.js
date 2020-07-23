@@ -6,8 +6,14 @@ import Navigation from "./components/Navigation";
 
 
 const theme = createMuiTheme({
+    palette: {
+        main: {
+            primary: "rgba(247,247,247 0.87)",
+        },
+    },
     typography: {
         fontFamily: ['"Open Sans"', 'sans-serif', 'Modak', 'cursive'].join(','),
+        color: "white"
     },
 });
 
