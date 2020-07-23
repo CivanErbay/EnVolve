@@ -6,7 +6,9 @@ import classNames from 'classnames';
 const useStyles = makeStyles((theme) => ({
     buttonStyle : {
         textTransform: 'none',
-        backgroundColor: "white",
+        background: "rgba(57,164,209)",
+        color: "white",
+        fontWeight: "bold"
     }
 }))
 
