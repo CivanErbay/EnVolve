@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import {AddClassButton} from "./AddClassButton";
+
 
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -61,7 +61,7 @@ export default function SchoolClasses() {
     return (
         <>
 
-            <Box mt={2} key={schoolClasses.id} className={classes.center}>{schoolClasses.map(schoolClass =>
+            <Box mt={2} key={schoolClasses.id} className={classes.center}>{schoolClasses.map((schoolClass) =>
                 <Box mt={2} className={classNames(classes.boxStyle, classes.center)} boxShadow={6}
                      key={schoolClass.id} m={1}> <Link
                     className={classNames(classes.link, classes.details)}
@@ -71,7 +71,7 @@ export default function SchoolClasses() {
                 </Link></Box>
             )}</Box>
 
-            <AddClassButton/>
+
 
         </>
     )

@@ -30,7 +30,7 @@ export const RegisterButton = () => {
 
     return (
         <Box>
-            <Typography style={{fontWeight: "bold"}}>Not yet registered?</Typography>
+            <Typography color={"secondary"} style={{fontWeight: "bold"}}>Not yet registered?</Typography>
             <Box mt={2} boxShadow={2} p={1} className={classes.buttonStyle}>
                 <Link className={classes.link} to="/register">Create Account</Link>
             </Box>

@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Box} from "@material-ui/core";
 import {Redirect, useParams} from 'react-router-dom';
-import BackButton from "../components/BackButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {StudentList} from "../components/StudentList";
 import {deleteClassById, getClassById} from "../utils/fetch-utils";
-import classNames from "classnames";
 import Typography from "@material-ui/core/Typography";
-import BasicButton from "../components/BasicButton";
 import {Dashboard} from "../components/Dashboard";
 import List from "@material-ui/core/List";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
@@ -25,15 +22,13 @@ const useStyles = makeStyles((theme) => ({
     },
     centerRow: {
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "flex-start",
         alignItems: "center",
         border: "solid",
         padding: "1em",
         borderRadius: "15px",
-       /* background: "rgba(58, 209, 155, 0.5)",*/
         backgroundColor: "#F7F7F7"
     },
-
     cName: {
         fontSize: "5em",
         fontWeight: "bold",
@@ -105,12 +100,16 @@ export default function SingleClass() {
             BackgroundColor defined in index.css
 */}
                     {!showStudents ?
-                        <Box boxShadow={3} mb={2} className={classes.centerRow} onClick={showStudentList}>  <img style={{height: "5vh"}} src="../images/classIcon.svg" alt=""/> <Typography>Show Students</Typography> </Box> :
-                      <Box boxShadow={3} mb={2} className={classes.centerRow} onClick={hideStudentList}>  <img style={{height: "5vh"}} src="../images/hide.svg" alt=""/> <Typography>Hide Students</Typography> </Box>}
+                        <Box boxShadow={3} mb={2} className={classes.centerRow} onClick={showStudentList}>  <img style={{height: "4vh"}} src="../images/classIcon.svg" alt=""/> <Typography style={{marginLeft: "5px"}}>Show Students</Typography> </Box> :
+                      <Box boxShadow={3} mb={2} className={classes.centerRow} onClick={hideStudentList}>  <img style={{height: "4vh"}} src="../images/hide.svg" alt=""/> <Typography style={{marginLeft: "5px"}}>Hide Students</Typography> </Box>}
 
                 <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={deleteClass} >
-                    <img src="../images/delete.svg" alt="" style={{height: "6vh"}}/>
-                    <Typography>Delete Class</Typography>
+                    <img src="../images/delete.svg" alt="" style={{height: "4vh"}}/>
+                    <Typography style={{marginLeft: "5px"}}>Delete Class</Typography>
+                </Box>
+                <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={deleteClass} >
+                    <img src="../images/back.svg" alt="" style={{height: "4vh"}}/>
+                    <Typography style={{marginLeft: "5px"}}>Overview</Typography>
                 </Box>
 
             </List>
@@ -138,7 +137,7 @@ export default function SingleClass() {
 
             <div> {/*Swipe able Drawer*/}
                 <React.Fragment key={"bottom"}>
-                    <BasicButton onClick={toggleDrawer("bottom", true)} content={"Options"}/>
+                    <Box  onClick={toggleDrawer("bottom", true)} ><img style={{height: "8vh"}}  src="/images/menu.svg" alt=""/></Box>
                     <SwipeableDrawer
                         anchor={"bottom"}
                         open={swipe["bottom"]}
@@ -150,7 +149,7 @@ export default function SingleClass() {
                 </React.Fragment>
 
             </div>
-            <BackButton/>
+
         </>
     )
 }

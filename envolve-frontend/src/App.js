@@ -7,13 +7,22 @@ import Navigation from "./components/Navigation";
 
 const theme = createMuiTheme({
     palette: {
-        main: {
-            primary: "rgba(247,247,247 0.87)",
+        primary: {
+            main: "#272635",
         },
+        secondary: {
+            main: "#F7F7F7",
+        }
+    },
+    overrides: {
+        MuiTypography: {
+           text: {
+               color: "#F7F7F7",
+           }
+        }
     },
     typography: {
         fontFamily: ['"Open Sans"', 'sans-serif', 'Modak', 'cursive'].join(','),
-        color: "white"
     },
 });
 
