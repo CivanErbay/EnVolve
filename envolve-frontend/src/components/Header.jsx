@@ -13,13 +13,20 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         maxWidth: "550px"
     },
+/*    bgImage: {
+        backgroundImage: `url(${"./images/blueheader.svg"})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        minHeight: "100%",
+    }*/
 
 }))
 
 export default function Header() {
     const classes = useStyles();
     return (
-        <Box p={4}>
+        <Box p={4} boxShadow={3} className={classes.bgImage}>
         <div><Link className={classes.link} to="/">
             <img className={classes.image} src="./images/envolveLogoNew.svg" alt=""/>
         </Link>
