@@ -18,11 +18,11 @@ public class SurveyController {
     }
 
     @PostMapping
-    public void addNewSurvey (NewSurveyDto newSurveyDto) {
+    public void addNewSurvey (@RequestBody NewSurveyDto newSurveyDto) {
         surveyService.addNewSurvey(newSurveyDto);
     }
 
-    @GetMapping("/newsurvey/{id}")
+    @GetMapping("/{schoolClassId}")
     public NewSurvey getNewSurvey (@PathVariable String schoolClassId) {
         return surveyService.getNewSurvey(schoolClassId);
     }

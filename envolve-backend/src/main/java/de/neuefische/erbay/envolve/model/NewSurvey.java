@@ -15,9 +15,8 @@ import java.util.List;
 public class NewSurvey {
 
     @Id
-    private String id;
     private String schoolClassId;
-    private List<Question> surveyList;
+    private List<Question> questionList;
     private boolean active;
     //TimeStamp missing
     //LocalDate localDate = LocalDate.now();

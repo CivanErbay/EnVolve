@@ -25,7 +25,7 @@ public class SurveyService {
     public void addNewSurvey (NewSurveyDto newSurveyDto) {
         NewSurvey newSurvey = new NewSurvey();
         newSurvey.setSchoolClassId(newSurveyDto.getSchoolClassId());
-        newSurvey.setSurveyList(newSurveyDto.getSurveyList());
+        newSurvey.setQuestionList(newSurveyDto.getQuestionList());
         newSurvey.setActive(true);
         newSurveyDb.save(newSurvey);
     }

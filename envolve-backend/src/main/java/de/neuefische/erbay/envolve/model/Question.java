@@ -9,11 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection = "question")
 public class Question {
 
-    @Id
-    private String id;
+
     private String questionText;
     private int response;
 
