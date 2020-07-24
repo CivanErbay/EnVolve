@@ -1,11 +1,10 @@
 package de.neuefische.erbay.envolve.controller;
 
-import de.neuefische.erbay.envolve.model.Question;
+import de.neuefische.erbay.envolve.model.NewSurvey;
+import de.neuefische.erbay.envolve.model.dto.NewSurveyDto;
 import de.neuefische.erbay.envolve.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/survey")
 @RestController
@@ -19,7 +18,13 @@ public class SurveyController {
     }
 
     @PostMapping
-    public void addQuestion (Question question) {
-        surveyService.addQuestion(question);
+    public void addNewSurvey (NewSurveyDto newSurveyDto) {
+        surveyService.addNewSurvey(newSurveyDto);
     }
+
+    @GetMapping("/newsurvey/{id}")
+    public NewSurvey getNewSurvey (@PathVariable String schoolClassId) {
+        return surveyService.getNewSurvey(schoolClassId);
+    }
+
 }

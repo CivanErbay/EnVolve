@@ -1,9 +1,9 @@
 package de.neuefische.erbay.envolve.model;
 
-import de.neuefische.erbay.envolve.model.SingleSurvey;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -11,11 +11,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection = "survey")
-public class Survey {
+@Document(collection = "newsurvey")
+public class NewSurvey {
 
+    @Id
     private String id;
-    private String classId;
-    private List<SingleSurvey> surveyList;
-
+    private String schoolClassId;
+    private List<Question> surveyList;
+    private boolean active;
+    //TimeStamp missing
+    //LocalDate localDate = LocalDate.now();
 }
