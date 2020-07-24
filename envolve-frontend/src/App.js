@@ -6,6 +6,21 @@ import Navigation from "./components/Navigation";
 
 
 const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: "#272635",
+        },
+        secondary: {
+            main: "#F7F7F7",
+        }
+    },
+    overrides: {
+        MuiTypography: {
+           text: {
+               color: "#F7F7F7",
+           }
+        }
+    },
     typography: {
         fontFamily: ['"Open Sans"', 'sans-serif', 'Modak', 'cursive'].join(','),
     },

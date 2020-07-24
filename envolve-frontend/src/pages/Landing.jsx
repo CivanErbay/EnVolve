@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         height: '65vh'
     },
+    codeBox : {
+        backgroundColor: "#F7F7F7",
+        borderRadius: "5px"
+    }
 }))
 
 
@@ -26,9 +30,10 @@ export default function Landing() {
     return (
         <>
             <div className={classes.center}>
+                <Box p={5} boxShadow={3} className={classes.codeBox}>
                 <form>
-                    <Typography style={{fontWeight: "bold", fontSize:"1.5em"}}>Start Survey</Typography>
-                    <Box mt={2}>
+                    <Typography color={"primary"} style={{fontWeight: "bold", fontSize:"1.5em"}}>Start Survey</Typography>
+                    <Box mt={2} >
                     <TextField id="outlined-basic" label="Enter Code" variant="outlined"/>
                     </Box>
                 </form>
@@ -36,6 +41,7 @@ export default function Landing() {
                 <Box mt={4}>
                     <BasicButton content={"Submit"}/>
                 </Box>
+                    </Box>
             </div>
             <Footer/>
         </>

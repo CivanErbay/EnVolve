@@ -79,7 +79,9 @@ export default function Login() {
             </form>
             </Box>
 
+
             <RegisterButton/>
+
 
         </Box>
             <img style={{height: "5vh", padding: "0.5em"}} src="./images/arrowDown.svg" alt=""/>
