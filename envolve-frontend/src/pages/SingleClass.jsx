@@ -115,7 +115,7 @@ export default function SingleClass() {
                 </Box>
                 {/*
                 Usehistory
-*/}/*
+*/}
                 <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={redirectOverview}>
                     <img src="../images/back.svg" alt="" style={{height: "4vh"}}/>
                     <Typography style={{marginLeft: "5px"}}>Overview</Typography>

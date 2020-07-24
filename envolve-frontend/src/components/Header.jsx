@@ -23,7 +23,7 @@ export default function Header() {
 
     const classes = useStyles();
     return (
-        <Box p={4}>
+        <Box p={2}>
             <div><Link className={classes.link} to="/">
                 <img className={classes.image} src="/images/envolveLogoNew.svg" alt=""/>
             </Link></div>

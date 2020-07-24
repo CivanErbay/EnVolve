@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -15,10 +16,10 @@ import java.util.List;
 public class SurveyAnswer {
 
     @Id
-    private String id;
-    private Student studentcode;
-    private String classId;
+    private String schoolClassId;
+    private String studentCode;
     private List<Question> questionList;
+    private LocalDate localDate;
 
 
 }

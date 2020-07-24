@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,6 +19,5 @@ public class NewSurvey {
     private String schoolClassId;
     private List<Question> questionList;
     private boolean active;
-    //TimeStamp missing
-    //LocalDate localDate = LocalDate.now();
+    private LocalDate localDate;
 }
