@@ -12,6 +12,7 @@ import SchoolClassCreation from "../pages/SchoolClassCreation";
 import SingleClass from "../pages/SingleClass";
 import Landing from "../pages/Landing";
 import {Box} from "@material-ui/core";
+import SurveyCreation from "../pages/SurveyCreation";
 
 export default function Navigation() {
 
@@ -40,6 +41,7 @@ export default function Navigation() {
                 <PrivateRoute path="/overview" component={Overview} exact/>
                 <PrivateRoute path="/creation" component={SchoolClassCreation} exact/>
                 <PrivateRoute path="/singleclass/:id" component={SingleClass} exact/>
+                <PrivateRoute path="/createsurvey/:id" component={SurveyCreation} exact/>
                 <Route path="/">
                     <Landing/>
                 </Route>

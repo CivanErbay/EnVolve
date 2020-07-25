@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Box} from "@material-ui/core";
-import {Redirect, useParams} from 'react-router-dom';
+import {Redirect, useParams, useHistory} from 'react-router-dom';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {StudentList} from "../components/StudentList";
 import {deleteClassById, getClassById} from "../utils/fetch-utils";
@@ -65,6 +65,14 @@ export default function SingleClass() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    //Go to createSurvey Page
+    const history = useHistory();
+    const routeCreateSurvey = () => {
+        let path = `/createsurvey/${schoolClass.id}`
+        history.push(path)
+    }
+
+
     const showStudentList = () => {
         setShowStudents(true)
     }
@@ -109,13 +117,16 @@ export default function SingleClass() {
                         style={{height: "4vh"}} src="../images/hide.svg" alt=""/> <Typography
                         style={{marginLeft: "5px"}}>Hide Students</Typography> </Box>}
 
+                <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={routeCreateSurvey}>
+                    <img src="../images/survey.svg" alt="" style={{height: "4vh"}}/>
+                    <Typography style={{marginLeft: "5px"}}>Create Survey</Typography>
+                </Box>
+
                 <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={deleteClass}>
                     <img src="../images/delete.svg" alt="" style={{height: "4vh"}}/>
                     <Typography style={{marginLeft: "5px"}}>Delete Class</Typography>
                 </Box>
-                {/*
-                Usehistory
-*/}
+
                 <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={redirectOverview}>
                     <img src="../images/back.svg" alt="" style={{height: "4vh"}}/>
                     <Typography style={{marginLeft: "5px"}}>Overview</Typography>

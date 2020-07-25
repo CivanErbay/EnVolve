@@ -1,12 +1,10 @@
 import Box from "@material-ui/core/Box";
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import { LineChart, Line } from 'recharts';
 import BarChart from "recharts/lib/chart/BarChart";
 import CartesianGrid from "recharts/lib/cartesian/CartesianGrid";
 import XAxis from "recharts/lib/cartesian/XAxis";
 import YAxis from "recharts/lib/cartesian/YAxis";
-import Tooltip from "@material-ui/core/Tooltip";
 import Legend from "recharts/lib/component/Legend";
 import Bar from "recharts/lib/cartesian/Bar";
 
