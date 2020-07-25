@@ -39,7 +39,15 @@ public class SurveyService {
         newSurveyDb.save(newSurvey);
     }
 
-    public NewSurvey getNewSurvey(String schoolClassId) {
+    public NewSurvey getNewSurvey(String schoolClassId, String studentCode) {
+        //Zeile 44 - 49 nochmal abchecken lassen
+        List<SurveyAnswer> surveyAnswerListFilteredByDate = getSurveyAnswerListFilteredByDate(schoolClassId);
+        for (int i = 0; i < surveyAnswerListFilteredByDate.size(); i++) {
+           if(surveyAnswerListFilteredByDate.get(i).getStudentCode().equals(studentCode)) {
+               throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + studentCode + " finished his survey already");
+           }
+        }
+
         Optional<NewSurvey> tempNewSurvey = newSurveyDb.findById(schoolClassId);
         if (tempNewSurvey.isPresent()) {
             return tempNewSurvey.get();
@@ -80,6 +88,7 @@ public class SurveyService {
         return filteredAnswerList;
     }
 
+    
 
         /*
         public List<SurveyAnswer> getFilteredSurveyAnswerList (String schoolClassId) {
