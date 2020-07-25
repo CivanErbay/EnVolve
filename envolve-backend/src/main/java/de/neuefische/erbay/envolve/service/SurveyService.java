@@ -39,14 +39,7 @@ public class SurveyService {
         newSurveyDb.save(newSurvey);
     }
 
-    public NewSurvey getNewSurvey(String schoolClassId, String studentCode) {
-        //Zeile 44 - 49 nochmal abchecken lassen
-        List<SurveyAnswer> surveyAnswerListFilteredByDate = getSurveyAnswerListFilteredByDate(schoolClassId);
-        for (int i = 0; i < surveyAnswerListFilteredByDate.size(); i++) {
-           if(surveyAnswerListFilteredByDate.get(i).getStudentCode().equals(studentCode)) {
-               throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + studentCode + " finished his survey already");
-           }
-        }
+   public NewSurvey getNewSurvey(String schoolClassId) {
 
         Optional<NewSurvey> tempNewSurvey = newSurveyDb.findById(schoolClassId);
         if (tempNewSurvey.isPresent()) {
@@ -54,6 +47,18 @@ public class SurveyService {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Survey with " + schoolClassId + " not found)");
     }
+
+    public NewSurvey getNewSurveyFilter(String schoolClassId, String studentCode) {
+        //Zeile 44 - 49 nochmal abchecken lassen -- StudentCode Check ob Student bereits an Umfrage teilgenommen hat
+        List<SurveyAnswer> surveyAnswerListFilteredByDate = getSurveyAnswerListFilteredByDate(schoolClassId);
+        for (int i = 0; i < surveyAnswerListFilteredByDate.size(); i++) {
+            if(surveyAnswerListFilteredByDate.get(i).getStudentCode().equals(studentCode)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + studentCode + " finished his survey already");
+            }
+        }
+        return getNewSurvey(schoolClassId);
+    }
+
 
     public void addSurveyAnswer(SurveyAnswerDto surveyAnswerDto) {
         SurveyAnswer surveyAnswer = new SurveyAnswer();
