@@ -3,6 +3,7 @@ package de.neuefische.erbay.envolve.service;
 import de.neuefische.erbay.envolve.db.NewSurveyDb;
 import de.neuefische.erbay.envolve.db.SurveyAnswerDb;
 import de.neuefische.erbay.envolve.model.NewSurvey;
+import de.neuefische.erbay.envolve.model.SchoolClass;
 import de.neuefische.erbay.envolve.model.SurveyAnswer;
 import de.neuefische.erbay.envolve.model.dto.NewSurveyDto;
 import de.neuefische.erbay.envolve.model.dto.SurveyAnswerDto;
@@ -21,12 +22,14 @@ public class SurveyService {
 
     private final NewSurveyDb newSurveyDb;
     private final SurveyAnswerDb surveyAnswerDb;
+    private final SchoolClassService schoolClassService;
 
 
     @Autowired
-    public SurveyService(NewSurveyDb newSurveyDb, SurveyAnswerDb surveyAnswerDb) {
+    public SurveyService(NewSurveyDb newSurveyDb, SurveyAnswerDb surveyAnswerDb, SchoolClassService schoolClassService) {
         this.newSurveyDb = newSurveyDb;
         this.surveyAnswerDb = surveyAnswerDb;
+        this.schoolClassService = schoolClassService;
     }
 
     public void addNewSurvey(NewSurveyDto newSurveyDto) {
@@ -48,12 +51,20 @@ public class SurveyService {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Survey with " + schoolClassId + " not found)");
     }
 
-    public NewSurvey getNewSurveyFilter(String schoolClassId, String studentCode) {
-        //Zeile 44 - 49 nochmal abchecken lassen -- StudentCode Check ob Student bereits an Umfrage teilgenommen hat
-        List<SurveyAnswer> surveyAnswerListFilteredByDate = getSurveyAnswerListFilteredByDate(schoolClassId);
-        for (int i = 0; i < surveyAnswerListFilteredByDate.size(); i++) {
-            if(surveyAnswerListFilteredByDate.get(i).getStudentCode().equals(studentCode)) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + studentCode + " finished his survey already");
+    public NewSurvey getNewSurveyFiltered(String schoolClassId, String studentCode) {
+
+        //Check if StudentCode is valid //if student is member of Class
+        SchoolClass currentSchoolClass = schoolClassService.getClassById(schoolClassId);
+        for (int i = 0; i < currentSchoolClass.getClassmembers().size(); i++) {
+            if (currentSchoolClass.getClassmembers().get(i).getCode().equals(studentCode)) {
+
+                //check if StudentCode is already used for this survey
+                List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId(schoolClassId);
+                for (int j = 0; j < allSurveyAnswerListByClassId.size(); j++) {
+                    if(allSurveyAnswerListByClassId.get(j).getStudentCode().equals(studentCode)) {
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + studentCode + " finished his survey already");
+                    }
+                }
             }
         }
         return getNewSurvey(schoolClassId);

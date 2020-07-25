@@ -27,7 +27,7 @@ public class SurveyController {
 
     @GetMapping("/{schoolClassId}/{studentCode}")
     public NewSurvey getNewSurveyWithStudentCodeCheck (@PathVariable String schoolClassId, @PathVariable String studentCode ) {
-        return surveyService.getNewSurveyFilter(schoolClassId, studentCode);
+        return surveyService.getNewSurveyFiltered(schoolClassId, studentCode);
     }
 
     @PostMapping("/feedback")

@@ -5,7 +5,9 @@ import de.neuefische.erbay.envolve.model.SchoolClass;
 import de.neuefische.erbay.envolve.model.Student;
 import de.neuefische.erbay.envolve.model.dto.AddSchoolClassDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +45,14 @@ public class SchoolClassService {
        return schoolClassDb.findByTeacher(teacher);
     }
 
-    public Optional<SchoolClass> getClassById(String id) {
-      return schoolClassDb.findById(id);
+    public SchoolClass getClassById(String id) {
+
+        Optional<SchoolClass> tempSchoolClass = schoolClassDb.findById(id);
+        if (tempSchoolClass.isPresent()) {
+            return tempSchoolClass.get();
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Schoolclass with " + id + " not exists");
+
     }
 
     public void deleteClassById(String id) {
