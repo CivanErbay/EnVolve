@@ -11,7 +11,6 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 
 @RequestMapping("/api/classes")
@@ -38,11 +37,7 @@ public class SchoolClassController {
 
     @GetMapping("/class/{id}")
     public SchoolClass getClassById(@PathVariable String id) {
-        Optional<SchoolClass> tempSchoolClass = schoolClassService.getClassById(id);
-        if (tempSchoolClass.isPresent()) {
-            return tempSchoolClass.get();
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Schoolclass with " + id + " not exists");
+      return schoolClassService.getClassById(id);
     }
 
     @DeleteMapping("/class/{id}")
