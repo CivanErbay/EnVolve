@@ -42,7 +42,7 @@ public class SurveyService {
         newSurveyDb.save(newSurvey);
     }
 
-   public NewSurvey getNewSurvey(String schoolClassId) {
+    public NewSurvey getNewSurvey(String schoolClassId) {
 
         Optional<NewSurvey> tempNewSurvey = newSurveyDb.findById(schoolClassId);
         if (tempNewSurvey.isPresent()) {
@@ -57,17 +57,18 @@ public class SurveyService {
         SchoolClass currentSchoolClass = schoolClassService.getClassById(schoolClassId);
         for (int i = 0; i < currentSchoolClass.getClassmembers().size(); i++) {
             if (currentSchoolClass.getClassmembers().get(i).getCode().equals(studentCode)) {
-
                 //check if StudentCode is already used for this survey
                 List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId(schoolClassId);
                 for (int j = 0; j < allSurveyAnswerListByClassId.size(); j++) {
-                    if(allSurveyAnswerListByClassId.get(j).getStudentCode().equals(studentCode)) {
+                    if (allSurveyAnswerListByClassId.get(j).getStudentCode().equals(studentCode)) {
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + studentCode + " finished his survey already");
                     }
+                    return getNewSurvey(schoolClassId);
                 }
             }
         }
-        return getNewSurvey(schoolClassId);
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student with " + studentCode + " is not member of this class");
+
     }
 
 
@@ -98,7 +99,7 @@ public class SurveyService {
         for (int i = 0; i < allSurveyAnswersBySchoolClass.size(); i++) {
             LocalDate answerLocalDate = allSurveyAnswersBySchoolClass.get(i).getLocalDate();
             if (answerLocalDate.compareTo(surveyCreationDate) >= 0) {
-            filteredAnswerList.add(allSurveyAnswersBySchoolClass.get(i));
+                filteredAnswerList.add(allSurveyAnswersBySchoolClass.get(i));
             }
         }
         return filteredAnswerList;
