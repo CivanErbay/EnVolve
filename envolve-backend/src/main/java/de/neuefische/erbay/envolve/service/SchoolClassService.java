@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class SchoolClassService {
 
@@ -27,12 +26,12 @@ public class SchoolClassService {
      List<Student> tempList = new ArrayList<>();
 
         List<String> studentNames = tempSchoolClass.getClassmembers();
-
         schoolClass.setTeacher(teacherName);
 
         for (int i = 0; i < studentNames.size(); i++) {
             String singleClassmemberName = tempSchoolClass.getClassmembers().get(i);
-            String code = "123";
+            int r = ((int) (Math.random() * (99999 - 10000)) + 10000);
+            String code = r + "";
             Student singleClassmember = new Student(singleClassmemberName,code);
             tempList.add(singleClassmember);
         }
