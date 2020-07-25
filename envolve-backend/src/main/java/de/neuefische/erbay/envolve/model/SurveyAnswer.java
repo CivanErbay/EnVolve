@@ -16,6 +16,7 @@ import java.util.List;
 public class SurveyAnswer {
 
     @Id
+    private String id;
     private String schoolClassId;
     private String studentCode;
     private List<Question> questionList;

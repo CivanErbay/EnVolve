@@ -7,6 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface SurveyAnswerDb extends PagingAndSortingRepository<SurveyAnswer, String> {
-    List<SurveyAnswer> findBySchoolClassIdAndLocalDateBetween(String schoolClassId, LocalDate localDate, LocalDate localDate2);
+    List<SurveyAnswer> findBySchoolClassIdAndLocalDateGreaterThanEqualAndLocalDateLessThanEqual(String schoolClassId, LocalDate localDate, LocalDate localDate2);
     List<SurveyAnswer> findBySchoolClassId(String schoolClassId);
 }

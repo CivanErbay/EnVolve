@@ -35,15 +35,22 @@ public class SurveyController {
         surveyService.addSurveyAnswer(surveyAnswerDto);
     }
 
-    //Still buggy I guess..
-    @GetMapping("/feedback/{schoolClassId}")
-    public List<SurveyAnswer> getFilteredSurveyAnswerList (@PathVariable String schoolClassId) {
-       return surveyService.getFilteredSurveyAnswerList(schoolClassId);
-    }
 
     @GetMapping("/feedback/all/{schoolClassId}")
     public List<SurveyAnswer> getAllSurveyAnswerListByClassId(@PathVariable String schoolClassId) {
         return surveyService.getAllSurveyAnswerListByClassId(schoolClassId);
     }
+
+    @GetMapping("/feedback/{schoolClassId}")
+    public List<SurveyAnswer> getFilteredSurveyAnswerList(@PathVariable String schoolClassId) {
+        return surveyService.getSurveyAnswerListFilteredByDate(schoolClassId);
+    }
+
+    //Still buggy I guess..
+ /*   @GetMapping("/feedback/{schoolClassId}")
+    public List<SurveyAnswer> getFilteredSurveyAnswerList (@PathVariable String schoolClassId) {
+       return surveyService.getFilteredSurveyAnswerList(schoolClassId);
+    }
+*/
 
 }
