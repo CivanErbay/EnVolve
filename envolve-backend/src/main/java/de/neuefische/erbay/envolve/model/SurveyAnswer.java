@@ -1,21 +1,25 @@
 package de.neuefische.erbay.envolve.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection = "singlesurvey")
-public class SingleSurvey {
+@Document(collection = "surveyanswer" )
+public class SurveyAnswer {
 
-    private String id;
-    private String studentId;
+    @Id
+    private String schoolClassId;
+    private String studentCode;
     private List<Question> questionList;
+    private LocalDate localDate;
+
 
 }

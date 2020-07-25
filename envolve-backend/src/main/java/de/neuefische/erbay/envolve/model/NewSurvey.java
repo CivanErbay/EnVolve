@@ -6,13 +6,18 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Question {
+@Document(collection = "newsurvey")
+public class NewSurvey {
 
-
-    private String questionText;
-    private int response;
-
+    @Id
+    private String schoolClassId;
+    private List<Question> questionList;
+    private boolean active;
+    private LocalDate localDate;
 }
