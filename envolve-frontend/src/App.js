@@ -15,7 +15,7 @@ const theme = createMuiTheme({
         }
     },
     typography: {
-        fontFamily: ['"Open Sans"', 'sans-serif', 'Modak', 'cursive'].join(','),
+        fontFamily: ['Josefin Sans', 'sans-serif', 'Modak', 'cursive'].join(','),
     },
 });
 

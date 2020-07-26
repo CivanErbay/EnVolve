@@ -16,6 +16,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import Wrapper from "../components/Wrapper";
 import BasicButton from "../components/BasicButton";
+import BackButton from "../components/BackButton";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -134,8 +135,9 @@ export default function SurveyCreation() {
             </Grid>
 
 
-            <Box mt={2}> <BasicButton content={"Create"} onClick={postSingleSurvey}/></Box>
+            <Box mt={2}> <BasicButton style={{fontSize: "2em"}} content={"Create"} onClick={postSingleSurvey}/></Box>
 
+            <BackButton/>
 
         </Box>
     )

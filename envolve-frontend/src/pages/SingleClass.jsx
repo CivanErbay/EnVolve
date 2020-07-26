@@ -9,6 +9,7 @@ import {Dashboard} from "../components/Dashboard";
 import List from "@material-ui/core/List";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import clsx from "clsx";
+import Wrapper from "../components/Wrapper";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#F7F7F7"
     },
     cName: {
-        fontSize: "5em",
+        fontSize: "3em",
         fontWeight: "bold",
     },
     list: {
@@ -143,10 +144,11 @@ export default function SingleClass() {
 
             <Box className={classes.center}>
                 {schoolClass && (
-                    <Box mt={2}> <Typography
-                        className={classes.cName}>{schoolClass.classname} </Typography></Box>
+                    <Box mt={2}> <Typography color={"secondary"}
+                                             className={classes.cName}>{schoolClass.classname} </Typography></Box>
                 )}
-                <Dashboard/>
+                <Wrapper><Dashboard/></Wrapper>
+
 
                 {showStudents ? <StudentList id={id}/> : null}
                 <Box mt={2}>
@@ -155,7 +157,7 @@ export default function SingleClass() {
 
             </Box>
 
-            <div> {/*Swipe able Drawer*/}
+            <Box m={4}> {/*Swipe able Drawer*/}
                 <React.Fragment key={"bottom"}>
                     <Box onClick={toggleDrawer("bottom", true)}><img style={{height: "8vh"}} src="/images/menu.svg"
                                                                      alt=""/></Box>
@@ -169,7 +171,7 @@ export default function SingleClass() {
                     </SwipeableDrawer>
                 </React.Fragment>
 
-            </div>
+            </Box>
 
         </>
     )
