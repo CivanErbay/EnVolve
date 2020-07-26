@@ -2,7 +2,7 @@ import {getJWTToken} from "./jwt-utils";
 
 export function postSurvey(survey) {
     const token = getJWTToken();
-    return fetch("api/classes", {
+    return fetch("api/survey", {
         method: 'POST',
         headers: {
             'Content-Type': "application/json",

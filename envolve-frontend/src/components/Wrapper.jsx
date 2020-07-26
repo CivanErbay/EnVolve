@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     },
     wrapper: {
         backgroundColor: "#F7F7F7",
-        width: "350px",
+        width: "300px",
         maxWidth: "800px",
         borderRadius: "10px"
     },
