@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     },
     wrapper: {
         backgroundColor: "#F7F7F7",
-        width: "75%",
+        width: "300px",
         maxWidth: "800px",
         borderRadius: "10px"
     },
@@ -25,7 +25,7 @@ export default function Wrapper ({children, style}){
 
     return (
 
-        <Box mt={4} p={4} style={style} boxShadow={2} className={classNames (classes.newFont, classes.wrapper)}>
+        <Box mt={4} p={3} style={style} boxShadow={2} className={classNames (classes.newFont, classes.wrapper)}>
             {children}
         </Box>
     )

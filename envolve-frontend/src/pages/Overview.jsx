@@ -8,7 +8,7 @@ import clsx from "clsx";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import { useHistory } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import {removeJWTToken} from "../utils/jwt-utils";
 import {LOGOUT} from "../context/UserContextProvider";
 
@@ -45,10 +45,12 @@ export default function Overview() {
 
     //For Redirect to /create
     const history = useHistory();
-    const routeChange = () =>{
+    const routeCreateClass = () =>{
         let path = `/creation`;
         history.push(path);
     }
+
+
 
     //For Logout
     const dispatch = useContext(UserDispatchContext)
@@ -79,13 +81,9 @@ export default function Overview() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={routeChange}>
+                <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={routeCreateClass}>
                     <img src="../images/plus.svg" alt="" style={{height: "4vh"}}/>
                     <Typography style={{marginLeft: "5px"}}>Create Class</Typography>
-                </Box>
-                <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={routeChange}>
-                    <img src="../images/survey.svg" alt="" style={{height: "4vh"}}/>
-                    <Typography style={{marginLeft: "5px"}}>Create Survey</Typography>
                 </Box>
                 <Box boxShadow={3} mt={2} className={classes.centerRow} onClick={logout} >
                     <img src="../images/logout.svg" alt="" style={{height: "4vh"}}/>
@@ -114,7 +112,7 @@ export default function Overview() {
 
             <div> {/*Swipe able Drawer*/}
                 <React.Fragment key={"bottom"}>
-                    <Box mt={10} onClick={toggleDrawer("bottom", true)} ><img style={{height: "8vh"}}  src="./images/menu.svg" alt=""/></Box>
+                    <Box mt={6} onClick={toggleDrawer("bottom", true)} ><img style={{height: "8vh"}}  src="./images/menu.svg" alt=""/></Box>
                     <SwipeableDrawer
                         anchor={"bottom"}
                         open={swipe["bottom"]}

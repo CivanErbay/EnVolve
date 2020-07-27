@@ -27,8 +27,6 @@ export default function SchoolClassCreation() {
     const [studentlist, setStudentlist] = useState([])
     const [cname, setCName] = useState("")
     const [creationSuccess, setCreationSuccess] = useState(false)
-
-
     const [schoolClass, setSchoolClass] = useState({
         classname: '',
         classmembers: []
