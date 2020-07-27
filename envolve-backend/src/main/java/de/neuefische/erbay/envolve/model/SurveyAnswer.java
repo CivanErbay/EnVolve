@@ -20,7 +20,7 @@ public class SurveyAnswer {
     private String schoolClassId;
     private String studentCode;
     private List<Question> questionList;
-    private LocalDate localDate;
+    private String localDate;
 
 
 }

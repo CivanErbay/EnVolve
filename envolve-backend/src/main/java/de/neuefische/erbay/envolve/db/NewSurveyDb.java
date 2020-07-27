@@ -9,7 +9,6 @@ import de.neuefische.erbay.envolve.model.NewSurvey;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public class NewSurveyDb  {
@@ -17,10 +16,11 @@ public class NewSurveyDb  {
     private final String collection = "newsurvey";
 
 
+    //Not working - newSurvey does not getting transferred to firebase
     public void save(NewSurvey newSurvey) {
-        if (newSurvey.getSchoolClassId() == null) {
+    /*    if (newSurvey.getSchoolClassId() == null) {
             newSurvey.setSchoolClassId(UUID.randomUUID().toString());
-        }
+        }*/
         Firestore dbFireStore = FirestoreClient.getFirestore();
         ApiFuture<WriteResult> set = dbFireStore.collection(collection).document(newSurvey.getSchoolClassId()).set(newSurvey);
         System.out.println(set);
