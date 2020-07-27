@@ -30,7 +30,7 @@ export default function Landing() {
     return (
         <>
             <div className={classes.center}>
-                <Box p={5} boxShadow={3} className={classes.codeBox}>
+                <Box p={5} boxShadow={3} style={{boxShadow: "#FFFFF"}} className={classes.codeBox}>
                 <form>
                     <Typography color={"primary"} style={{fontWeight: "bold", fontSize:"1.5em"}}>Start Survey</Typography>
                     <Box mt={2} >
@@ -39,7 +39,7 @@ export default function Landing() {
                 </form>
 
                 <Box mt={4}>
-                    <BasicButton content={"Submit"}/>
+                    <BasicButton style={{fontSize: "1em"}} content={"Start"}/>
                 </Box>
                     </Box>
             </div>

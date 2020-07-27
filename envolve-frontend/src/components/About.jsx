@@ -15,8 +15,8 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center"
     },
     headline: {
-        fontFamily: "Modak",
         fontSize: "4.5em",
+        color: "#F7F7F7"
 
     },
     textTypo: {
@@ -38,9 +38,9 @@ export const About = () => {
 
             <Typography className={classes.headline}>About</Typography>
 
-            <Box px={3} py={4} m={5} boxShadow={3} style={{maxWidth: "600px", backgroundColor:  "#C6DEA6"}}>
+            <Box px={3} py={4} m={5} boxShadow={3} style={{maxWidth: "600px", backgroundColor: "#F7F7F7"}}>
                 <img style={{height: "25vh"}} src="./images/twoPersons.png" alt=""/>
-                <Typography className={classes.textTypo}><span style={{fontFamily:"Modak", fontSize:"1.5em", lineHeight:".75"}}>EnVolve </span> is an app to <b>improve communication between students and their teachers </b>.
+                <Typography className={classes.textTypo}><span style={{letterSpacing: "-2.25px", fontSize:"1.5em", lineHeight:".75", fontWeight: "bold"}}>Envolve </span> is an app to <b>improve communication between students and their teachers </b>.
                     <br /> The approach is to
                 establish a <b>continuous student-side feedback loop</b> to allow students to share their interests, ideas,
                 wishes, criticisms and so on.

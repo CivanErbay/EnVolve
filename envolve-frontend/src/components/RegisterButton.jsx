@@ -6,8 +6,6 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 
 const useStyles = makeStyles((theme) => ({
-
-
     buttonStyle : {
         textTransform: 'none',
         background: "rgba(57,164,209)",

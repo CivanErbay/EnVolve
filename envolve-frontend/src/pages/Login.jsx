@@ -71,18 +71,14 @@ export default function Login() {
             <Box boxShadow={2} className={classes.loginBox}>
             <form className={classes.center}>
                 <Typography style={{fontWeight: "bold", fontSize: "1.5em"}}>Teacher Login</Typography>
-                <TextField onChange={(event) => setUsername(event.target.value)} id="standard-basic" label="Username" value={username}/>
-                <TextField onChange={(event) => setPassword(event.target.value)} id="standard-basic" type="password" label="Password" value={password}/>
+                <TextField onChange={(event) => setUsername(event.target.value)} id="standard-basic1" label="Username" value={username} autoComplete="on"/>
+                <TextField onChange={(event) => setPassword(event.target.value)} id="standard-basic2" type="password" label="Password" value={password} autoComplete="on"/>
                 <Box pt={2}>
                     <BasicButton onClick={login} content={"Login"}/>
                 </Box>
             </form>
             </Box>
-
-
             <RegisterButton/>
-
-
         </Box>
             <img style={{height: "5vh", padding: "0.5em"}} src="./images/arrowDown.svg" alt=""/>
         <About/>

@@ -14,15 +14,8 @@ const theme = createMuiTheme({
             main: "#F7F7F7",
         }
     },
-    overrides: {
-        MuiTypography: {
-           text: {
-               color: "#F7F7F7",
-           }
-        }
-    },
     typography: {
-        fontFamily: ['"Open Sans"', 'sans-serif', 'Modak', 'cursive'].join(','),
+        fontFamily: ['Josefin Sans', 'sans-serif', 'Modak', 'cursive'].join(','),
     },
 });
 

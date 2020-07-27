@@ -13,6 +13,6 @@ import java.util.List;
 public class NewSurveyDto {
 
     private String schoolClassId;
-    private List<Question> questionList;
+    private List<String> questionList;
 
 }
