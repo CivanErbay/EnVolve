@@ -142,18 +142,19 @@ export default function SingleClass() {
         <>
 
 
-            <Box className={classes.center}>
+            <Box className={classes.center} >
                 {schoolClass && (
                     <Box mt={2}> <Typography color={"secondary"}
                                              className={classes.cName}>{schoolClass.classname} </Typography></Box>
                 )}
+
                 <Wrapper><Dashboard/></Wrapper>
 
 
                 {showStudents ? <StudentList id={id}/> : null}
-                <Box mt={2}>
 
-                </Box>
+
+
 
             </Box>
 
