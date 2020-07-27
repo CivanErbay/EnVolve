@@ -28,7 +28,7 @@ public class TokenService {
     }
 
 
-    public String getToken(@RequestBody LoginDto teacher) {
+    public String getToken(@RequestBody Teacher teacher) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(teacher.getUsername(), teacher.getPassword()));
         final Optional<Teacher> tempTeacher = teacherDb.findById(teacher.getUsername());
         return jwtUtils.createToken(new HashMap<>(Map.of("firstname", tempTeacher.get().getFirstname(),"lastname", tempTeacher.get().getLastname())), teacher.getUsername());
