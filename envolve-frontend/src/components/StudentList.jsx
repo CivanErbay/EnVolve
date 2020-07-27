@@ -1,6 +1,7 @@
 import {Box} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import {getClassById} from "../utils/fetch-utils";
+import Wrapper from "./Wrapper";
 
 
 
@@ -19,10 +20,12 @@ export const StudentList = ({id}) => {
     return (
 
         <Box>
-        {schoolClass &&  ( <>
-            {schoolClass.classmembers.map((member) =>
-                <h4 key={member.student}>{member.student}</h4>)} </> )
+
+        {schoolClass &&  (    <Wrapper style={{display: "flex"}}>
+        {schoolClass.classmembers.map((member) =>
+             <h4 style={{margin: "0 0.5em 0 0.5em"}} key={member.student}>{member.student}</h4>)} </Wrapper>)
         }
+
         </Box>
 
     )

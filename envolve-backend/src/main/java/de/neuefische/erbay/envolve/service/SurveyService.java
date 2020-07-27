@@ -3,6 +3,7 @@ package de.neuefische.erbay.envolve.service;
 import de.neuefische.erbay.envolve.db.NewSurveyDb;
 import de.neuefische.erbay.envolve.db.SurveyAnswerDb;
 import de.neuefische.erbay.envolve.model.NewSurvey;
+import de.neuefische.erbay.envolve.model.Question;
 import de.neuefische.erbay.envolve.model.SchoolClass;
 import de.neuefische.erbay.envolve.model.SurveyAnswer;
 import de.neuefische.erbay.envolve.model.dto.NewSurveyDto;
@@ -36,7 +37,17 @@ public class SurveyService {
         newSurveyDb.deleteById(newSurveyDto.getSchoolClassId());
         NewSurvey newSurvey = new NewSurvey();
         newSurvey.setSchoolClassId(newSurveyDto.getSchoolClassId());
-        newSurvey.setQuestionList(newSurveyDto.getQuestionList());
+
+        //Create QuestionList out of Stringlistfrom newSurveyDto
+        List<Question> surveyList = new ArrayList<>();
+        List<String> tempList = newSurveyDto.getQuestionList();
+        for (int i = 0; i < newSurveyDto.getQuestionList().size(); i++) {
+            Question tempQuestion = new Question();
+            tempQuestion.setQuestionText(tempList.get(i));
+            tempQuestion.setResponse(0);
+            surveyList.add(tempQuestion);
+        }
+        newSurvey.setQuestionList(surveyList);
         newSurvey.setLocalDate(LocalDate.now());
         newSurvey.setActive(true);
         newSurveyDb.save(newSurvey);

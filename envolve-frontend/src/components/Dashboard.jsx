@@ -1,65 +1,135 @@
 import Box from "@material-ui/core/Box";
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import { LineChart, Line } from 'recharts';
+import RadarChart from "recharts/lib/chart/RadarChart";
+import {
+    Area,
+    AreaChart,
+    Bar,
+    CartesianGrid,
+    Legend,
+    PolarAngleAxis,
+    PolarGrid,
+    Radar,
+    ReferenceLine,
+    XAxis,
+    YAxis
+} from "recharts";
+import Typography from "@material-ui/core/Typography";
 import BarChart from "recharts/lib/chart/BarChart";
-import CartesianGrid from "recharts/lib/cartesian/CartesianGrid";
-import XAxis from "recharts/lib/cartesian/XAxis";
-import YAxis from "recharts/lib/cartesian/YAxis";
-import Tooltip from "@material-ui/core/Tooltip";
-import Legend from "recharts/lib/component/Legend";
-import Bar from "recharts/lib/cartesian/Bar";
+
 
 const useStyles = makeStyles((theme) => ({
     stretch: {
-        height: "60vh",
+        fontSize: "0.75em",
+    },
+    background: {
+        backgroundColor: "#F6D4BA"
     }
+
 
 }));
 
 
 export const Dashboard = () => {
-    const data = [{
-        name: 'Satisfaction', uv: 4000, pv: 2400, value: 24,
-    },
-        {
-            name: 'Atmosphere', uv: 3000, pv: 1398, value: 22,
-        },
-        {
-            name: 'Benefit', uv: 2000, pv: 9800, value: 22,
-        },
-        {
-            name: 'Concentration', uv: 2780, pv: 3908, value: 20,
-        },
-        {
-            name: 'Empowerment', uv: 1890, pv: 4800, value: 21,
-        }];
+    const data = [
+        {subject: 'Atmosphere', A: 120, B: 110, fullMark: 150},
+        {subject: 'Empowerment', A: 98, B: 130, fullMark: 150},
+        {subject: 'Concentration', A: 86, B: 130, fullMark: 150},
+        {subject: 'Benefit', A: 99, B: 100, fullMark: 150},
+        {subject: 'Helpfulness', A: 85, B: 90, fullMark: 150},
 
+    ];
+    const data2 = [
+        {name: 'AT', last: 4, current: 2.4, amt: 2.4},
+        {name: 'EM', last: -3, current: 1.3, amt: 2.2},
+        {name: 'CO', last: -2, current: -4.8, amt: 2.2},
+        {name: 'BE', last: 2.7, current: 3.9, amt: 2.0},
+        {name: 'HE', last: -1.8, current: 4.8, amt: 2.1},
+
+    ];
+    const data3 = [
+        {name: 'W1', uv: 4, pv: 2.4, amt: 2.4},
+        {name: 'W2', uv: 3, pv: 1398, amt: 2.2},
+        {name: 'W3', uv: -1, pv: 9.8, amt: 2.2},
+        {name: 'W4', uv: 5, pv: 3.9, amt: 2},
+        {name: 'W5', uv: -2, pv: 4.8, amt: 2.1},
+        {name: 'W6', uv: -2.5, pv: 3.8, amt: 2.2},
+        {name: 'W7', uv: 3.4, pv: 4.3, amt: 2.1},
+    ];
 
     const classes = useStyles();
 
+    const gradientOffset = () => {
+        const dataMax = Math.max(...data.map((i) => i.uv));
+        const dataMin = Math.min(...data.map((i) => i.uv));
+
+        if (dataMax <= 0){
+            return 0
+        }
+        else if (dataMin >= 0){
+            return 1
+        }
+        else{
+            return dataMax / (dataMax - dataMin);
+        }
+    }
+
+    const off = gradientOffset();
+
     return (
-        <Box className={classes.stretch}>
+        <Box color={"secondary"} className={classes.stretch}>
+
+            <Typography style={{fontSize: "2.5em", fontWeight: "bold", padding: "0.25em", textAlign: "left"}}>LAST WEEK</Typography>
+            <Box mt={-3}>
+            <RadarChart cx={140} cy={140} outerRadius={60} width={300} height={250} data={data}>
+                <PolarGrid/>
+                <PolarAngleAxis dataKey="subject"/>
+                <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#272635" fillOpacity={0.6}/>
+            </RadarChart>
+            </Box>
 
 
-            <BarChart
-                width={400}
-                height={300}
-                data={data}
-                margin={{
-                    top: 20, right: 30, left: 20, bottom: 5,
-                }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
+            <Box mt={4}>
+            <Typography style={{fontSize: "2.5em", fontWeight: "bold", padding: "0.25em" , textAlign: "left"}}>CHANGES</Typography>
+            <Box mt={2} ml={-4} >
+                <BarChart width={322} height={300} data={data2}
+                          margin={{top: 5, right: 1, left: 1, bottom: 5}}>
+                    <CartesianGrid strokeDasharray="2 2"/>
+                    <XAxis dataKey="name"/>
+                    <YAxis/>
+                    <Legend/>
+                    <ReferenceLine y={0} stroke='#000'/>
+                        <Bar dataKey="last" fill="#272635"/>
+                        <Bar dataKey="current" fill="#82ca9d"/>
+                </BarChart>
+            </Box>
+            </Box>
 
-            <Legend />
-{/*
-            <Bar dataKey="pv" stackId="a" fill="#8884d8" />
-*/}
-            <Bar dataKey="value" stackId="a" fill="#82ca9d" />
-         {/*   <Bar dataKey="uv" fill="#ffc658" />*/}
-            </BarChart>
+            <Box mt={6}>
+                <Typography style={{fontSize: "2.5em", fontWeight: "bold", padding: "0.25em", textAlign: "left"}}>OVERALL</Typography>
+                <Box mt={2} ml={-4}>
+                <AreaChart
+                    width={350}
+                    height={300}
+                    data={data3}
+                    margin={{top: 10, right: 30, left: 0, bottom: 0}}
+                >
+                    <CartesianGrid strokeDasharray="3 3"/>
+                    <XAxis dataKey="name"/>
+                    <YAxis/>
+
+                    <defs>
+                        <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset={off} stopColor="green" stopOpacity={1}/>
+                            <stop offset={off} stopColor="#272635" stopOpacity={1}/>
+                        </linearGradient>
+                    </defs>
+                    <Area type="monotone" dataKey="uv" stroke="#000" fill="url(#splitColor)" />
+                </AreaChart>
+            </Box>
+            </Box>
+
 
         </Box>
     )
