@@ -1,6 +1,5 @@
 package de.neuefische.erbay.envolve.controller;
 
-import de.neuefische.erbay.envolve.model.Teacher;
 import de.neuefische.erbay.envolve.model.dto.LoginDto;
 import de.neuefische.erbay.envolve.model.dto.TeacherRegisterDto;
 import de.neuefische.erbay.envolve.service.UserService;
@@ -23,6 +22,7 @@ public class RegisterController {
         this.authController = authController;
     }
 
+/*
     @PostMapping
     public String register(@RequestBody TeacherRegisterDto data) {
         userService.register(data);
@@ -31,5 +31,6 @@ public class RegisterController {
         loginData.setUsername(data.getUsername());
         return authController.login(loginData);
     }
+*/
 
 }

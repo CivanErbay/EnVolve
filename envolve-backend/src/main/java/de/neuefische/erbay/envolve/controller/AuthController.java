@@ -1,12 +1,9 @@
 package de.neuefische.erbay.envolve.controller;
 
-import de.neuefische.erbay.envolve.db.TeacherDb;
 import de.neuefische.erbay.envolve.model.Teacher;
 import de.neuefische.erbay.envolve.model.dto.LoginDto;
-import de.neuefische.erbay.envolve.security.JWTUtils;
 import de.neuefische.erbay.envolve.service.TokenService;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +24,7 @@ public class AuthController {
     }
 
     @PostMapping
-    public String login(@RequestBody LoginDto teacher) {
+    public String login(@RequestBody Teacher teacher) {
         try {
             return tokenService.getToken(teacher);
             //Optional tempTeacher to store firstname and lastname of the currently logged in Teacher into the generated token.
