@@ -39,6 +39,7 @@ public class SchoolClassService {
         }
         schoolClass.setClassmembers(tempList);
         schoolClass.setClassname(tempSchoolClass.getClassname());
+
     schoolClassDb.save(schoolClass);
     }
     public List<SchoolClass> getClassesByTeacher(String teacher) {
@@ -46,7 +47,6 @@ public class SchoolClassService {
     }
 
     public SchoolClass getClassById(String id) {
-
         Optional<SchoolClass> tempSchoolClass = schoolClassDb.findById(id);
         if (tempSchoolClass.isPresent()) {
             return tempSchoolClass.get();

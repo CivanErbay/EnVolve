@@ -31,6 +31,7 @@ public class FirebaseService {
 
     public Teacher register (TeacherRegisterDto data) {
         Firestore dbFireStore = FirestoreClient.getFirestore();
+
         Teacher teacher = new Teacher();
         teacher.setUsername(data.getUsername());
         String encodedPw = encoder.encode(data.getPassword());
@@ -38,6 +39,9 @@ public class FirebaseService {
         teacher.setFirstname(data.getFirstname());
         teacher.setLastname(data.getLastname());
         teacher.setEmail(data.getEmail());
+
+
+
         dbFireStore.collection("teacher").document(teacher.getUsername()).set(teacher);
         return teacher;
     }
@@ -47,7 +51,6 @@ public class FirebaseService {
         DocumentReference documentReference = dbFireStore.collection("teacher").document(data.getUsername());
         ApiFuture<DocumentSnapshot> future = documentReference.get();
         DocumentSnapshot document = future.get();
-
         Teacher tmpTeacher;
 
         if (document.exists()) {
