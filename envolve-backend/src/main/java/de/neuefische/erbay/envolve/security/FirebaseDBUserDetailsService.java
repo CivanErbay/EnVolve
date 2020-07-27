@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MongoDbUserDetailsService implements UserDetailsService {
+public class FirebaseDBUserDetailsService implements UserDetailsService {
     private final TeacherDb teacherDb;
 
     @Autowired
-    public MongoDbUserDetailsService(TeacherDb teacherDb) {
+    public FirebaseDBUserDetailsService(TeacherDb teacherDb) {
         this.teacherDb = teacherDb;
     }
 

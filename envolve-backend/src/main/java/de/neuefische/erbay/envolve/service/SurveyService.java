@@ -33,6 +33,7 @@ public class SurveyService {
         this.schoolClassService = schoolClassService;
     }
 
+    // Probably broken because of LocalDate?
     public void addNewSurvey(NewSurveyDto newSurveyDto) {
         newSurveyDb.deleteById(newSurveyDto.getSchoolClassId());
         NewSurvey newSurvey = new NewSurvey();
