@@ -63,12 +63,14 @@ export default function Register() {
     }
 
     function handleSubmit(event) {
+        console.log(registerState)
         event.preventDefault();
         if (registerState.confirmpassword !== registerState.password) {
             setAnchorEl(event.currentTarget);
         } else {
             postRegister(registerState)
                 .then((response) => {
+                    console.log(response)
                 setJWTToken(response);
                 const userData = getDecodedJWTToken();
                 dispatch({type: LOGIN_SUCCESS, payload: userData});
