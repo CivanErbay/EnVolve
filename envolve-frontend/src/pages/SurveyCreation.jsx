@@ -101,15 +101,11 @@ export default function SurveyCreation() {
                         <Typography className={classes.headlinetwo} color={"primary"}>Questionlist</Typography>
 
                         <List>
-                            {questionList && questionList.map((singleQuestion) =>
+                            {questionList && questionList.map((singleQuestion, index) =>
                                 <ListItem key={questionList.id}>
                                     <ListItemAvatar>
-                                        <Avatar style={{
-                                            background: 'linear-gradient(to right top, #0071A0, #39A4D1)',
-                                            padding: ".75em",
-                                            marginRight: "1em"
-                                        }}>
-                                            <img src="../images/question.svg" alt="" style={{height: "4vh"}}/>
+                                        <Avatar style={{backgroundColor: "#272635"}}>
+                                            <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "4vh",}}>{index+1}</div>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText

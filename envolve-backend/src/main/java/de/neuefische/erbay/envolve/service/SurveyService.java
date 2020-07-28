@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class SurveyService {
@@ -36,9 +36,22 @@ public class SurveyService {
     }
 
     public void addNewSurvey(NewSurveyDto newSurveyDto) {
-        newSurveyDb.deleteById(newSurveyDto.getSchoolClassId());
+        //get all "Old" NewSurveys
+        String schoolClassId = newSurveyDto.getSchoolClassId();
+        List<NewSurvey> outDatedNewSurveys = newSurveyDb.findByNewSurveysBySchoolClassId(schoolClassId);
+
+        //Set all "old" NewSurvey active: false and save them in DB
+        for (int i = 0; i < outDatedNewSurveys.size(); i++) {
+            outDatedNewSurveys.get(i).setActive(false);
+            newSurveyDb.save(outDatedNewSurveys.get(i));
+        }
+
+
+
+        //Create newSurvey
         NewSurvey newSurvey = new NewSurvey();
         newSurvey.setSchoolClassId(newSurveyDto.getSchoolClassId());
+        newSurvey.setId(UUID.randomUUID().toString());
 
         //Create QuestionList out of Stringlistfrom newSurveyDto
         List<Question> surveyList = new ArrayList<>();
@@ -62,13 +75,32 @@ public class SurveyService {
         newSurveyDb.save(newSurvey);
     }
 
-    public NewSurvey getNewSurvey(String schoolClassId) {
+/*    public NewSurvey getNewSurvey(String schoolClassId) {
 
         Optional<NewSurvey> tempNewSurvey = newSurveyDb.findById(schoolClassId);
         if (tempNewSurvey.isPresent()) {
             return tempNewSurvey.get();
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Survey with " + schoolClassId + " not found)");
+    }*/
+
+    public NewSurvey getActiveNewSurvey (String schoolClassId) {
+        //Gets list of all NewSurveys of a single Class
+        List<NewSurvey> fullNewSurveyList = newSurveyDb.findByNewSurveysBySchoolClassId(schoolClassId);
+        NewSurvey responseSurvey = new NewSurvey();
+
+        //Looks for the survey with active status and sets it to responseSurvey, which is getting returned
+        for (int i = 0; i < fullNewSurveyList.size(); i++) {
+             boolean activeCheck = fullNewSurveyList.get(i).getActive();
+             if(activeCheck) {
+                 responseSurvey.setSchoolClassId(fullNewSurveyList.get(i).getSchoolClassId());
+                 responseSurvey.setQuestionList(fullNewSurveyList.get(i).getQuestionList());
+                 responseSurvey.setLocalDate(fullNewSurveyList.get(i).getLocalDate());
+                 return responseSurvey;
+             }
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No active survey found)");
+
     }
 
     //SurveyAnswer Method which is called by Frontend
@@ -87,7 +119,7 @@ public class SurveyService {
 
 
                 }
-                return getNewSurvey(schoolClassId);
+                return getActiveNewSurvey(schoolClassId);
             }
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student with " + studentCode + " is not member of this class");
@@ -127,7 +159,7 @@ public class SurveyService {
         List<SurveyAnswer> allSurveyAnswersBySchoolClass = surveyAnswerDb.findBySchoolClassId(schoolClassId);
 
         //Get CreationDate of latest Survey
-        NewSurvey newSurvey = getNewSurvey(schoolClassId);
+        NewSurvey newSurvey = getActiveNewSurvey(schoolClassId);
         String surveyCreationDate = newSurvey.getLocalDate();
 
         //Format String Date back to LocalDate-Format
@@ -147,14 +179,5 @@ public class SurveyService {
         return filteredAnswerList;
     }
 
-
-        /*
-        public List<SurveyAnswer> getFilteredSurveyAnswerList (String schoolClassId) {
-            NewSurvey newSurvey = getNewSurvey(schoolClassId);
-            LocalDate oldDate = newSurvey.getLocalDate();
-            LocalDate newDate = LocalDate.now();
-            return surveyAnswerDb.findBySchoolClassIdAndLocalDateGreaterThanEqualAndLocalDateLessThanEqual(schoolClassId, oldDate, newDate);
-        }
-    */
 
 }
