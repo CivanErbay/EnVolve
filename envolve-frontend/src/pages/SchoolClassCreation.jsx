@@ -6,7 +6,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {postClass} from "../utils/fetch-utils";
 import Typography from "@material-ui/core/Typography";
 import BackButton from "../components/BackButton";
-import WhiteWrapper from "../components/WhiteWrapper";
+import WhiteWrapper from "../components/wrapper/WhiteWrapper";
 import {Redirect} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({

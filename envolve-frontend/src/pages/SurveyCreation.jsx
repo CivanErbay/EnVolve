@@ -14,7 +14,7 @@ import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
-import WhiteWrapper from "../components/WhiteWrapper";
+import WhiteWrapper from "../components/wrapper/WhiteWrapper";
 import BasicButton from "../components/BasicButton";
 import BackButton from "../components/BackButton";
 

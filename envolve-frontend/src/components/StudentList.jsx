@@ -1,7 +1,7 @@
 import {Box} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import {getClassById} from "../utils/fetch-utils";
-import WhiteWrapper from "./WhiteWrapper";
+import WhiteWrapper from "./wrapper/WhiteWrapper";
 
 
 
