@@ -35,7 +35,7 @@ public class NewSurveyDb  {
     }*/
 
 
-    public void deleteBywd(String schoolClassId) {
+    public void deleteById(String schoolClassId) {
         Firestore dbFireStore = FirestoreClient.getFirestore();
         dbFireStore.collection(collection).document(schoolClassId).delete();
     }
