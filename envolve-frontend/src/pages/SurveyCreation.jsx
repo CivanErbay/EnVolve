@@ -14,7 +14,7 @@ import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
-import Wrapper from "../components/Wrapper";
+import WhiteWrapper from "../components/WhiteWrapper";
 import BasicButton from "../components/BasicButton";
 import BackButton from "../components/BackButton";
 
@@ -97,7 +97,7 @@ export default function SurveyCreation() {
 
             <Grid container spacing={2} className={classes.center}>
                 <Grid item xs={12} md={6}>
-                    <Wrapper>
+                    <WhiteWrapper>
                         <Typography className={classes.headlinetwo} color={"primary"}>Questionlist</Typography>
 
                         <List>
@@ -130,7 +130,7 @@ export default function SurveyCreation() {
                                        label="Question" value={questionText} autoComplete="on"/>
                             <BasicButton style={{marginTop: "20px"}} onClick={addQuestion} content={"Add question"}/>
                         </Box>
-                    </Wrapper>
+                    </WhiteWrapper>
                 </Grid>
             </Grid>
 

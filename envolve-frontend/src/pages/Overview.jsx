@@ -3,7 +3,7 @@ import {UserDispatchContext, UserStateContext} from "../context/UserContext";
 import SchoolClasses from "../components/SchoolClasses";
 import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import Wrapper from "../components/Wrapper";
+import WhiteWrapper from "../components/WhiteWrapper";
 import clsx from "clsx";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
@@ -11,6 +11,7 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import { useHistory} from "react-router-dom";
 import {removeJWTToken} from "../utils/jwt-utils";
 import {LOGOUT} from "../context/UserContextProvider";
+import DiagonalWrapper from "../components/DiagonalWrapper";
 
 
 
@@ -102,11 +103,11 @@ export default function Overview() {
     return (
         <Box className={classes.center}>
 
-            <Wrapper>
+            <DiagonalWrapper>
                 <h1>Heyho {userState.userData.firstname}!</h1>
                 <h4 style={{fontWeight: "600"}}>Check the latest survey results</h4>
                 <SchoolClasses/>
-            </Wrapper>
+            </DiagonalWrapper>
 
 
 

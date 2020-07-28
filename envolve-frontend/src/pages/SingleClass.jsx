@@ -9,7 +9,7 @@ import {Dashboard} from "../components/Dashboard";
 import List from "@material-ui/core/List";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import clsx from "clsx";
-import Wrapper from "../components/Wrapper";
+import WhiteWrapper from "../components/WhiteWrapper";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -148,7 +148,7 @@ export default function SingleClass() {
                                              className={classes.cName}>{schoolClass.classname} </Typography></Box>
                 )}
 
-                <Wrapper><Dashboard/></Wrapper>
+                <WhiteWrapper><Dashboard/></WhiteWrapper>
 
 
                 {showStudents ? <StudentList id={id}/> : null}

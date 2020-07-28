@@ -6,7 +6,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {postClass} from "../utils/fetch-utils";
 import Typography from "@material-ui/core/Typography";
 import BackButton from "../components/BackButton";
-import Wrapper from "../components/Wrapper";
+import WhiteWrapper from "../components/WhiteWrapper";
 import {Redirect} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +60,7 @@ export default function SchoolClassCreation() {
 
     return (
         <Box mt={3} className={classes.column}>
-            <Wrapper>
+            <WhiteWrapper>
             <h4>Classname</h4>
             <TextField placeholder="Enter Classname" onChange={(event) => setCName(event.target.value)} value={cname} required/>
 
@@ -77,7 +77,7 @@ export default function SchoolClassCreation() {
 
             <BasicButton disabled={isDisabled()} onClick={handleSubmit} content={"Create"}/>
             </Box>
-            </Wrapper>
+            </WhiteWrapper>
             <BackButton/>
 
         </Box>

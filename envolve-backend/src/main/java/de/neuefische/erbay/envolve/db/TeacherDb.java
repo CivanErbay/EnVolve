@@ -48,7 +48,6 @@ public class TeacherDb  {
             return null;
         }
         assert tmpTeacher != null;
-
 /*
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(tmpTeacher.getUsername(), tmpTeacher.getPassword()));
 */
