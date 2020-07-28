@@ -63,7 +63,6 @@ export default function Register() {
     }
 
     function handleSubmit(event) {
-        console.log(registerState)
         event.preventDefault();
         if (registerState.confirmpassword !== registerState.password) {
             setAnchorEl(event.currentTarget);

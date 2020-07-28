@@ -27,7 +27,7 @@ public class TokenService {
         this.teacherDb = teacherDb;
     }
 
-
+    //WHY getToken unused?
     public String getToken(@RequestBody Teacher teacher) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(teacher.getUsername(), teacher.getPassword()));
         final Optional<Teacher> tempTeacher = teacherDb.findById(teacher.getUsername());

@@ -15,11 +15,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
     @EnableWebSecurity
     public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-        private final MongoDbUserDetailsService userDetailsService;
+        private final FirebaseDBUserDetailsService userDetailsService;
         private final JwtAuthFilter authFilter;
 
         @Autowired
-        public SecurityConfig(MongoDbUserDetailsService userDetailsService, JwtAuthFilter authFilter) {
+        public SecurityConfig(FirebaseDBUserDetailsService userDetailsService, JwtAuthFilter authFilter) {
             this.userDetailsService = userDetailsService;
             this.authFilter = authFilter;
         }

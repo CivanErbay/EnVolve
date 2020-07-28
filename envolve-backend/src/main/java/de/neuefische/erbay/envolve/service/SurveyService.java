@@ -14,8 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -48,7 +50,14 @@ public class SurveyService {
             surveyList.add(tempQuestion);
         }
         newSurvey.setQuestionList(surveyList);
-        newSurvey.setLocalDate(LocalDate.now());
+
+        //format Date to String to make it fitting into firebase DB
+        LocalDate localDate = LocalDate.now();//For reference
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        String formattedString = localDate.format(formatter);
+
+
+        newSurvey.setLocalDate(formattedString);
         newSurvey.setActive(true);
         newSurveyDb.save(newSurvey);
     }
@@ -62,6 +71,7 @@ public class SurveyService {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Survey with " + schoolClassId + " not found)");
     }
 
+    //SurveyAnswer Method which is called by Frontend
     public NewSurvey getNewSurveyFiltered(String schoolClassId, String studentCode) {
 
         //Check if StudentCode is valid //if student is member of Class
@@ -74,22 +84,37 @@ public class SurveyService {
                     if (allSurveyAnswerListByClassId.get(j).getStudentCode().equals(studentCode)) {
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + studentCode + " finished his survey already");
                     }
-                    return getNewSurvey(schoolClassId);
+
+
                 }
+                return getNewSurvey(schoolClassId);
             }
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student with " + studentCode + " is not member of this class");
 
     }
 
-
+    //Method which is called after user(student) replied to getNewSurveyFiltered
     public void addSurveyAnswer(SurveyAnswerDto surveyAnswerDto) {
         SurveyAnswer surveyAnswer = new SurveyAnswer();
         surveyAnswer.setSchoolClassId(surveyAnswerDto.getSchoolClassId());
         surveyAnswer.setStudentCode(surveyAnswerDto.getStudentCode());
         surveyAnswer.setQuestionList(surveyAnswerDto.getQuestionList());
-        surveyAnswer.setLocalDate(LocalDate.now());
-        surveyAnswerDb.save(surveyAnswer);
+
+
+        List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId( surveyAnswerDto.getSchoolClassId());
+        for (int j = 0; j < allSurveyAnswerListByClassId.size(); j++) {
+            if (allSurveyAnswerListByClassId.get(j).getStudentCode().equals(surveyAnswerDto.getStudentCode())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + surveyAnswerDto.getStudentCode() + " finished his survey already");
+            }
+            LocalDate localDate = LocalDate.now();//For reference
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+            String formattedString = localDate.format(formatter);
+
+            surveyAnswer.setLocalDate(formattedString);
+            surveyAnswerDb.save(surveyAnswer);
+        }
+
     }
 
     public List<SurveyAnswer> getAllSurveyAnswerListByClassId(String schoolClassId) {
@@ -103,20 +128,25 @@ public class SurveyService {
 
         //Get CreationDate of latest Survey
         NewSurvey newSurvey = getNewSurvey(schoolClassId);
-        LocalDate surveyCreationDate = newSurvey.getLocalDate();
+        String surveyCreationDate = newSurvey.getLocalDate();
+
+        //Format String Date back to LocalDate-Format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy", Locale.ENGLISH);
+        LocalDate dateTime = LocalDate.parse(surveyCreationDate, formatter);
 
         //Filter all surveys by date - all surveys bigger than creationDate (of newSurvey)
         List<SurveyAnswer> filteredAnswerList = new ArrayList<>();
         for (int i = 0; i < allSurveyAnswersBySchoolClass.size(); i++) {
-            LocalDate answerLocalDate = allSurveyAnswersBySchoolClass.get(i).getLocalDate();
-            if (answerLocalDate.compareTo(surveyCreationDate) >= 0) {
+            String answerLocalDate = allSurveyAnswersBySchoolClass.get(i).getLocalDate();
+            LocalDate localDateAnswer = LocalDate.parse(answerLocalDate, formatter);
+
+            if (localDateAnswer.compareTo(dateTime) >= 0) {
                 filteredAnswerList.add(allSurveyAnswersBySchoolClass.get(i));
             }
         }
         return filteredAnswerList;
     }
 
-    
 
         /*
         public List<SurveyAnswer> getFilteredSurveyAnswerList (String schoolClassId) {

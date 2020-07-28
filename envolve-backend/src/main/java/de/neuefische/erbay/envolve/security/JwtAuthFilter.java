@@ -1,7 +1,5 @@
 package de.neuefische.erbay.envolve.security;
 
-import de.neuefische.erbay.envolve.security.JWTUtils;
-import de.neuefische.erbay.envolve.security.MongoDbUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,10 +21,10 @@ import java.util.Optional;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JWTUtils jwtUtils;
-    private final MongoDbUserDetailsService detailsService;
+    private final FirebaseDBUserDetailsService detailsService;
 
     @Autowired
-    public JwtAuthFilter(JWTUtils jwtUtils, MongoDbUserDetailsService detailsService) {
+    public JwtAuthFilter(JWTUtils jwtUtils, FirebaseDBUserDetailsService detailsService) {
         this.jwtUtils = jwtUtils;
         this.detailsService = detailsService;
     }

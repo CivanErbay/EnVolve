@@ -19,5 +19,6 @@ public class NewSurvey {
     private String schoolClassId;
     private List<Question> questionList;
     private boolean active;
-    private LocalDate localDate;
+ /*   private LocalDate localDate;*/
+    private String localDate;
 }
