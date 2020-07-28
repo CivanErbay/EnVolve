@@ -50,7 +50,6 @@ public class SurveyService {
             surveyList.add(tempQuestion);
         }
         newSurvey.setQuestionList(surveyList);
-      /*  newSurvey.setLocalDate(LocalDate.now());*/
 
         //format Date to String to make it fitting into firebase DB
         LocalDate localDate = LocalDate.now();//For reference

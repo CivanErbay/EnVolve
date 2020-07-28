@@ -9,7 +9,6 @@ import com.google.firebase.cloud.FirestoreClient;
 import de.neuefische.erbay.envolve.model.Teacher;
 import de.neuefische.erbay.envolve.model.dto.LoginDto;
 import de.neuefische.erbay.envolve.security.JWTUtils;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -23,7 +22,6 @@ public class TeacherDb  {
 
     private final String collection = "teacher";
     private final JWTUtils jwtUtils;
-
 
 
     public TeacherDb(JWTUtils jwtUtils) {
@@ -54,6 +52,7 @@ public class TeacherDb  {
 /*
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(tmpTeacher.getUsername(), tmpTeacher.getPassword()));
 */
+        //Fabi suggested NOT to create token, why? Ask!
         return jwtUtils.createToken(new HashMap<>(Map.of("firstname", tmpTeacher.getFirstname(),"lastname", tmpTeacher.getLastname())), tmpTeacher.getUsername());
     }
 
