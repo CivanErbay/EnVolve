@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {UserDispatchContext, UserStateContext} from "../context/UserContext";
-import Wrapper from "../components/Wrapper";
+import WhiteWrapper from "../components/WhiteWrapper";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -88,7 +88,7 @@ export default function Register() {
 
     return (
         <Box className={classes.inner}>
-        <Wrapper style={{background: "rgba(58, 209, 155, 0.5)", padding: "3em 2.25em 4em 2.25em"}}>
+        <WhiteWrapper style={{background: "rgba(58, 209, 155, 0.5)", padding: "3em 2.25em 4em 2.25em"}}>
         <Box className={classes.outer}>
             <h2>Register</h2>
             <form>
@@ -132,7 +132,7 @@ export default function Register() {
             </Box>
             </form>
         </Box>
-        </Wrapper>
+        </WhiteWrapper>
         </Box>
     )
 }
