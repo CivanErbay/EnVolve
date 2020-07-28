@@ -29,6 +29,17 @@ public class SchoolClassDb {
         }
     }
 
+    //GET ALL CLASSES
+    public List<SchoolClass> getAllClasses() {
+        try {
+            Firestore dbFireStore = FirestoreClient.getFirestore();
+            ApiFuture<QuerySnapshot> tempSchoolClasses = dbFireStore.collection(collection).get();
+            List<QueryDocumentSnapshot> documents = tempSchoolClasses.get().getDocuments();
+            return documents.stream().map(document -> document.toObject(SchoolClass.class)).collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new RuntimeException("failed to get Schoolclasses", e);
+        }
+    }
 
     // ADD METHOD
     public void save(SchoolClass schoolClass) {

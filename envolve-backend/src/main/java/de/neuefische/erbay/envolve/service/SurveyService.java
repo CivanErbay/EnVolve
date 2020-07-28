@@ -1,6 +1,7 @@
 package de.neuefische.erbay.envolve.service;
 
 import de.neuefische.erbay.envolve.db.NewSurveyDb;
+import de.neuefische.erbay.envolve.db.SchoolClassDb;
 import de.neuefische.erbay.envolve.db.SurveyAnswerDb;
 import de.neuefische.erbay.envolve.model.NewSurvey;
 import de.neuefische.erbay.envolve.model.Question;
@@ -26,13 +27,15 @@ public class SurveyService {
     private final NewSurveyDb newSurveyDb;
     private final SurveyAnswerDb surveyAnswerDb;
     private final SchoolClassService schoolClassService;
+    private final SchoolClassDb schoolClassDb;
 
 
     @Autowired
-    public SurveyService(NewSurveyDb newSurveyDb, SurveyAnswerDb surveyAnswerDb, SchoolClassService schoolClassService) {
+    public SurveyService(NewSurveyDb newSurveyDb, SurveyAnswerDb surveyAnswerDb, SchoolClassService schoolClassService, SchoolClassDb schoolClassDb) {
         this.newSurveyDb = newSurveyDb;
         this.surveyAnswerDb = surveyAnswerDb;
         this.schoolClassService = schoolClassService;
+        this.schoolClassDb = schoolClassDb;
     }
 
     public void addNewSurvey(NewSurveyDto newSurveyDto) {
@@ -103,11 +106,31 @@ public class SurveyService {
 
     }
 
+
+    //THIS METHOD GETS CALLED BY getNewSurveyFiltered to get the schoolClassId (because student can only pastet his code, not the Id)
+    //NOT WORKING - in line 117 - even if codes are matching in debugger its not returning the value of line 119..
+  public String getSchoolClassIdByStudentCode (String studentCode) {
+      List<SchoolClass> allClasses = schoolClassDb.getAllClasses();
+      for (int i = 0; i < allClasses.size(); i++) {
+          SchoolClass singleClass = allClasses.get(i);
+          for (int i1 = 0; i1 < allClasses.get(i).getClassmembers().size(); i1++) {
+              if (singleClass.getClassmembers().get(i).getCode().equals(studentCode))
+              {
+                return singleClass.getId();
+              }
+          }
+      }
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Couldnt find any Class with this Code");
+  }
+
     //SurveyAnswer Method which is called by Frontend
-    public NewSurvey getNewSurveyFiltered(String schoolClassId, String studentCode) {
+    public NewSurvey getNewSurveyFiltered( String studentCode) {
+
+        String schoolClassId = getSchoolClassIdByStudentCode(studentCode);
 
         //Check if StudentCode is valid //if student is member of Class
         SchoolClass currentSchoolClass = schoolClassService.getClassById(schoolClassId);
+
         for (int i = 0; i < currentSchoolClass.getClassmembers().size(); i++) {
             if (currentSchoolClass.getClassmembers().get(i).getCode().equals(studentCode)) {
                 //check if StudentCode is already used for this survey

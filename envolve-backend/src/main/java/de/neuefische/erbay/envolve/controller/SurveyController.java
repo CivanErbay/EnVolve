@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("createsurvey/api/survey")
+@RequestMapping("/api/survey")
 @RestController
 public class SurveyController {
 
@@ -25,9 +25,9 @@ public class SurveyController {
         surveyService.addNewSurvey(newSurveyDto);
     }
 
-    @GetMapping("/{schoolClassId}/{studentCode}")
-    public NewSurvey getNewSurveyWithStudentCodeCheck (@PathVariable String schoolClassId, @PathVariable String studentCode ) {
-        return surveyService.getNewSurveyFiltered(schoolClassId, studentCode);
+    @GetMapping("/{studentCode}")
+    public NewSurvey getNewSurveyWithStudentCodeCheck (@PathVariable String studentCode ) {
+        return surveyService.getNewSurveyFiltered(studentCode);
     }
 
     @PostMapping("/feedback")
@@ -46,11 +46,6 @@ public class SurveyController {
         return surveyService.getSurveyAnswerListFilteredByDate(schoolClassId);
     }
 
-    //Still buggy I guess..
- /*   @GetMapping("/feedback/{schoolClassId}")
-    public List<SurveyAnswer> getFilteredSurveyAnswerList (@PathVariable String schoolClassId) {
-       return surveyService.getFilteredSurveyAnswerList(schoolClassId);
-    }
-*/
+
 
 }
