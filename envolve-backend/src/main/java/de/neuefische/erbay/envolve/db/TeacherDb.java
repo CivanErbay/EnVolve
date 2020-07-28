@@ -6,12 +6,10 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.cloud.FirestoreClient;
-import de.neuefische.erbay.envolve.model.SchoolClass;
 import de.neuefische.erbay.envolve.model.Teacher;
 import de.neuefische.erbay.envolve.model.dto.LoginDto;
-import de.neuefische.erbay.envolve.model.dto.TeacherRegisterDto;
 import de.neuefische.erbay.envolve.security.JWTUtils;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -25,23 +23,15 @@ public class TeacherDb  {
 
     private final String collection = "teacher";
     private final JWTUtils jwtUtils;
-    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+
 
     public TeacherDb(JWTUtils jwtUtils) {
         this.jwtUtils = jwtUtils;
     }
 
-    public Teacher register (TeacherRegisterDto data) {
+    public Teacher register (Teacher teacher) {
         Firestore dbFireStore = FirestoreClient.getFirestore();
-
-        de.neuefische.erbay.envolve.model.Teacher teacher = new Teacher();
-        teacher.setUsername(data.getUsername());
-        String encodedPw = encoder.encode(data.getPassword());
-        teacher.setPassword(encodedPw);
-        teacher.setFirstname(data.getFirstname());
-        teacher.setLastname(data.getLastname());
-        teacher.setEmail(data.getEmail());
-
         dbFireStore.collection(collection).document(teacher.getUsername()).set(teacher);
         return teacher;
     }
@@ -60,6 +50,7 @@ public class TeacherDb  {
             return null;
         }
         assert tmpTeacher != null;
+
 /*
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(tmpTeacher.getUsername(), tmpTeacher.getPassword()));
 */
