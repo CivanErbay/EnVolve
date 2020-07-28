@@ -5,7 +5,13 @@ import {makeStyles} from "@material-ui/core/styles";
 
 
 const useStyles = makeStyles((theme) => ({
-
+    backImg: {
+        background: `url(${"/images/steps.svg"})`,
+        /*     backgroundSize: "cover",*/
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "50% 0px",
+        height: "100%",
+    },
     newFont : {
         fontFamily: "'Open Sans', sans-serif;",
         fontWeight: "800"
@@ -16,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "800px",
         borderRadius: "10px"
     },
+
 
 }));
 

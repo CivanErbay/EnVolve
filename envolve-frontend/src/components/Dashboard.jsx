@@ -23,10 +23,6 @@ const useStyles = makeStyles((theme) => ({
     stretch: {
         fontSize: "0.75em",
     },
-    background: {
-        backgroundColor: "#F6D4BA"
-    }
-
 
 }));
 

@@ -10,6 +10,8 @@ import List from "@material-ui/core/List";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import clsx from "clsx";
 import WhiteWrapper from "../components/WhiteWrapper";
+import DiagonalWrapper from "../components/DiagonalWrapper";
+import StepWrapper from "../components/StepWrapper";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -148,7 +150,7 @@ export default function SingleClass() {
                                              className={classes.cName}>{schoolClass.classname} </Typography></Box>
                 )}
 
-                <WhiteWrapper><Dashboard/></WhiteWrapper>
+                <StepWrapper><Dashboard/></StepWrapper>
 
 
                 {showStudents ? <StudentList id={id}/> : null}

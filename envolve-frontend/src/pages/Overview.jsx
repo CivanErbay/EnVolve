@@ -113,7 +113,7 @@ export default function Overview() {
 
             <div> {/*Swipe able Drawer*/}
                 <React.Fragment key={"bottom"}>
-                    <Box mt={6} onClick={toggleDrawer("bottom", true)} ><img style={{height: "8vh"}}  src="./images/menu.svg" alt=""/></Box>
+                    <Box m={3} onClick={toggleDrawer("bottom", true)} ><img style={{height: "8vh"}}  src="./images/menu.svg" alt=""/></Box>
                     <SwipeableDrawer
                         anchor={"bottom"}
                         open={swipe["bottom"]}
