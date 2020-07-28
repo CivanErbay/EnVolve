@@ -41,6 +41,7 @@ export default function Login() {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [errorInfo, setErrorInfo] = useState("")
     const classes = useStyles();
 
     const dispatch = useContext(UserDispatchContext)
@@ -53,7 +54,7 @@ export default function Login() {
                 const userData = getDecodedJWTToken();
                 dispatch({type: LOGIN_SUCCESS, payload: userData });
             })
-            .catch(() => {
+            .catch((e) => {
                 dispatch({ type: LOGIN_FAILED });
             })
     }
