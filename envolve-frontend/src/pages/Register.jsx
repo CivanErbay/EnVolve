@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {UserDispatchContext, UserStateContext} from "../context/UserContext";
-import WhiteWrapper from "../components/WhiteWrapper";
+import WhiteWrapper from "../components/wrapper/WhiteWrapper";
 import Button from "@material-ui/core/Button";
 
 
