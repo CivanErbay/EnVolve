@@ -4,13 +4,14 @@ import TextField from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {postRegister} from "../utils/fetch-utils";
 import BasicButton from "../components/BasicButton";
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {UserDispatchContext, UserStateContext} from "../context/UserContext";
 import WhiteWrapper from "../components/WhiteWrapper";
+import Button from "@material-ui/core/Button";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +28,11 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         justifyContent: "center",
     },
-
+    link: {
+        textDecoration: 'none',
+        color: 'white',
+        textTransform: 'none'
+    }
 }));
 
 export default function Register() {
@@ -70,69 +75,76 @@ export default function Register() {
             postRegister(registerState)
                 .then((response) => {
                     console.log(response)
-                setJWTToken(response);
-                const userData = getDecodedJWTToken();
-                dispatch({type: LOGIN_SUCCESS, payload: userData});
-            })
+                    setJWTToken(response);
+                    const userData = getDecodedJWTToken();
+                    dispatch({type: LOGIN_SUCCESS, payload: userData});
+                })
                 .catch(() => {
                     dispatch({type: LOGIN_FAILED});
                 });
         }
     }
 
-    const { authStatus } = useContext(UserStateContext);
+    const {authStatus} = useContext(UserStateContext);
     if (authStatus === 'SUCCESS') {
-        return <Redirect to={'/overview'} />;
+        return <Redirect to={'/overview'}/>;
     }
 
 
     return (
         <Box className={classes.inner}>
-        <WhiteWrapper style={{background: "rgba(58, 209, 155, 0.5)", padding: "3em 2.25em 4em 2.25em"}}>
-        <Box className={classes.outer}>
-            <h2>Register</h2>
-            <form>
-            <Box className={classes.inner}>
-                <TextField style={{width: "320px"}} onChange={handleChange} name="username"
-                           label="Username"/>
-                <Box>
-                    <TextField style={{width: "150px", margin: "10px"}} onChange={handleChange} name="firstname"
-                               label="Name"/>
-                    <TextField style={{width: "150px", margin: "10px"}} onChange={handleChange} name="lastname"
-                                label="Lastname"/>
+            <WhiteWrapper style={{padding: "3em 2.25em 4em 2.25em"}}>
+                <Box className={classes.outer}>
+                    <h2>Register</h2>
+                    <form>
+                        <Box className={classes.inner}>
+                            <TextField style={{width: "320px"}} onChange={handleChange} name="username"
+                                       label="Username"/>
+                            <Box>
+                                <TextField style={{width: "150px", margin: "10px"}} onChange={handleChange}
+                                           name="firstname"
+                                           label="Name"/>
+                                <TextField style={{width: "150px", margin: "10px"}} onChange={handleChange}
+                                           name="lastname"
+                                           label="Lastname"/>
+                            </Box>
+                            <TextField style={{width: "320px"}} name="email" onChange={handleChange}
+                                       label="Email Address"/>
+                            <TextField style={{width: "320px", margin: "10px"}} type="password"
+                                       onChange={handleChange} name="password" label="Password"/>
+                            <TextField style={{width: "320px"}} onChange={handleChange} name="confirmpassword"
+                                       type="password" label="Confirm Password"/>
+                            <Box mt={5}>
+                                <BasicButton onClick={handleSubmit}
+                                             disabled={registerState.username.length < 2 || registerState.firstname.length < 2 || registerState.lastname.length < 2 || registerState.password.length < 2 || registerState.email.length < 2
+                                             } content={"Register"}/>
+                                {registerState.confirmpassword !== registerState.password &&
+                                <Popover
+                                    id={id}
+                                    open={open}
+                                    anchorEl={anchorEl}
+                                    onClose={handleClose}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'center',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'center',
+                                    }}
+                                >
+                                    <Typography className={classes.typography}>Passwords not matching</Typography>
+                                </Popover>}
+                            </Box>
+                        </Box>
+                    </form>
                 </Box>
-                <TextField style={{width: "320px"}} name="email" onChange={handleChange}
-                           label="Email Address"/>
-                <TextField style={{width: "320px", margin: "10px"}} type="password"
-                           onChange={handleChange} name="password" label="Password"/>
-                <TextField style={{width: "320px"}} onChange={handleChange} name="confirmpassword"
-                           type="password" label="Confirm Password"/>
-                <Box mt={5}>
-                    <BasicButton onClick={handleSubmit}
-                                 disabled={registerState.username.length < 2 || registerState.firstname.length < 2 || registerState.lastname.length < 2 || registerState.password.length < 2 || registerState.email.length < 2
-                              } content={"Register"}/>
-                    {registerState.confirmpassword !== registerState.password &&
-                    <Popover
-                        id={id}
-                        open={open}
-                        anchorEl={anchorEl}
-                        onClose={handleClose}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
-                        }}
-                    >
-                        <Typography className={classes.typography}>Passwords not matching</Typography>
-                    </Popover>}
-                </Box>
+            </WhiteWrapper>
+            <Box pt={6} pb={2}>
+                <Button><
+                    Link className={classes.link} to="/login">Back</Link>
+                </Button>
             </Box>
-            </form>
-        </Box>
-        </WhiteWrapper>
         </Box>
     )
 }
