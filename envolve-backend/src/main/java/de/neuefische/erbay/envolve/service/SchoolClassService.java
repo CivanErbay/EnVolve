@@ -55,6 +55,10 @@ public class SchoolClassService {
 
     }
 
+    public List<SchoolClass> getAllClasses() {
+        return schoolClassDb.getAllClasses();
+    }
+
     public void deleteClassById(String id) {
         schoolClassDb.deleteById(id);
     }

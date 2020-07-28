@@ -11,7 +11,10 @@ export const SurveyAnswer = () => {
             Welcome XY
         </Typography>
 
-            <WhiteWrapper></WhiteWrapper>
+            <WhiteWrapper>
+                <Box>Question</Box>
+
+            </WhiteWrapper>
         </Box>
     )
 
