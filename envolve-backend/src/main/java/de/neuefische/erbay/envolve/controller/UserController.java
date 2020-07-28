@@ -1,6 +1,5 @@
 package de.neuefische.erbay.envolve.controller;
 
-import de.neuefische.erbay.envolve.model.Teacher;
 import de.neuefische.erbay.envolve.model.dto.LoginDto;
 import de.neuefische.erbay.envolve.model.dto.TeacherRegisterDto;
 import de.neuefische.erbay.envolve.service.UserService;
@@ -19,16 +18,13 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public String register (@RequestBody TeacherRegisterDto teacherRegisterDto) throws ExecutionException, InterruptedException {
-        Teacher registeredTeacher = userService.register(teacherRegisterDto);
-        LoginDto logindata = new LoginDto();
-        logindata.setUsername(registeredTeacher.getUsername());
-        logindata.setPassword(registeredTeacher.getPassword());
-        return userService.login(logindata);
+    public String register (@RequestBody TeacherRegisterDto teacherRegisterDto)  {
+        userService.register(teacherRegisterDto);
+        return userService.login(teacherRegisterDto.getUsername(), teacherRegisterDto.getPassword());
     }
 
     @PostMapping("/login")
-    public String login (@RequestBody LoginDto loginDto) throws ExecutionException, InterruptedException {
-        return userService.login(loginDto);
+    public String login (@RequestBody LoginDto loginDto) {
+        return userService.login(loginDto.getUsername(), loginDto.getPassword());
     }
 }

@@ -81,7 +81,7 @@ export const Dashboard = () => {
             <RadarChart cx={140} cy={140} outerRadius={60} width={300} height={250} data={data}>
                 <PolarGrid/>
                 <PolarAngleAxis dataKey="subject"/>
-                <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#272635" fillOpacity={0.6}/>
+                <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#D9EFF9" fillOpacity={0.6}/>
             </RadarChart>
             </Box>
 
