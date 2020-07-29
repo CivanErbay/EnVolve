@@ -49,8 +49,6 @@ public class SurveyService {
             newSurveyDb.save(outDatedNewSurveys.get(i));
         }
 
-
-
         //Create newSurvey
         NewSurvey newSurvey = new NewSurvey();
         newSurvey.setSchoolClassId(newSurveyDto.getSchoolClassId());
@@ -129,6 +127,8 @@ public class SurveyService {
         //This Method IS BROKEN, Or not?!!!
         String schoolClassId = getSchoolClassIdByStudentCode(studentCode);
 
+
+
         //Check if StudentCode is valid //if student is member of Class
         SchoolClass currentSchoolClass = schoolClassService.getClassById(schoolClassId);
 
@@ -153,24 +153,26 @@ public class SurveyService {
     //Method which is called after user(student) replied to getNewSurveyFiltered
     public void addSurveyAnswer(SurveyAnswerDto surveyAnswerDto) {
         SurveyAnswer surveyAnswer = new SurveyAnswer();
-        surveyAnswer.setSchoolClassId(surveyAnswerDto.getSchoolClassId());
+        //ACHTUNG: SLOW METHOD
+        String schoolClassId = getSchoolClassIdByStudentCode(surveyAnswerDto.getStudentCode());
+
+        surveyAnswer.setSchoolClassId(schoolClassId);
         surveyAnswer.setStudentCode(surveyAnswerDto.getStudentCode());
         surveyAnswer.setQuestionList(surveyAnswerDto.getQuestionList());
 
-
-        List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId( surveyAnswerDto.getSchoolClassId());
+        //Check if StudentCode used already - Put this in getNewSurveyFiltered later
+        List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId( schoolClassId);
         for (int j = 0; j < allSurveyAnswerListByClassId.size(); j++) {
             if (allSurveyAnswerListByClassId.get(j).getStudentCode().equals(surveyAnswerDto.getStudentCode())) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + surveyAnswerDto.getStudentCode() + " finished his survey already");
             }
-            LocalDate localDate = LocalDate.now();//For reference
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-            String formattedString = localDate.format(formatter);
-
-            surveyAnswer.setLocalDate(formattedString);
-            surveyAnswerDb.save(surveyAnswer);
         }
+        LocalDate localDate = LocalDate.now();//For reference
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        String formattedString = localDate.format(formatter);
 
+        surveyAnswer.setLocalDate(formattedString);
+        surveyAnswerDb.save(surveyAnswer);
     }
 
     public List<SurveyAnswer> getAllSurveyAnswerListByClassId(String schoolClassId) {

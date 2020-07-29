@@ -34,7 +34,7 @@ export async function getSurveyForStudent(studentCode) {
 
 export function postSurveyAnswer(survey) {
     const token = getJWTToken();
-    return fetch("api/survey", {
+    return fetch("api/survey/feedback", {
         method: 'POST',
         headers: {
             'Content-Type': "application/json",
