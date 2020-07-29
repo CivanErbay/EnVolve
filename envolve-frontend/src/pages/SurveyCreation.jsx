@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Redirect, useParams} from "react-router-dom";
 import {getClassById} from "../utils/fetch-utils";
-import {postSurvey} from "../utils/survey-fetch-utils";
+import {postNewSurvey} from "../utils/survey-fetch-utils";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -58,12 +58,11 @@ export default function SurveyCreation() {
         setQuestionList(questionList.concat(questionText))
         setQuestionText("")
     }
-    console.log(questionList)
-    console.log(survey.questionList)
+
 
     //Post fetch Method
     const postSingleSurvey = async () => {
-        const postResult = await postSurvey({...survey, schoolClassId: schoolClass.id})
+        const postResult = await postNewSurvey({...survey, schoolClassId: schoolClass.id})
         setCreationSuccess(postResult)
     }
 
