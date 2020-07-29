@@ -4,7 +4,6 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import de.neuefische.erbay.envolve.model.NewSurvey;
-import de.neuefische.erbay.envolve.model.SchoolClass;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
