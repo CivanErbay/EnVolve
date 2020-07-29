@@ -31,10 +31,19 @@ const useStyles = makeStyles({
 export const SurveyAnswer = () => {
     const classes = useStyles();
     const {id} = useParams();
+    //State for newSurvey Fetch
     const [currentSurvey, setCurrentSurvey] = useState([]);
+    //State for Question Counter
     const [questionState, setQuestionState] = useState(0)
+    //State for Default Slider Value reset
     const [defaultValueState, setDefaultValueState] = useState(3)
-    const [collectedAnswers, setCollectedAnswers] = useState([])
+    //State for final post Fetch Array
+    const [collectedAnswers, setCollectedAnswers] = useState({
+        studentCode: '',
+        questionList: []
+    })
+    //State for accumulating answerList of each singleQuestions
+    const [answerList, setAnswerList] = useState([])
 
     const [progressValue, setProgressValue] = useState(0)
     const [userResponse, setUserResponse] = useState(undefined)
@@ -54,24 +63,19 @@ export const SurveyAnswer = () => {
     }
 
     //Post fetch Method
-    //I have to set Up Object which is getting accepted by the Post fetch to the backend (see SurveyAnswerDto) - Either I change surveyAnswerDto (without schoolClassId) or the get-Fetch (getSurveyForStudent) provides schoolClassId
- /*   const postAnswer = async () => {
-      /!*  const postResult = *!/await postSurveyAnswer({...survey, schoolClassId: schoolClass.id})
+    const postAnswer = async () => {
+     await postSurveyAnswer({...collectedAnswers, studentCode: id, questionList: answerList})
     }
-*/
     const nextQuestionButton = () => {
         setDefaultValueState(3)
-        setCollectedAnswers(collectedAnswers.concat(userResponse))
+        setAnswerList(answerList.concat(userResponse))
         setQuestionState(questionState + 1)
     }
 
     const finishButton = () => {
         setCollectedAnswers(collectedAnswers.concat(userResponse))
         postAnswer().then(routeLanding).catch()
-
     }
-
-
     const marks = [
         {
             value: 1,
@@ -111,7 +115,8 @@ export const SurveyAnswer = () => {
 
 
     console.log(userResponse)
-    console.log(collectedAnswers)
+    console.log(answerList)
+    console.log(currentSurvey)
 
     return (
         <Box className={classes.center} mt={4}>
@@ -153,7 +158,7 @@ export const SurveyAnswer = () => {
                 </Box>
                 {currentSurvey.questionList && questionState < currentSurvey.questionList.length - 1 ?
                     <BasicButton className={classes.q} content={"Next Question"} onClick={nextQuestionButton}/> :
-                    <BasicButton onClick={finishButton} content={"Finish"}/>}
+                    <BasicButton /*onClick={finishButton}*/ content={"Finish"}/>}
 
             </WhiteWrapper>
         </Box>
