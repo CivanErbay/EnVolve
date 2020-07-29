@@ -1,6 +1,6 @@
 import {getJWTToken} from "./jwt-utils";
 
-export function postSurvey(survey) {
+export function postNewSurvey(survey) {
     const token = getJWTToken();
     return fetch("api/survey", {
         method: 'POST',
@@ -30,4 +30,22 @@ export async function getSurveyForStudent(studentCode) {
         throw new Error('something went wrong?');
     }
     return await response.json();
+}
+
+export function postSurveyAnswer(survey) {
+    const token = getJWTToken();
+    return fetch("api/survey", {
+        method: 'POST',
+        headers: {
+            'Content-Type': "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(survey)
+    }).then(() => {
+            return true;
+        }
+    ).catch(() => {
+            return false;
+        }
+    )
 }
