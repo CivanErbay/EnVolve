@@ -17,3 +17,17 @@ export function postSurvey(survey) {
         }
     )
 }
+
+export async function getSurveyForStudent(studentCode) {
+    const token = getJWTToken();
+    const response = await fetch(`/api/survey/${studentCode}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+    if (response.status !== 200) {
+        throw new Error('something went wrong?');
+    }
+    return await response.json();
+}

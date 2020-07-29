@@ -114,7 +114,7 @@ public class SurveyService {
       for (int i = 0; i < allClasses.size(); i++) {
           SchoolClass singleClass = allClasses.get(i);
           for (int i1 = 0; i1 < allClasses.get(i).getClassmembers().size(); i1++) {
-              if (studentCode.equals(singleClass.getClassmembers().get(i).getCode()))
+              if (studentCode.equals(singleClass.getClassmembers().get(i1).getCode()))
               {
                 return singleClass.getId();
               }
