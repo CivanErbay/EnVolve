@@ -107,25 +107,26 @@ public class SurveyService {
     }
 
 
-    //THIS METHOD GETS CALLED BY getNewSurveyFiltered to get the schoolClassId (because student can only pastet his code, not the Id)
+    //THIS METHOD GETS CALLED BY getNewSurveyFiltered to get the schoolClassId (because student can only paste his code, not the Id)
     //NOT WORKING - in line 117 - even if codes are matching in debugger its not returning the value of line 119..
   public String getSchoolClassIdByStudentCode (String studentCode) {
       List<SchoolClass> allClasses = schoolClassDb.getAllClasses();
       for (int i = 0; i < allClasses.size(); i++) {
           SchoolClass singleClass = allClasses.get(i);
           for (int i1 = 0; i1 < allClasses.get(i).getClassmembers().size(); i1++) {
-              if (singleClass.getClassmembers().get(i).getCode().equals(studentCode))
+              if (studentCode.equals(singleClass.getClassmembers().get(i).getCode()))
               {
                 return singleClass.getId();
               }
           }
       }
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Couldnt find any Class with this Code");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldnt find any Class with this Code");
   }
 
     //SurveyAnswer Method which is called by Frontend
     public NewSurvey getNewSurveyFiltered( String studentCode) {
 
+        //This Method IS BROKEN, Or not?!!!
         String schoolClassId = getSchoolClassIdByStudentCode(studentCode);
 
         //Check if StudentCode is valid //if student is member of Class
