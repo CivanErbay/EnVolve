@@ -17,7 +17,7 @@ export const SurveyAnswer = () => {
 
             <WhiteWrapper>
                 <Box>Question</Box>
-
+                <Typography>{id}</Typography>
             </WhiteWrapper>
         </Box>
     )
