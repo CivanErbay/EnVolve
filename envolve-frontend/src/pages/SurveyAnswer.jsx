@@ -35,26 +35,27 @@ export const SurveyAnswer = () => {
     const [currentSurvey, setCurrentSurvey] = useState([]);
     //State for Question Counter
     const [questionState, setQuestionState] = useState(0)
-    //State for Default Slider Value reset
-    const [defaultValueState, setDefaultValueState] = useState(3)
-    //State for final post Fetch Array
-    const [collectedAnswers, setCollectedAnswers] = useState({
-        studentCode: '',
-        questionList: []
-    })
+
+
     //State for accumulating answerList of each singleQuestions
-    const [answerList, setAnswerList] = useState([])
+    const [responseList, setResponseList] = useState([])
+
 
     const [progressValue, setProgressValue] = useState(0)
-    const [userResponse, setUserResponse] = useState(undefined)
+
+    const [userResponse, setUserResponse] = useState(3)
 
 
     useEffect(() => {
         getSurveyForStudent(id).then(fetchResponse => {
-            setCurrentSurvey(fetchResponse)
+            if (!fetchResponse)
+                routeLanding()
+            else
+                setCurrentSurvey(fetchResponse)
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
 
     const history = useHistory();
     const routeLanding = () => {
@@ -63,18 +64,35 @@ export const SurveyAnswer = () => {
     }
 
     //Post fetch Method
-    const postAnswer = async () => {
-     await postSurveyAnswer({...collectedAnswers, studentCode: id, questionList: answerList})
+    const postAnswer = async (collectedAnswers) => {
+        const b = await postSurveyAnswer(collectedAnswers);
+        console.log(b)
     }
+
+
     const nextQuestionButton = () => {
-        setDefaultValueState(3)
-        setAnswerList(answerList.concat(userResponse))
+        setResponseList([...responseList, {
+            questionText: currentSurvey.questionList[questionState].questionText,
+            response: userResponse,
+        }])
+
+        setUserResponse(3)
         setQuestionState(questionState + 1)
     }
 
     const finishButton = () => {
-        setCollectedAnswers(collectedAnswers.concat(userResponse))
-        postAnswer().then(routeLanding).catch()
+        let finalResponseList = [...responseList, {
+            questionText: currentSurvey.questionList[questionState].questionText,
+            response: userResponse,
+
+        }]
+
+        let finalObject = {
+            studentCode: id,
+            questionList: finalResponseList,
+        }
+
+        postAnswer(finalObject).then(routeLanding)
     }
     const marks = [
         {
@@ -107,16 +125,9 @@ export const SurveyAnswer = () => {
         return marks.findIndex((mark) => mark.value === value) + 1;
     }
 
-    const handleChange = response => (e, value) => {
-        setUserResponse({
-            response: value // --> Important bit here: This is how you set the value of sliders
-        });
+    const handleChange = (e, value) => {
+        setUserResponse(value);
     };
-
-
-    console.log(userResponse)
-    console.log(answerList)
-    console.log(currentSurvey)
 
     return (
         <Box className={classes.center} mt={4}>
@@ -137,9 +148,8 @@ export const SurveyAnswer = () => {
                     <Slider
                         min={1}
                         max={5}
-                        onChange={handleChange(userResponse)}
+                        onChange={handleChange}
                         value={userResponse}
-                        defaultValue={defaultValueState}
                         valueLabelFormat={valueLabelFormat}
                         getAriaValueText={valuetext}
                         aria-labelledby="discrete-slider-restrict"
@@ -158,7 +168,7 @@ export const SurveyAnswer = () => {
                 </Box>
                 {currentSurvey.questionList && questionState < currentSurvey.questionList.length - 1 ?
                     <BasicButton className={classes.q} content={"Next Question"} onClick={nextQuestionButton}/> :
-                    <BasicButton /*onClick={finishButton}*/ content={"Finish"}/>}
+                    <BasicButton className={classes.q} onClick={finishButton} content={"Finish"}/>}
 
             </WhiteWrapper>
         </Box>
