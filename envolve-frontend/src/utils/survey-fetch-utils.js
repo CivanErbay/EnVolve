@@ -19,26 +19,30 @@ export function postNewSurvey(survey) {
 }
 
 export async function getSurveyForStudent(studentCode) {
-    const token = getJWTToken();
+/*    const token = getJWTToken();*/
     const response = await fetch(`/api/survey/${studentCode}`, {
         method: 'GET',
-        headers: {
+      /*  headers: {
             Authorization: `Bearer ${token}`,
-        },
+        },*/
     })
     if (response.status !== 200) {
-        throw new Error('something went wrong?');
+    return false
     }
     return await response.json();
 }
 
 export function postSurveyAnswer(survey) {
+/*
     const token = getJWTToken();
-    return fetch("api/survey/feedback", {
+*/
+    return fetch("/api/survey/feedback", {
         method: 'POST',
         headers: {
             'Content-Type': "application/json",
+/*
             Authorization: `Bearer ${token}`,
+*/
         },
         body: JSON.stringify(survey)
     }).then(() => {
