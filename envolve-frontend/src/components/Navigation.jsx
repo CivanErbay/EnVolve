@@ -33,17 +33,14 @@ export default function Navigation() {
         <Router>
             <Header/>
             <Switch>
-                <Route path="/login" exact>
-                    <Login/>
-                </Route>
-                <Route path="/register">
-                    <Register/>
-                </Route>
+                <Route path="/login" component={Login} exact/>
+                <Route path="/register" component={Register}/>
+                <Route path="/answer/:id" component={SurveyAnswer} exact/>
                 <PrivateRoute path="/overview" component={Overview} exact/>
                 <PrivateRoute path="/creation" component={SchoolClassCreation} exact/>
                 <PrivateRoute path="/singleclass/:id" component={SingleClass} exact/>
                 <PrivateRoute path="/:id" component={SurveyCreation} exact/>
-                <PrivateRoute path="/answer/:id"   component={SurveyAnswer} exact/>
+
                 <Route path="/">
                     <Landing/>
                 </Route>

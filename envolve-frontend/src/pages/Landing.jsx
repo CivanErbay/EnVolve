@@ -29,10 +29,11 @@ export default function Landing() {
     const[studentCode, setStudentCode] = useState("");
     const classes = useStyles();
 
+    console.log(studentCode)
 
     const history = useHistory();
     const routeSurveyAnswer = () => {
-        let path = `/${studentCode}`
+        let path = `/answer/${studentCode}`
         history.push(path)
     }
 
