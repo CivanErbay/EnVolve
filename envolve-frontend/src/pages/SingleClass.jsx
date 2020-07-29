@@ -71,7 +71,7 @@ export default function SingleClass() {
     //Go to createSurvey Page
     const history = useHistory();
     const routeCreateSurvey = () => {
-        let path = `/createsurvey/${schoolClass.id}`
+        let path = `/${schoolClass.id}`
         history.push(path)
     }
 

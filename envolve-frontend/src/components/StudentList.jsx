@@ -2,6 +2,7 @@ import {Box} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import {getClassById} from "../utils/fetch-utils";
 import WhiteWrapper from "./wrapper/WhiteWrapper";
+import Typography from "@material-ui/core/Typography";
 
 
 
@@ -21,9 +22,9 @@ export const StudentList = ({id}) => {
 
         <Box>
 
-        {schoolClass &&  (    <WhiteWrapper style={{display: "flex"}}>
+        {schoolClass &&  (    <WhiteWrapper style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
         {schoolClass.classmembers.map((member) =>
-             <h4 style={{margin: "0 0.5em 0 0.5em"}} key={member.student}>{member.student}</h4>)} </WhiteWrapper>)
+             <Typography style={{margin: "0 0.5em 0 0.5em"}} key={member.student}>{member.student} ({member.code})</Typography>)} </WhiteWrapper>)
         }
 
         </Box>

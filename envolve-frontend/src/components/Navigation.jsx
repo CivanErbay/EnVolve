@@ -42,8 +42,8 @@ export default function Navigation() {
                 <PrivateRoute path="/overview" component={Overview} exact/>
                 <PrivateRoute path="/creation" component={SchoolClassCreation} exact/>
                 <PrivateRoute path="/singleclass/:id" component={SingleClass} exact/>
-                <PrivateRoute path="/createsurvey/:id" component={SurveyCreation} exact/>
-                {/*<PrivateRoute path="/answer/"   component={SurveyAnswer} excat/>*/}
+                <PrivateRoute path="/:id" component={SurveyCreation} exact/>
+                <PrivateRoute path="/answer/:id"   component={SurveyAnswer} exact/>
                 <Route path="/">
                     <Landing/>
                 </Route>
