@@ -36,6 +36,7 @@ export function postSurveyAnswer(survey) {
 /*
     const token = getJWTToken();
 */
+    //ACHTUNG das slash / vor api/... ist wichtig, damit der fetch funktioniert!
     return fetch("/api/survey/feedback", {
         method: 'POST',
         headers: {

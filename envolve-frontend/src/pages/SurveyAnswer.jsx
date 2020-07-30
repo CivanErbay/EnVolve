@@ -53,6 +53,11 @@ export const SurveyAnswer = () => {
 
 
     const history = useHistory();
+    const routeThankYou = () => {
+        let path = `/thankyou`
+        history.push(path)
+    }
+
     const routeLanding = () => {
         let path = `/`
         history.push(path)
@@ -74,19 +79,16 @@ export const SurveyAnswer = () => {
         setUserResponse(3)
         setQuestionState(questionState + 1)
     }
-
+    //IMPORTANT ...responseList unwrap Schreibweise merken!!!
     const finishButton = () => {
         let finalResponseList = [...responseList, {
             questionText: currentSurvey.questionList[questionState].questionText,
-            response: userResponse,
-
+            response: userResponse
         }]
-
         let finalObject = {
             studentCode: id,
             questionList: finalResponseList,
         }
-
         postAnswer(finalObject).then(routeLanding)
     }
     const marks = [
