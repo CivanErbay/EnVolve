@@ -14,7 +14,9 @@ import Landing from "../pages/Landing";
 import {Box} from "@material-ui/core";
 import SurveyCreation from "../pages/SurveyCreation";
 import {SurveyAnswer} from "../pages/SurveyAnswer";
+/*
 import ErrorBoundary from "./ErrorBoundary";
+*/
 
 export default function Navigation() {
 
