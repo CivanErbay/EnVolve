@@ -14,6 +14,7 @@ import Landing from "../pages/Landing";
 import {Box} from "@material-ui/core";
 import SurveyCreation from "../pages/SurveyCreation";
 import {SurveyAnswer} from "../pages/SurveyAnswer";
+import ThankYou from "./ThankYou";
 /*
 import ErrorBoundary from "./ErrorBoundary";
 */
@@ -40,6 +41,7 @@ export default function Navigation() {
                     <Route path="/login" component={Login} exact/>
                     <Route path="/register" component={Register}/>
                     <Route path="/answer/:id" component={SurveyAnswer} exact/>
+                    <Route path="/thankyou" component={ThankYou} exact/>
                     <PrivateRoute path="/overview" component={Overview} exact/>
                     <PrivateRoute path="/creation" component={SchoolClassCreation} exact/>
                     <PrivateRoute path="/singleclass/:id" component={SingleClass} exact/>
