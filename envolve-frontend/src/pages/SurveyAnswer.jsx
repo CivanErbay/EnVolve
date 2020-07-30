@@ -89,7 +89,7 @@ export const SurveyAnswer = () => {
             studentCode: id,
             questionList: finalResponseList,
         }
-        postAnswer(finalObject).then(routeLanding)
+        postAnswer(finalObject).then(routeThankYou)
     }
     const marks = [
         {

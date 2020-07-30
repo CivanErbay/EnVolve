@@ -118,7 +118,7 @@ export const Dashboard = () => {
                     <defs>
                         <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
                             <stop offset={off} stopColor="green" stopOpacity={1}/>
-                            <stop offset={off} stopColor="#272635" stopOpacity={1}/>
+                            <stop offset={off} stopColor="#D9EFF9" stopOpacity={1}/>
                         </linearGradient>
                     </defs>
                     <Area type="monotone" dataKey="uv" stroke="#000" fill="url(#splitColor)" />
