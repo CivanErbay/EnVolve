@@ -138,7 +138,7 @@ export const SurveyAnswer = () => {
 
             <WhiteWrapper>
                 <Box mb={1} className={classes.qHeadline}>Question {questionState + 1}</Box>
-                <LinearWithValueLabel progressVal={{}}/>
+                {currentSurvey.questionList && <LinearWithValueLabel progressVal={questionState/currentSurvey.questionList.length*100}/>  }
 
                 {currentSurvey.questionList && <Typography
                     className={classes.q}> {currentSurvey.questionList[questionState].questionText}</Typography>}
