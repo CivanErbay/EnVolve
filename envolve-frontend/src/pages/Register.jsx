@@ -1,5 +1,5 @@
 import {Box} from "@material-ui/core";
-import React, {useContext, useState} from "react";
+import React, { useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {postRegister} from "../utils/fetch-utils";
@@ -8,10 +8,10 @@ import {Link, Redirect} from 'react-router-dom';
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
-import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
-import {UserDispatchContext, UserStateContext} from "../context/UserContext";
 import WhiteWrapper from "../components/wrapper/WhiteWrapper";
 import Button from "@material-ui/core/Button";
+import {useDispatch, useSelector} from "react-redux";
+import {LOGIN_FAILED, LOGIN_SUCCESS} from "../actions";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register() {
 
-    const dispatch = useContext(UserDispatchContext)
+    const dispatch = useDispatch();
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -85,7 +85,8 @@ export default function Register() {
         }
     }
 
-    const {authStatus} = useContext(UserStateContext);
+    const {authStatus} = useSelector(state => state.loggedUser)
+
     if (authStatus === 'SUCCESS') {
         return <Redirect to={'/overview'}/>;
     }
