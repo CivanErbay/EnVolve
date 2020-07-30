@@ -1,5 +1,4 @@
-import React, {useContext} from "react";
-import {UserDispatchContext, UserStateContext} from "../context/UserContext";
+import React from "react";
 import SchoolClasses from "../components/SchoolClasses";
 import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -9,8 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import { useHistory} from "react-router-dom";
 import {removeJWTToken} from "../utils/jwt-utils";
-import {LOGOUT} from "../context/UserContextProvider";
 import DiagonalWrapper from "../components/wrapper/DiagonalWrapper";
+import {useDispatch, useSelector} from "react-redux";
+import {LOGOUT} from "../actions";
 
 
 
@@ -53,7 +53,10 @@ export default function Overview() {
 
 
     //For Logout
-    const dispatch = useContext(UserDispatchContext)
+
+    const dispatch = useDispatch();
+    const userState = useSelector(state => state.loggedUser)
+
     function logout() {         //Logout-Methopd
         removeJWTToken()        //Remove Token from localStorage
         dispatch({type: LOGOUT})    //Trigger Logout by setting authStatus:undefined in the context
@@ -95,7 +98,7 @@ export default function Overview() {
         </div>
     );
 
-    const userState = useContext(UserStateContext)
+
     const classes = useStyles();
 
 

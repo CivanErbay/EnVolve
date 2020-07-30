@@ -1,14 +1,19 @@
-import React, {useContext, useEffect} from "react";
-import {UserDispatchContext, UserStateContext} from "../context/UserContext";
+import React, { useEffect} from "react";
+
 import {removeJWTToken} from "../utils/jwt-utils";
-import {LOGOUT} from "../context/UserContextProvider";
+
 import {Redirect, Route} from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
+import {useDispatch, useSelector} from "react-redux";
+import {LOGOUT} from "../actions";
 
 
 export default function PrivateRoute({component: Component, ...rest}) {
-    const {authStatus, userData} = useContext(UserStateContext);
-    const dispatch = useContext(UserDispatchContext);
+
+
+    const {authStatus, userData} = useSelector(state => state.loggedUser)
+    const dispatch = useDispatch();
+
 
     //Each private Route is just accessible by authenticated Users
 
