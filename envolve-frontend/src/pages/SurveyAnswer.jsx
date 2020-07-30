@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import WhiteWrapper from "../components/wrapper/WhiteWrapper";
 import {useHistory, useParams} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
-import {getSurveyForStudent, postNewSurvey, postSurveyAnswer} from "../utils/survey-fetch-utils";
+import {getSurveyForStudent, postSurveyAnswer} from "../utils/survey-fetch-utils";
 import BasicButton from "../components/BasicButton";
 import Slider from "@material-ui/core/Slider";
 import LinearWithValueLabel from "../components/ProgressBar";
@@ -35,14 +35,9 @@ export const SurveyAnswer = () => {
     const [currentSurvey, setCurrentSurvey] = useState([]);
     //State for Question Counter
     const [questionState, setQuestionState] = useState(0)
-
-
     //State for accumulating answerList of each singleQuestions
     const [responseList, setResponseList] = useState([])
-
-
-    const [progressValue, setProgressValue] = useState(0)
-
+    //State for Slider Value after submitting one single Questions
     const [userResponse, setUserResponse] = useState(3)
 
 

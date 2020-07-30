@@ -9,8 +9,7 @@ import {Dashboard} from "../components/Dashboard";
 import List from "@material-ui/core/List";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import clsx from "clsx";
-import WhiteWrapper from "../components/wrapper/WhiteWrapper";
-import DiagonalWrapper from "../components/wrapper/DiagonalWrapper";
+
 import StepWrapper from "../components/wrapper/StepWrapper";
 
 const useStyles = makeStyles((theme) => ({
