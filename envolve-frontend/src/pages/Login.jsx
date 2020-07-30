@@ -46,7 +46,6 @@ export default function Login() {
 /*    const [errorInfo, setErrorInfo] = useState("")*/
     const classes = useStyles();
 
-/*    const dispatch = useContext(UserDispatchContext)*/
     const dispatch = useDispatch();
 
 
@@ -63,7 +62,6 @@ export default function Login() {
             })
     }
 
-  /*  const { authStatus } = useContext(UserStateContext);*/
     const  {authStatus } = useSelector(state => state.loggedUser);
 
 
