@@ -3,7 +3,6 @@ import {UserDispatchContext, UserStateContext} from "../context/UserContext";
 import SchoolClasses from "../components/SchoolClasses";
 import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import WhiteWrapper from "../components/wrapper/WhiteWrapper";
 import clsx from "clsx";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";

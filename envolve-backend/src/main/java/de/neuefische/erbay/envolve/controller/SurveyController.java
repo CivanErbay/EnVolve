@@ -35,7 +35,6 @@ public class SurveyController {
         surveyService.addSurveyAnswer(surveyAnswerDto);
     }
 
-
     @GetMapping("/feedback/all/{schoolClassId}")
     public List<SurveyAnswer> getAllSurveyAnswerListByClassId(@PathVariable String schoolClassId) {
         return surveyService.getAllSurveyAnswerListByClassId(schoolClassId);
