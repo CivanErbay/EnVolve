@@ -1,5 +1,5 @@
 import Box from "@material-ui/core/Box";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import RadarChart from "recharts/lib/chart/RadarChart";
 import {
@@ -17,6 +17,7 @@ import {
 } from "recharts";
 import Typography from "@material-ui/core/Typography";
 import BarChart from "recharts/lib/chart/BarChart";
+import {getSurveyAnswerListByClassId} from "../utils/survey-fetch-utils";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +28,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const Dashboard = () => {
+export const Dashboard = ({schoolClassId}) => {
+
+    const classes = useStyles();
+    const [allSurveyAnswers, setAllSurveyAnswers] = useState([]);
+    const [overallResult, setOverallResult] = useState([])
+
     const data = [
         {subject: 'Atmosphere', A: 120, B: 110, fullMark: 150},
         {subject: 'Empowerment', A: 98, B: 130, fullMark: 150},
@@ -45,18 +51,64 @@ export const Dashboard = () => {
 
     ];
     const data3 = [
-        {name: 'W1', uv: 4, pv: 2.4, amt: 2.4},
-        {name: 'W2', uv: 3, pv: 1398, amt: 2.2},
+        {name: 'W1', overall: overallResult, pv: overallResult, },
+    /*    {name: 'W2', uv: 3, pv: 1.3, amt: 2.2},
         {name: 'W3', uv: -1, pv: 9.8, amt: 2.2},
         {name: 'W4', uv: 5, pv: 3.9, amt: 2},
         {name: 'W5', uv: -2, pv: 4.8, amt: 2.1},
         {name: 'W6', uv: -2.5, pv: 3.8, amt: 2.2},
-        {name: 'W7', uv: 3.4, pv: 4.3, amt: 2.1},
+        {name: 'W7', uv: 3.4, pv: 4.3, amt: 2.1},*/
     ];
 
-    const classes = useStyles();
 
-    const gradientOffset = () => {
+
+    useEffect(() => {
+        getSurveyAnswerListByClassId(schoolClassId).then(response => {
+         setAllSurveyAnswers(response.map(singleResponse => {
+                return {
+                    ...singleResponse, localDate: new Date (singleResponse.localDate)
+                }
+            }));
+        })
+    },[])
+
+
+
+    useEffect(() => {
+        let tempOverall = []
+
+        for(let i = 0; i < allSurveyAnswers.length; i++) {
+            for(let j = 0; j< allSurveyAnswers[i].questionList.length; j++) {
+               tempOverall.push(allSurveyAnswers[i].questionList[j].response)
+            }
+        }
+        if (tempOverall.length > 0) {
+            const sum = tempOverall.reduce((acc, curr) => {
+                return acc + curr
+            });
+
+            let average = sum/tempOverall.length;
+            const finalAverage = Math.round(average * 10) / 10;
+            console.log(finalAverage)
+            setOverallResult(finalAverage)
+        }
+    },[allSurveyAnswers])
+
+
+ //Result last 7 Days
+console.log(allSurveyAnswers.filter((result)=> {
+    return result.localDate.getTime() > new Date().getTime() - (7 * 24 * 60 * 60 * 1000)
+
+} ))
+    //Result between 7 and 14 days
+console.log(allSurveyAnswers.filter((result)=> {
+    return result.localDate.getTime() > new Date().getTime() - (14 *24*60*60*1000) && result.localDate.getTime() < new Date().getTime() - (7 * 24 * 60 * 60 * 1000)
+} ))
+
+
+
+
+/*    const gradientOffset = () => {
         const dataMax = Math.max(...data.map((i) => i.uv));
         const dataMin = Math.min(...data.map((i) => i.uv));
 
@@ -71,10 +123,12 @@ export const Dashboard = () => {
         }
     }
 
-    const off = gradientOffset();
+    const off = gradientOffset();*/
 
     return (
         <Box color={"secondary"} className={classes.stretch}>
+
+            {allSurveyAnswers.length > 0 && console.log(allSurveyAnswers[0].questionList[0].response)}
 
             <Typography style={{fontSize: "2.5em", fontWeight: "bold", padding: "0.25em", textAlign: "left"}}>LAST WEEK</Typography>
             <Box mt={-3}>
@@ -113,15 +167,15 @@ export const Dashboard = () => {
                 >
                     <CartesianGrid strokeDasharray="3 3"/>
                     <XAxis dataKey="name"/>
-                    <YAxis/>
+                    <YAxis domain={[0, 5]}/>
 
                     <defs>
                         <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset={off} stopColor="green" stopOpacity={1}/>
-                            <stop offset={off} stopColor="#D9EFF9" stopOpacity={1}/>
+                            <stop stopColor="green" stopOpacity={1}/> {/*offset={off}*/}
+                            <stop stopColor="#D9EFF9" stopOpacity={1}/> {/*offset={off}*/}
                         </linearGradient>
                     </defs>
-                    <Area type="monotone" dataKey="uv" stroke="#000" fill="url(#splitColor)" />
+                    <Area type="monotone" dataKey="overall" stroke="#000" fill="url(#splitColor)" />
                 </AreaChart>
             </Box>
             </Box>

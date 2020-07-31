@@ -58,7 +58,7 @@ export function postSurveyAnswer(survey) {
 
 export async function getSurveyAnswerListByClassId(schoolClassId) {
     const token = getJWTToken();
-    const response = await fetch(`/api/classes/${schoolClassId}`, {
+    const response = await fetch(`/api/survey/feedback/all/${schoolClassId}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,

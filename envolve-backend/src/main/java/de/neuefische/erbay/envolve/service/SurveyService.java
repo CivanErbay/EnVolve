@@ -106,7 +106,6 @@ public class SurveyService {
 
 
     //THIS METHOD GETS CALLED BY getNewSurveyFiltered to get the schoolClassId (because student can only paste his code, not the Id)
-    //NOT WORKING - in line 117 - even if codes are matching in debugger its not returning the value of line 119..
   public String getSchoolClassIdByStudentCode (String studentCode) {
       List<SchoolClass> allClasses = schoolClassDb.getAllClasses();
       for (int i = 0; i < allClasses.size(); i++) {
