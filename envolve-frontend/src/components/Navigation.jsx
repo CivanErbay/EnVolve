@@ -1,7 +1,5 @@
-import React, {useContext, useEffect} from 'react'
-import {UserDispatchContext} from "../context/UserContext";
+import React, {useEffect} from 'react'
 import {getDecodedJWTToken, isJWTTokenValid} from "../utils/jwt-utils";
-import {LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Header from "./Header";
 import Login from "../pages/Login";
@@ -15,18 +13,19 @@ import {Box} from "@material-ui/core";
 import SurveyCreation from "../pages/SurveyCreation";
 import {SurveyAnswer} from "../pages/SurveyAnswer";
 import ThankYou from "./ThankYou";
-/*
-import ErrorBoundary from "./ErrorBoundary";
-*/
+import {useDispatch} from "react-redux";
+import {LOGIN_FAILED, LOGIN_SUCCESS} from "../actions";
+
 
 export default function Navigation() {
 
 
-    const dispatch = useContext(UserDispatchContext);
+
+    const dispatch = useDispatch()
 
     useEffect(() => {           //Keep Login status after Refresh
         if (isJWTTokenValid()) {
-            dispatch({ type: LOGIN_SUCCESS, payload: getDecodedJWTToken() });
+            dispatch({type: LOGIN_SUCCESS, payload: getDecodedJWTToken()});
         } else {
             dispatch({type: LOGIN_FAILED})
         }
@@ -35,8 +34,8 @@ export default function Navigation() {
     return (
         <Box>
             <Router>
-            <Header/>
-            {/*<ErrorBoundary>*/}
+                <Header/>
+
                 <Switch>
                     <Route path="/login" component={Login} exact/>
                     <Route path="/register" component={Register}/>
@@ -51,8 +50,8 @@ export default function Navigation() {
                         <Landing/>
                     </Route>
                 </Switch>
-            {/*</ErrorBoundary>*/}
-        </Router>
+
+            </Router>
         </Box>
     )
 }

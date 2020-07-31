@@ -1,16 +1,18 @@
-import React, {useContext, useState} from 'react'
+import React, { useState} from 'react'
 import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import TextField from '@material-ui/core/TextField';
 import Box from "@material-ui/core/Box";
 import BasicButton from "../components/BasicButton";
-import {UserDispatchContext, UserStateContext} from "../context/UserContext";
-import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";
+/*import {UserDispatchContext, UserStateContext} from "../context/UserContext";
+import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";*/
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {performLogin} from "../utils/auth-utils";
-import { Redirect, useLocation} from "react-router-dom";
+import {Redirect, useLocation} from "react-router-dom";
 import {About} from "../components/About";
 import {RegisterButton} from "../components/RegisterButton";
+import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from "../actions";
+import {useDispatch, useSelector} from "react-redux";
 
 
 
@@ -41,10 +43,11 @@ export default function Login() {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [errorInfo, setErrorInfo] = useState("")
+/*    const [errorInfo, setErrorInfo] = useState("")*/
     const classes = useStyles();
 
-    const dispatch = useContext(UserDispatchContext)
+    const dispatch = useDispatch();
+
 
     function login() {
         dispatch({ type: LOGIN });
@@ -59,12 +62,17 @@ export default function Login() {
             })
     }
 
-    const { authStatus } = useContext(UserStateContext);
+    const  {authStatus } = useSelector(state => state.loggedUser);
+
+
     const location = useLocation();
+
     if (authStatus === 'SUCCESS') {
         let locationState = location.state || {from:{pathname: "/overview"}}
         return <Redirect to={locationState.from.pathname} />;
     }
+
+
 
     return (
         <>

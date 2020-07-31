@@ -1,11 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import {getSchoolClassesByTeacher} from "../utils/fetch-utils";
 import Box from "@material-ui/core/Box";
-import {UserStateContext} from "../context/UserContext";
 import classNames from 'classnames';
 import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import {useSelector} from "react-redux";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,9 +45,10 @@ export default function SchoolClasses() {
     const [schoolClasses, setSchoolClasses] = useState([]);
     const classes = useStyles();
     //get the actual logged in userContext
-    const userState = useContext(UserStateContext)
+    const userState = useSelector(state => state.loggedUser);
     //get the teacher out of the context
     const teacher = userState.userData.sub
+
 
     //get classes out of this teacher
     useEffect(() => {
