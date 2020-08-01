@@ -160,12 +160,13 @@ public class SurveyService {
         surveyAnswer.setQuestionList(surveyAnswerDto.getQuestionList());
 
         //Check if StudentCode used already - Put this in getNewSurveyFiltered later
-        List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId( schoolClassId);
+        //DEACTIVATED TO FILL DATABASE WITH MORE DATA OVER A LONGER PERIOD TO FILL DASHBOARD
+ /*       List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId( schoolClassId);
         for (int j = 0; j < allSurveyAnswerListByClassId.size(); j++) {
             if (allSurveyAnswerListByClassId.get(j).getStudentCode().equals(surveyAnswerDto.getStudentCode())) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + surveyAnswerDto.getStudentCode() + " finished his survey already");
             }
-        }
+        } */
         LocalDate localDate = LocalDate.now();//For reference
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         String formattedString = localDate.format(formatter);
