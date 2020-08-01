@@ -45,6 +45,4 @@ public class SurveyController {
         return surveyService.getSurveyAnswerListFilteredByDate(schoolClassId);
     }
 
-
-
 }
