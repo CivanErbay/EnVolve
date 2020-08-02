@@ -13,6 +13,7 @@ import {Box} from "@material-ui/core";
 import SurveyCreation from "../pages/SurveyCreation";
 import {SurveyAnswer} from "../pages/SurveyAnswer";
 import ThankYou from "./ThankYou";
+import NoSurvey from "./NoSurvey";
 import {useDispatch} from "react-redux";
 import {LOGIN_FAILED, LOGIN_SUCCESS} from "../actions";
 
@@ -41,6 +42,7 @@ export default function Navigation() {
                     <Route path="/register" component={Register}/>
                     <Route path="/answer/:id" component={SurveyAnswer} exact/>
                     <Route path="/thankyou" component={ThankYou} exact/>
+                    <Route path="/nosurvey" component={NoSurvey} exact/>
                     <PrivateRoute path="/overview" component={Overview} exact/>
                     <PrivateRoute path="/creation" component={SchoolClassCreation} exact/>
                     <PrivateRoute path="/singleclass/:id" component={SingleClass} exact/>
