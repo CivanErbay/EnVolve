@@ -149,7 +149,7 @@ export default function SingleClass() {
                                              className={classes.cName}>{schoolClass.classname} </Typography></Box>
                 )}
 
-                <StepWrapper><Dashboard/></StepWrapper>
+                <StepWrapper><Dashboard schoolClassId={id}/></StepWrapper>
 
 
                 {showStudents ? <StudentList id={id}/> : null}

@@ -106,7 +106,6 @@ public class SurveyService {
 
 
     //THIS METHOD GETS CALLED BY getNewSurveyFiltered to get the schoolClassId (because student can only paste his code, not the Id)
-    //NOT WORKING - in line 117 - even if codes are matching in debugger its not returning the value of line 119..
   public String getSchoolClassIdByStudentCode (String studentCode) {
       List<SchoolClass> allClasses = schoolClassDb.getAllClasses();
       for (int i = 0; i < allClasses.size(); i++) {
@@ -161,12 +160,13 @@ public class SurveyService {
         surveyAnswer.setQuestionList(surveyAnswerDto.getQuestionList());
 
         //Check if StudentCode used already - Put this in getNewSurveyFiltered later
-        List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId( schoolClassId);
+        //DEACTIVATED TO FILL DATABASE WITH MORE DATA OVER A LONGER PERIOD TO FILL DASHBOARD
+ /*       List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId( schoolClassId);
         for (int j = 0; j < allSurveyAnswerListByClassId.size(); j++) {
             if (allSurveyAnswerListByClassId.get(j).getStudentCode().equals(surveyAnswerDto.getStudentCode())) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + surveyAnswerDto.getStudentCode() + " finished his survey already");
             }
-        }
+        } */
         LocalDate localDate = LocalDate.now();//For reference
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         String formattedString = localDate.format(formatter);
