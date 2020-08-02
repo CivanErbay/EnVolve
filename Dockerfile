@@ -1,11 +1,11 @@
-Dockerfile:
+FROM openjdk:14
 
-  FROM openjdk:14
+ENV ENVIRONMENT=prod
 
-  ENV ENVIRONMENT=prod
+MAINTAINER Civan Erbay <civan.erbay@web.de>
 
-  MAINTAINER Civan Erbay <civan.erbay@web.de>
+ADD envolve-backend/target/envolve-backend.jar app.jar
 
-  ADD envolve-backend/target/app.jar app.jar
+CMD [ "sh", "-c", "java -Dserver.port=$PORT -Dauth.jwt.secret=$JWT_SECRET -jar /app.jar" ]
 
-  CMD [ "sh", "-c", "java -Dserver.port=$PORT -jar /app.jar" ]
+
