@@ -11,7 +11,6 @@ import {
     PolarAngleAxis,
     PolarGrid,
     Radar,
-    ReferenceLine,
     XAxis,
     YAxis
 } from "recharts";
@@ -33,21 +32,23 @@ export const Dashboard = ({schoolClassId}) => {
     const classes = useStyles();
     const [allSurveyAnswers, setAllSurveyAnswers] = useState([]);
     const [resultByWeek, setResultByWeek] = useState([])
+    const [lastWeekResult, setLastWeekResult] = useState([])
+    const [prevLastWeekResult, setPrevLastWeekResult] = useState([])
 
     const data = [
-        {subject: 'Atmosphere', A: 120, B: 110, fullMark: 150},
-        {subject: 'Empowerment', A: 98, B: 130, fullMark: 150},
-        {subject: 'Concentration', A: 86, B: 130, fullMark: 150},
-        {subject: 'Benefit', A: 99, B: 100, fullMark: 150},
-        {subject: 'Helpfulness', A: 85, B: 90, fullMark: 150},
+        {subject: 'Atmosphere', A: lastWeekResult[0], B: 1.1, fullMark: 5},
+        {subject: 'Empowerment', A: lastWeekResult[1], B: 1.3, fullMark: 5},
+        {subject: 'Concentration', A: lastWeekResult[2], B: 1.3, fullMark: 5},
+        {subject: 'Benefit', A: lastWeekResult[3], B: 1, fullMark: 5},
+        {subject: 'Motivation', A: lastWeekResult[4], B: 5, fullMark: 5},
 
     ];
     const data2 = [
-        {name: 'AT', last: 4, current: 2.4, amt: 2.4},
-        {name: 'EM', last: -3, current: 1.3, amt: 2.2},
-        {name: 'CO', last: -2, current: -4.8, amt: 2.2},
-        {name: 'BE', last: 2.7, current: 3.9, amt: 2.0},
-        {name: 'HE', last: -1.8, current: 4.8, amt: 2.1},
+        {name: 'ATMO', lastWeek: prevLastWeekResult[0], currentWeek: lastWeekResult[0] },
+        {name: 'EMPO', lastWeek: prevLastWeekResult[1], currentWeek: lastWeekResult[1] },
+        {name: 'CONC', lastWeek: prevLastWeekResult[2], currentWeek: lastWeekResult[2]},
+        {name: 'BENE', lastWeek: prevLastWeekResult[3], currentWeek: lastWeekResult[3]},
+        {name: 'MOTI', lastWeek: prevLastWeekResult[4], currentWeek: lastWeekResult[4]},
 
     ];
     const data3 =
@@ -74,9 +75,6 @@ export const Dashboard = ({schoolClassId}) => {
     useEffect(() => {
         if (allSurveyAnswers.length > 0) {
 
-
-
-
             const weekResults = []
             for (let i = 0; i < 5; i++) {
                 weekResults.push(allSurveyAnswers.filter(result => {
@@ -85,9 +83,10 @@ export const Dashboard = ({schoolClassId}) => {
             }
 
             //First Table
-            console.log(weekResults)
-            const lastWeekResponses = lastWeekResponseCalculator(weekResults[0]);
+            setLastWeekResult(lastWeekResponseCalculator(weekResults[0]));
 
+            //Second Table
+            setPrevLastWeekResult(lastWeekResponseCalculator(weekResults[1]))
 
             //Third Table
             const fiveWeekResponses = []
@@ -95,7 +94,6 @@ export const Dashboard = ({schoolClassId}) => {
                 fiveWeekResponses.push(allWeekResponseCalculator(weekResults[i]))
             }
             setResultByWeek(fiveWeekResponses)
-
 
 
         }
@@ -116,27 +114,22 @@ export const Dashboard = ({schoolClassId}) => {
     }
 
     const lastWeekResponseCalculator = (students) => {
-        let finalResponses = [[], [], [], [], []]
-            console.log(students)
-            for (let j = 0; j < students.length; j++) {
+        let tempResponses = [[], [], [], [], []]
 
-                //Push all same QuestionResults int responsesByQuestion (eg. Student[0] - question[0], Student[1] - question[0].. etc
-/*
-                let responsesByQuestion = [];
-*/
+        for (let j = 0; j < students.length; j++) {
 
-                for (let i = 0; i < students[j].questionList.length; i++) {
-                    finalResponses[i].push(students[j].questionList[i].response)
-                }
-                //Add one to counter to switch to next question and push all result of one single Question into finalResponses
-/*
-                finalResponses.push(responsesByQuestion)
-*/
+
+            for (let i = 0; i < students[j].questionList.length; i++) {
+                tempResponses[i].push(students[j].questionList[i].response)
             }
-            // make avg from arrays inside finalresponses
-
-
-        console.log(finalResponses)
+        }
+        //Average inside each tempResponse
+        let finalResponses = []
+        for (let k = 0; k < tempResponses[0].length; k++) {
+            finalResponses.push(tempResponses[k].reduce((curr, acc) => {
+                return curr + acc
+            }));
+        }
         return finalResponses
     }
 
@@ -180,16 +173,15 @@ export const Dashboard = ({schoolClassId}) => {
                     padding: "0.25em",
                     textAlign: "left"
                 }}>CHANGES</Typography>
-                <Box mt={2} ml={-4}>
-                    <BarChart width={322} height={300} data={data2}
+                <Box mt={2} ml={-6}>
+                    <BarChart width={350} height={300} data={data2}
                               margin={{top: 5, right: 1, left: 1, bottom: 5}}>
-                        <CartesianGrid strokeDasharray="2 2"/>
+                        <CartesianGrid strokeDasharray="3 3"/>
                         <XAxis dataKey="name"/>
-                        <YAxis/>
+                        <YAxis domain={[0,5]}/>
                         <Legend/>
-                        <ReferenceLine y={0} stroke='#000'/>
-                        <Bar dataKey="last" fill="#272635"/>
-                        <Bar dataKey="current" fill="#82ca9d"/>
+                            <Bar dataKey="lastWeek" fill="#39A4D1"/>
+                            <Bar dataKey="currentWeek" fill="#82ca9d"/>
                     </BarChart>
                 </Box>
             </Box>
