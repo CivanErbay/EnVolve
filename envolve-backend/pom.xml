@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>de.neuefische.erbay</groupId>
-	<artifactId>envolve</artifactId>
+	<artifactId>envolve-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>envolve</name>
+	<name>envolve-backend</name>
 	<description>Envolve final project</description>
 
 	<properties>
