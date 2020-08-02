@@ -12,7 +12,7 @@
 	<artifactId>envolve</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>envolve</name>
-	<description>EnVolve final project</description>
+	<description>Envolve final project</description>
 
 	<properties>
 		<java.version>14</java.version>
@@ -70,6 +70,7 @@
     </dependencies>
 
 	<build>
+		<finalName>envolve-backend</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
