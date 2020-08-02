@@ -44,7 +44,7 @@ export const SurveyAnswer = () => {
     useEffect(() => {
         getSurveyForStudent(id).then(fetchResponse => {
             if (!fetchResponse)
-                routeLanding()
+            {routeNoSurvey()}
             else
                 setCurrentSurvey(fetchResponse)
         })
@@ -58,8 +58,8 @@ export const SurveyAnswer = () => {
         history.push(path)
     }
 
-    const routeLanding = () => {
-        let path = `/`
+    const routeNoSurvey = () => {
+        let path = `/nosurvey`
         history.push(path)
     }
 

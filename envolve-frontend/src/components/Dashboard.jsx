@@ -17,6 +17,7 @@ import {
 import Typography from "@material-ui/core/Typography";
 import BarChart from "recharts/lib/chart/BarChart";
 import {getSurveyAnswerListByClassId} from "../utils/survey-fetch-utils";
+import PolarRadiusAxis from "recharts/lib/polar/PolarRadiusAxis";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -74,7 +75,6 @@ export const Dashboard = ({schoolClassId}) => {
     //FILTER ALL RESPONSE INTO DATES
     useEffect(() => {
         if (allSurveyAnswers.length > 0) {
-
             const weekResults = []
             for (let i = 0; i < 5; i++) {
                 weekResults.push(allSurveyAnswers.filter(result => {
@@ -83,10 +83,14 @@ export const Dashboard = ({schoolClassId}) => {
             }
 
             //First Table
+            console.log(weekResults)
+
             setLastWeekResult(lastWeekResponseCalculator(weekResults[0]));
 
             //Second Table
             setPrevLastWeekResult(lastWeekResponseCalculator(weekResults[1]))
+            console.log(lastWeekResponseCalculator(weekResults[1]))
+            console.log(lastWeekResponseCalculator(weekResults[0]))
 
             //Third Table
             const fiveWeekResponses = []
@@ -114,26 +118,35 @@ export const Dashboard = ({schoolClassId}) => {
     }
 
     const lastWeekResponseCalculator = (students) => {
+        //MAKE THIS DYNAMIC BECAUSE AS SOON AS I PUT ANOTHER ANSWER ITS BREAKING THE APP
         let tempResponses = [[], [], [], [], []]
-
+        console.log(tempResponses)
         for (let j = 0; j < students.length; j++) {
-
-
             for (let i = 0; i < students[j].questionList.length; i++) {
                 tempResponses[i].push(students[j].questionList[i].response)
             }
         }
         //Average inside each tempResponse
         let finalResponses = []
-        for (let k = 0; k < tempResponses[0].length; k++) {
-            finalResponses.push(tempResponses[k].reduce((curr, acc) => {
-                return curr + acc
-            }));
+
+        for (let v=0; v < tempResponses.length; v++){
+           finalResponses.push(average(tempResponses[v]))
         }
+        console.log(finalResponses)
         return finalResponses
     }
 
+    const average = (array) => {
 
+        let sum = 0;
+
+        for(let p = 0; p < array.length; p++) {
+            sum += array[p];
+
+        }
+        console.log(sum/array.length)
+        return sum/array.length
+    }
     /*    const gradientOffset = () => {
             const dataMax = Math.max(...data.map((i) => i.uv));
             const dataMin = Math.min(...data.map((i) => i.uv));
@@ -161,6 +174,7 @@ export const Dashboard = ({schoolClassId}) => {
                 <RadarChart cx={140} cy={140} outerRadius={60} width={300} height={250} data={data}>
                     <PolarGrid/>
                     <PolarAngleAxis dataKey="subject"/>
+                    <PolarRadiusAxis domain={[0, 5]} />
                     <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#D9EFF9" fillOpacity={0.6}/>
                 </RadarChart>
             </Box>
