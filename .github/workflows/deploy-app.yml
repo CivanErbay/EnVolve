@@ -1,41 +1,49 @@
-build-backend:
-  name: build jar file
-  runs-on: ubuntu-latest
-  steps:
-    - name: Set up JDK 14
-      uses: actions/setup-java@v1
-      with:
-        java-version: 14
-    - name: Build with Maven
-      run: mvn -B package --file ./envolve-backend/pom.xml
-    - name: upload envolve-backend.jar file
-      uses: actions/upload-artifact@v2
-      with:
-        name: envolve-backend.jar
-        path: envolve-backend/target/envolve-backend.jar
+name: Deploy project plan to heroku
 
-deploy:
-  name: deploy to heroku
-  runs-on: ubuntu-latest
-  needs: build-backend
-  steps:
-    - uses: actions/checkout@v2
-    - name: create target folder
-      run: mkdir envolve-backend/target
-    - name: download envolve-backend.jar
-      uses: actions/download-artifact@v2
-      with:
-        name: envolve-backend.jar
-        path: envolve-backend/target
-    - name: login to heroku
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:login
-    - name: heroku build/push container
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:push web -a envolve-feedback
-    - name: release container
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:release web -a envolve-feedback
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-backend:
+    name: build jar file
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK 14
+        uses: actions/setup-java@v1
+        with:
+          java-version: 14
+      - name: Build with Maven
+        run: mvn -B package --file ./envolve-backend/pom.xml
+      - name: upload envolve-backend.jar file
+        uses: actions/upload-artifact@v2
+        with:
+          name: envolve-backend.jar
+          path: envolve-backend/target/envolve-backend.jar
+
+  deploy:
+    name: deploy to heroku
+    runs-on: ubuntu-latest
+    needs: build-backend
+    steps:
+      - uses: actions/checkout@v2
+      - name: create target folder
+        run: mkdir envolve-backend/target
+      - name: download envolve-backend.jar
+        uses: actions/download-artifact@v2
+        with:
+          name: envolve-backend.jar
+          path: envolve-backend/target
+      - name: login to heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+      - name: heroku build/push container
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:push web -a envolve-feedback
+      - name: release container
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release web -a envolve-feedback
+
