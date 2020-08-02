@@ -55,3 +55,17 @@ export function postSurveyAnswer(survey) {
     )
 }
 
+
+export async function getSurveyAnswerListByClassId(schoolClassId) {
+    const token = getJWTToken();
+    const response = await fetch(`/api/survey/feedback/all/${schoolClassId}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+    if (response.status !== 200) {
+        throw new Error('something went wrong!!!');
+    }
+    return await response.json();
+}
