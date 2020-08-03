@@ -19,7 +19,7 @@ import java.util.List;
 */
 public class SchoolClass {
 
-    @Id
+  /*  @Id*/
     private String id;
     private String teacher;
     private String classname;

@@ -18,7 +18,7 @@ import java.util.List;
 */
 public class SurveyAnswer {
 
-    @Id
+   /* @Id*/
     private String id;
     private String schoolClassId;
     private String studentCode;
