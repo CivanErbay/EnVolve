@@ -28,6 +28,8 @@ jobs:
     needs: build-backend
     steps:
       - uses: actions/checkout@v2
+      - name: create firebase config
+        run: echo "${{ secrets.FIREBASE_CONFIG }}" > serviceAccount.json
       - name: create target folder
         run: mkdir envolve-backend/target
       - name: download envolve-backend.jar
