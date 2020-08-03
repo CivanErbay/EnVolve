@@ -38,7 +38,7 @@ export const Dashboard = ({schoolClassId}) => {
 
     const data = [
         {subject: 'Atmosphere', A: lastWeekResult[0], B: 1.1, fullMark: 5},
-        {subject: 'Empowerment', A: lastWeekResult[1], B: 1.3, fullMark: 5},
+        {subject: 'Participation', A: lastWeekResult[1], B: 1.3, fullMark: 5},
         {subject: 'Concentration', A: lastWeekResult[2], B: 1.3, fullMark: 5},
         {subject: 'Benefit', A: lastWeekResult[3], B: 1, fullMark: 5},
         {subject: 'Motivation', A: lastWeekResult[4], B: 5, fullMark: 5},
@@ -46,7 +46,7 @@ export const Dashboard = ({schoolClassId}) => {
     ];
     const data2 = [
         {name: 'ATMO', lastWeek: prevLastWeekResult[0], currentWeek: lastWeekResult[0] },
-        {name: 'EMPO', lastWeek: prevLastWeekResult[1], currentWeek: lastWeekResult[1] },
+        {name: 'PART', lastWeek: prevLastWeekResult[1], currentWeek: lastWeekResult[1] },
         {name: 'CONC', lastWeek: prevLastWeekResult[2], currentWeek: lastWeekResult[2]},
         {name: 'BENE', lastWeek: prevLastWeekResult[3], currentWeek: lastWeekResult[3]},
         {name: 'MOTI', lastWeek: prevLastWeekResult[4], currentWeek: lastWeekResult[4]},
@@ -106,21 +106,25 @@ export const Dashboard = ({schoolClassId}) => {
 
     const allWeekResponseCalculator = (week) => {
         let responses = []
+
         for (let i = 0; i < week.length; i++) {
             for (let j = 0; j < week[i].questionList.length; j++) {
                 responses.push(week[i].questionList[j].response)
             }
         }
-        const sum = responses.reduce((curr, acc) => {
-            return curr + acc
-        })
-        return sum / responses.length
+        if(responses.length > 0) {
+            const sum = responses.reduce((curr, acc) => {
+                return curr + acc
+            })
+
+            return sum / responses.length
+        }
+        return null
     }
 
     const lastWeekResponseCalculator = (students) => {
         //MAKE THIS DYNAMIC BECAUSE AS SOON AS I PUT ANOTHER ANSWER ITS BREAKING THE APP
         let tempResponses = [[], [], [], [], []]
-        console.log(tempResponses)
         for (let j = 0; j < students.length; j++) {
             for (let i = 0; i < students[j].questionList.length; i++) {
                 tempResponses[i].push(students[j].questionList[i].response)
@@ -129,17 +133,14 @@ export const Dashboard = ({schoolClassId}) => {
         //Average inside each tempResponse
         let finalResponses = []
 
-        for (let v=0; v < tempResponses.length; v++){
+        for (let v = 0; v < tempResponses.length; v++){
            finalResponses.push(average(tempResponses[v]))
         }
-        console.log(finalResponses)
         return finalResponses
     }
 
     const average = (array) => {
-
         let sum = 0;
-
         for(let p = 0; p < array.length; p++) {
             sum += array[p];
 
@@ -147,23 +148,6 @@ export const Dashboard = ({schoolClassId}) => {
         console.log(sum/array.length)
         return sum/array.length
     }
-    /*    const gradientOffset = () => {
-            const dataMax = Math.max(...data.map((i) => i.uv));
-            const dataMin = Math.min(...data.map((i) => i.uv));
-
-            if (dataMax <= 0){
-                return 0
-            }
-            else if (dataMin >= 0){
-                return 1
-            }
-            else{
-                return dataMax / (dataMax - dataMin);
-            }
-        }
-
-        const off = gradientOffset();*/
-
     return (
         <Box color={"secondary"} className={classes.stretch}>
 
