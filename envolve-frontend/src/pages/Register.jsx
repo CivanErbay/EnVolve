@@ -88,7 +88,7 @@ export default function Register() {
     const {authStatus} = useSelector(state => state.loggedUser)
 
     if (authStatus === 'SUCCESS') {
-        return <Redirect to={'https://envolve-2d3d3.web.app/overview'}/>;
+        return <Redirect to={'/overview'}/>;
     }
 
 
