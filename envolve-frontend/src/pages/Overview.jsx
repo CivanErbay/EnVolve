@@ -46,7 +46,7 @@ export default function Overview() {
     //For Redirect to /create
     const history = useHistory();
     const routeCreateClass = () =>{
-        let path = `/creation`;
+        let path = `https://envolve-2d3d3.web.app/creation`;
         history.push(path);
     }
 

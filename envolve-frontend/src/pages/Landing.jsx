@@ -33,7 +33,7 @@ export default function Landing() {
 
     const history = useHistory();
     const routeSurveyAnswer = () => {
-        let path = `/answer/${studentCode}`
+        let path = `https://envolve-2d3d3.web.app/answer/${studentCode}`
         history.push(path)
     }
 
