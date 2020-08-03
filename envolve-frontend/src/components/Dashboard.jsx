@@ -68,7 +68,7 @@ export const Dashboard = ({schoolClassId}) => {
                 }
             }));
         })
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
@@ -80,11 +80,9 @@ export const Dashboard = ({schoolClassId}) => {
                 weekResults.push(allSurveyAnswers.filter(result => {
                     return result.localDate.getTime() > new Date().getTime() - ((i + 1) * 7 * 24 * 60 * 60 * 1000) && result.localDate.getTime() < new Date().getTime() - (i * 7 * 24 * 60 * 60 * 1000)
                 }));
-            }
+
 
             //First Table
-
-
             setLastWeekResult(lastWeekResponseCalculator(weekResults[0]));
 
             //Second Table
@@ -98,7 +96,7 @@ export const Dashboard = ({schoolClassId}) => {
             }
             setResultByWeek(fiveWeekResponses)
 
-
+            }
         }
     }, [allSurveyAnswers])
 
@@ -122,7 +120,7 @@ export const Dashboard = ({schoolClassId}) => {
     }
 
     const lastWeekResponseCalculator = (student) => {
-        //MAKE THIS DYNAMIC BECAUSE AS SOON AS I PUT ANOTHER ANSWER ITS BREAKING THE APP
+        if(student.length > 0 ) {
         let tempResponses = Array(student[0].questionList.length).fill([])
         /*let tempResponses = [[], [], [], [], []]*/
         for (let j = 0; j < student.length; j++) {
@@ -130,20 +128,20 @@ export const Dashboard = ({schoolClassId}) => {
                 tempResponses[i].push(student[j].questionList[i].response)
             }
         }
-        //Average inside each tempResponse
+
         let finalResponses = []
 
         for (let v = 0; v < tempResponses.length; v++){
            finalResponses.push(average(tempResponses[v]))
         }
         return finalResponses
+        }
     }
 
     const average = (array) => {
         let sum = 0;
         for(let p = 0; p < array.length; p++) {
             sum += array[p];
-
         }
         return sum/array.length
     }
