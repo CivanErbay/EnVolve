@@ -22,8 +22,9 @@ export default function ThankYou() {
 
         <Box className={classes.center}>
             <DiagonalWrapper2 style={{fontSize: "2em"}}>
+
+                <Typography style={{fontSize: "1.4em", fontWeight: "bold"}}>See you soon!</Typography>
                 <Typography>Thank you for completing the survey</Typography>
-                <Typography>See you soon!</Typography>
             </DiagonalWrapper2>
             <Box mt={5}> <Typography style={{color: "white", fontSize: "0.75em"}}>You can close this window
                 now</Typography></Box>
