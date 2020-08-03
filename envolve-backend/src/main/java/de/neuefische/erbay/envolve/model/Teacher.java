@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Id;
 
 
 
-@Data
+/*@Data*/
 @AllArgsConstructor
 @NoArgsConstructor
 /*@Document(collection = "teacher")*/

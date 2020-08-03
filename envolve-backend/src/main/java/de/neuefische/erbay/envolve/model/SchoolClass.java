@@ -13,7 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+/*@Data*/
 /*
 @Document(collection = "class")
 */
