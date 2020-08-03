@@ -1,8 +1,10 @@
 import {getJWTToken} from "./jwt-utils";
 
+const baseURL = "https://envolve-feedback.herokuapp.com"
+
 export function postNewSurvey(survey) {
     const token = getJWTToken();
-    return fetch("https://envolve-2d3d3.web.app/api/survey", {
+    return fetch( `${baseURL}/api/survey`, {
         method: 'POST',
         headers: {
             'Content-Type': "application/json",
@@ -20,7 +22,7 @@ export function postNewSurvey(survey) {
 
 export async function getSurveyForStudent(studentCode) {
 /*    const token = getJWTToken();*/
-    const response = await fetch(`https://envolve-2d3d3.web.app/api/survey/${studentCode}`, {
+    const response = await fetch(`${baseURL}/api/survey/${studentCode}`, {
         method: 'GET',
       /*  headers: {
             Authorization: `Bearer ${token}`,
@@ -37,7 +39,7 @@ export function postSurveyAnswer(survey) {
     const token = getJWTToken();
 */
     //ACHTUNG das slash / vor api/... ist wichtig, damit der fetch funktioniert!
-    return fetch("https://envolve-2d3d3.web.appfi/api/survey/feedback", {
+    return fetch(`${baseURL}/api/survey/feedback`, {
         method: 'POST',
         headers: {
             'Content-Type': "application/json",
@@ -58,7 +60,7 @@ export function postSurveyAnswer(survey) {
 
 export async function getSurveyAnswerListByClassId(schoolClassId) {
     const token = getJWTToken();
-    const response = await fetch(`https://envolve-2d3d3.web.app/api/survey/feedback/all/${schoolClassId}`, {
+    const response = await fetch(`${baseURL}/api/survey/feedback/all/${schoolClassId}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
