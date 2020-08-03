@@ -83,14 +83,13 @@ export const Dashboard = ({schoolClassId}) => {
             }
 
             //First Table
-            console.log(weekResults)
+
 
             setLastWeekResult(lastWeekResponseCalculator(weekResults[0]));
 
             //Second Table
             setPrevLastWeekResult(lastWeekResponseCalculator(weekResults[1]))
-            console.log(lastWeekResponseCalculator(weekResults[1]))
-            console.log(lastWeekResponseCalculator(weekResults[0]))
+
 
             //Third Table
             const fiveWeekResponses = []
@@ -122,12 +121,13 @@ export const Dashboard = ({schoolClassId}) => {
         return null
     }
 
-    const lastWeekResponseCalculator = (students) => {
+    const lastWeekResponseCalculator = (student) => {
         //MAKE THIS DYNAMIC BECAUSE AS SOON AS I PUT ANOTHER ANSWER ITS BREAKING THE APP
-        let tempResponses = [[], [], [], [], []]
-        for (let j = 0; j < students.length; j++) {
-            for (let i = 0; i < students[j].questionList.length; i++) {
-                tempResponses[i].push(students[j].questionList[i].response)
+        let tempResponses = Array(student[0].questionList.length).fill([])
+        /*let tempResponses = [[], [], [], [], []]*/
+        for (let j = 0; j < student.length; j++) {
+            for (let i = 0; i < student[j].questionList.length; i++) {
+                tempResponses[i].push(student[j].questionList[i].response)
             }
         }
         //Average inside each tempResponse
@@ -145,7 +145,6 @@ export const Dashboard = ({schoolClassId}) => {
             sum += array[p];
 
         }
-        console.log(sum/array.length)
         return sum/array.length
     }
     return (
