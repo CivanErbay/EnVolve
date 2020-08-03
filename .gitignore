@@ -11,4 +11,6 @@
 .idea
 .DS_Store
 
+.serviceAccount.json
+./serviceAccount.json
 serviceAccount.json
