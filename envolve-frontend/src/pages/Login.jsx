@@ -68,7 +68,7 @@ export default function Login() {
     const location = useLocation();
 
     if (authStatus === 'SUCCESS') {
-        let locationState = location.state || {from:{pathname: "https://envolve-2d3d3.web.app/overview"}}
+        let locationState = location.state || {from:{pathname: "/overview"}}
         return <Redirect to={locationState.from.pathname} />;
     }
 

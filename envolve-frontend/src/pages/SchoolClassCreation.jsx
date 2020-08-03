@@ -54,7 +54,7 @@ export default function SchoolClassCreation() {
 
     if (creationSuccess) {
         return (
-            <Redirect to={"https://envolve-2d3d3.web.app/overview"} />
+            <Redirect to={"/overview"} />
         )
     }
 

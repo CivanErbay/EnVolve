@@ -1,7 +1,8 @@
 import {getJWTToken} from "./jwt-utils";
+const baseURL = "https://envolve-feedback.herokuapp.com"
 
 export function postRegister(registerData) {
-    return fetch('https://envolve-2d3d3.web.app/register', {
+    return fetch(`${baseURL}/register`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -17,7 +18,7 @@ export function postRegister(registerData) {
 
 export function postClass(schoolClass) {
     const token = getJWTToken();
-    return fetch("api/classes", {
+    return fetch(`${baseURL}/api/classes`, {
         method: 'POST',
         headers: {
             'Content-Type': "application/json",
@@ -35,7 +36,7 @@ export function postClass(schoolClass) {
 
 export async function getSchoolClassesByTeacher(teacher) {
     const token = getJWTToken();
-    const response = await fetch(`https://envolve-2d3d3.web.app/api/classes/${teacher}`, {
+    const response = await fetch(`${baseURL}/api/classes/${teacher}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -49,7 +50,7 @@ export async function getSchoolClassesByTeacher(teacher) {
 
 export async function getClassById(id) {
     const token = getJWTToken();
-    const response = await fetch(`https://envolve-2d3d3.web.app/api/classes/class/${id}`, {
+    const response = await fetch(`${baseURL}/api/classes/class/${id}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -63,7 +64,7 @@ export async function getClassById(id) {
 
 export function deleteClassById(id) {
     const token = getJWTToken();
-    return fetch(`/api/classes/class/${id}`, {
+    return fetch(`${baseURL}/api/classes/class/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': "application/json",
