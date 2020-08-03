@@ -1,7 +1,7 @@
 import {getJWTToken} from "./jwt-utils";
 
 export function postRegister(registerData) {
-    return fetch('/register', {
+    return fetch('https://envolve-2d3d3.web.app/register', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -35,7 +35,7 @@ export function postClass(schoolClass) {
 
 export async function getSchoolClassesByTeacher(teacher) {
     const token = getJWTToken();
-    const response = await fetch(`/api/classes/${teacher}`, {
+    const response = await fetch(`https://envolve-2d3d3.web.app/api/classes/${teacher}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ export async function getSchoolClassesByTeacher(teacher) {
 
 export async function getClassById(id) {
     const token = getJWTToken();
-    const response = await fetch(`/api/classes/class/${id}`, {
+    const response = await fetch(`https://envolve-2d3d3.web.app/api/classes/class/${id}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
