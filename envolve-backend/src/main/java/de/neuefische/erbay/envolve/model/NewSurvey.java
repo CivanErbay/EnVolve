@@ -18,7 +18,7 @@ import java.util.List;
 */
 public class NewSurvey {
 
-    @Id
+  /*  @Id*/
     private String id;
     private String schoolClassId;
     private List<Question> questionList;

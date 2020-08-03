@@ -15,7 +15,7 @@ import org.springframework.data.annotation.Id;
 /*@Document(collection = "teacher")*/
 public class Teacher {
 
-    @Id
+/*    @Id*/
     private String username;
     private String password;
     private String firstname;

@@ -13,7 +13,7 @@ import org.springframework.data.annotation.Id;
 @Document(collection = "student")
 */
 public class Student {
-    @Id
+   /* @Id*/
     private String student;
     private String code;
 }
