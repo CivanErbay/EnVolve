@@ -39,6 +39,7 @@ export const Dashboard = ({schoolClassId}) => {
 
     useEffect(() => {
         const data1 = [
+
             {subject: 'Atmosphere', A: lastWeekResult[0], B: 1.1, fullMark: 5},
             {subject: 'Participation', A: lastWeekResult[1], B: 1.3, fullMark: 5},
             {subject: 'Concentration', A: lastWeekResult[2], B: 1.3, fullMark: 5},
@@ -86,9 +87,8 @@ export const Dashboard = ({schoolClassId}) => {
                 weekResults.push(allSurveyAnswers.filter(result => {
                     return result.localDate.getTime() > new Date().getTime() - ((i + 1) * 7 * 24 * 60 * 60 * 1000) && result.localDate.getTime() < new Date().getTime() - (i * 7 * 24 * 60 * 60 * 1000)
                 }));
-
             }
-            console.log(allSurveyAnswers)
+            // NEXT TASK - TAKE OUT KeyWord out of weekResults/allSurveyanswers and map the Data!
             //First Table
             setLastWeekResult(lastWeekResponseCalculator(weekResults[0]));
 
