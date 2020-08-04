@@ -45,10 +45,7 @@ export default function SurveyCreation() {
     const {id} = useParams();
     const [schoolClass, setSchoolClass] = useState(null)
     const [creationSuccess, setCreationSuccess] = useState(false)
-
-    const [singleQuestion, setSingleQuestion] = useState(
-        {questionText: '', keyWord: ''}
-    )
+    const [singleQuestion, setSingleQuestion] = useState({questionText: '', keyWord: '', response: 0})
     const [questionList, setQuestionList] = useState([]);
     const [survey, setSurvey] = useState({
         schoolClassId: '',
@@ -60,7 +57,7 @@ export default function SurveyCreation() {
     //Add single Question to state
     const addQuestion = () => {
         setQuestionList(questionList.concat(singleQuestion))
-        setSingleQuestion({questionText: "", keyWord: ""})
+        setSingleQuestion({questionText: "", keyWord: "", response: 0})
     }
 
     function handleChange(event) {
@@ -97,7 +94,7 @@ export default function SurveyCreation() {
         )
     }
 
-    console.log(questionList)
+    console.log(survey)
 
     return (
         <Box color={"secondary"} className={classes.center}>

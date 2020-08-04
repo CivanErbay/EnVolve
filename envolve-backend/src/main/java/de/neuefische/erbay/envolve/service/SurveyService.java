@@ -56,11 +56,11 @@ public class SurveyService {
 
         //Create QuestionList out of Stringlistfrom newSurveyDto
         List<Question> surveyList = new ArrayList<>();
-        List<String> tempList = newSurveyDto.getQuestionList();
+        List<Question> tempList = newSurveyDto.getQuestionList();
         for (int i = 0; i < newSurveyDto.getQuestionList().size(); i++) {
             Question tempQuestion = new Question();
-            tempQuestion.setQuestionText(tempList.get(i));
-            tempQuestion.setKeyWord(tempList.get(i));
+            tempQuestion.setQuestionText(tempList.get(i).getQuestionText());
+            tempQuestion.setKeyWord(tempList.get(i).getKeyWord());
             tempQuestion.setResponse(0);
             surveyList.add(tempQuestion);
         }
