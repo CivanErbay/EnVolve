@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SingleClass() {
 
-    const [swipe, setSwipe] = useState({bottomt: false})
+    const [swipe, setSwipe] = useState({bottom: false})
     const toggleDrawer = (anchor, open) => (event) => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
