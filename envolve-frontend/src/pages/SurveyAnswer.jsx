@@ -73,6 +73,7 @@ export const SurveyAnswer = () => {
     const nextQuestionButton = () => {
         setResponseList([...responseList, {
             questionText: currentSurvey.questionList[questionState].questionText,
+            keyWord: currentSurvey.questionList[questionState].keyWord,
             response: userResponse,
         }])
 
@@ -83,6 +84,7 @@ export const SurveyAnswer = () => {
     const finishButton = () => {
         let finalResponseList = [...responseList, {
             questionText: currentSurvey.questionList[questionState].questionText,
+            keyWord: currentSurvey.questionList[questionState].keyWord,
             response: userResponse
         }]
         let finalObject = {
@@ -126,6 +128,7 @@ export const SurveyAnswer = () => {
         setUserResponse(value);
     };
 
+    console.log(currentSurvey)
     return (
         <Box className={classes.center} mt={4}>
             <Box>
