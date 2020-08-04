@@ -60,6 +60,7 @@ export const Dashboard = ({schoolClassId}) => {
             })
         ;
         setData({data1,data2,data3})
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[prevLastWeekResult,lastWeekResult])
 
 
@@ -103,6 +104,7 @@ export const Dashboard = ({schoolClassId}) => {
             setResultByWeek(fiveWeekResponses)
 
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [allSurveyAnswers])
 
 

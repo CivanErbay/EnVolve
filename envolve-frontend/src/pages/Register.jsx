@@ -74,7 +74,6 @@ export default function Register() {
         } else {
             postRegister(registerState)
                 .then((response) => {
-                    console.log(response)
                     setJWTToken(response);
                     const userData = getDecodedJWTToken();
                     dispatch({type: LOGIN_SUCCESS, payload: userData});
