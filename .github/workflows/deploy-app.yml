@@ -1,8 +1,6 @@
 name: Deploy project plan to heroku
 
-on:
-  push:
-    branches: [ master ]
+on: push
 
 jobs:
   build-backend:
