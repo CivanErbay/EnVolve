@@ -11,6 +11,7 @@ public class Question {
 
 
     private String questionText;
+    private String keyWord;
     private int response;
 
 }

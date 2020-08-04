@@ -60,16 +60,16 @@ public class SurveyService {
         for (int i = 0; i < newSurveyDto.getQuestionList().size(); i++) {
             Question tempQuestion = new Question();
             tempQuestion.setQuestionText(tempList.get(i));
+            tempQuestion.setKeyWord(tempList.get(i));
             tempQuestion.setResponse(0);
             surveyList.add(tempQuestion);
         }
         newSurvey.setQuestionList(surveyList);
 
         //format Date to String to make it fitting into firebase DB
-        LocalDate localDate = LocalDate.now();//For reference
+        LocalDate localDate = LocalDate.now(); //For reference
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         String formattedString = localDate.format(formatter);
-
 
         newSurvey.setLocalDate(formattedString);
         newSurvey.setActive(true);
