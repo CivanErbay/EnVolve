@@ -88,7 +88,7 @@ export const Dashboard = ({schoolClassId}) => {
                 }));
 
             }
-
+            console.log(allSurveyAnswers)
             //First Table
             setLastWeekResult(lastWeekResponseCalculator(weekResults[0]));
 
