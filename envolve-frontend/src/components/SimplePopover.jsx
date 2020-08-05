@@ -1,8 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import {Box} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     typography: {
@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SimplePopover({buttonContent},{popoverContent}) {
+export default function SimplePopover({popoverContent}) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -27,9 +27,10 @@ export default function SimplePopover({buttonContent},{popoverContent}) {
 
     return (
         <div>
-            <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
-                Open Popover
-            </Button>
+            <Box aria-describedby={id} onClick={handleClick}>
+                <img src="../images/info.svg" alt="" style={{height: "3.5vh"}}/>
+            </Box>
+
             <Popover
                 id={id}
                 open={open}
@@ -44,7 +45,7 @@ export default function SimplePopover({buttonContent},{popoverContent}) {
                     horizontal: 'center',
                 }}
             >
-                <Typography className={classes.typography}>The content of the Popover.</Typography>
+                <Typography className={classes.typography}>{popoverContent}</Typography>
             </Popover>
         </div>
     );

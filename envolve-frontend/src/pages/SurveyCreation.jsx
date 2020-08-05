@@ -17,6 +17,7 @@ import IconButton from "@material-ui/core/IconButton";
 import WhiteWrapper from "../components/wrapper/WhiteWrapper";
 import BasicButton from "../components/BasicButton";
 import BackButton from "../components/BackButton";
+import SimplePopover from "../components/SimplePopover";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
     headline: {
         fontSize: "2em",
+        marginTop: "1em",
     },
     headlinetwo: {
         fontSize: "1.25em",
@@ -94,7 +96,6 @@ export default function SurveyCreation() {
         )
     }
 
-    console.log(survey)
 
     return (
         <Box color={"secondary"} className={classes.center}>
@@ -122,7 +123,7 @@ export default function SurveyCreation() {
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText key={questionList.id}
-                                        primary={singleQuestion.questionText}
+                                                  primary={singleQuestion.questionText}
                                     />
                                     <Box m={2}>
                                         <ListItemSecondaryAction key={questionList.id}>
@@ -136,13 +137,17 @@ export default function SurveyCreation() {
                         </List>
                         <Box className={classes.center}>
                             <TextField onChange={handleChange} id="standard-basic1"
-                                       label="Question" name="questionText" value={singleQuestion.questionText} autoComplete="on"/>
-                            <Box>
-                            <TextField onChange={handleChange} id="standard-basic2"
-                                       label="Keyword" name="keyWord" value={singleQuestion.keyWord} autoComplete="on"/>
-                                <img src="../images/question2.svg" alt="" style={{height: "2vh"}}/>
-                            </Box>
+                                       label="Question" name="questionText" value={singleQuestion.questionText}
+                                       autoComplete="on"/>
 
+                            <Box ml={-6} style={{display: "flex", alignItems: "flex-end"}}>
+                                <Box mr={3}>
+                                    <SimplePopover popoverContent={"Please add a descriptive keyword each question"}/>
+                                </Box>
+                                <TextField onChange={handleChange} id="standard-basic2"
+                                           label="Keyword" name="keyWord" value={singleQuestion.keyWord}
+                                           autoComplete="on"/>
+                            </Box>
                             <BasicButton style={{marginTop: "20px"}} onClick={addQuestion} content={"Add question"}/>
                         </Box>
                     </WhiteWrapper>
