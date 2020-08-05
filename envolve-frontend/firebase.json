@@ -2,7 +2,6 @@
   "hosting": {
     "public": "build",
     "ignore": [
-      ".env.development.local",
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
