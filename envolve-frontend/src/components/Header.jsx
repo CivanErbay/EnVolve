@@ -25,7 +25,7 @@ export default function Header() {
     return (
         <Box px={2}>
             <div><Link className={classes.link} to="/">
-                <img className={classes.image} src="/images/envolveLogoNew.svg" alt=""/>
+                <img className={classes.image} src="/images/logo.svg" alt=""/>
             </Link></div>
 
         </Box>

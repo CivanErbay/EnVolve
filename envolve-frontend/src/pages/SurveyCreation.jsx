@@ -137,9 +137,11 @@ export default function SurveyCreation() {
                         <Box className={classes.center}>
                             <TextField onChange={handleChange} id="standard-basic1"
                                        label="Question" name="questionText" value={singleQuestion.questionText} autoComplete="on"/>
-
+                            <Box>
                             <TextField onChange={handleChange} id="standard-basic2"
                                        label="Keyword" name="keyWord" value={singleQuestion.keyWord} autoComplete="on"/>
+                                <img src="../images/question2.svg" alt="" style={{height: "2vh"}}/>
+                            </Box>
 
                             <BasicButton style={{marginTop: "20px"}} onClick={addQuestion} content={"Add question"}/>
                         </Box>

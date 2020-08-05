@@ -35,17 +35,13 @@ export async function getSurveyForStudent(studentCode) {
 }
 
 export function postSurveyAnswer(survey) {
-/*
-    const token = getJWTToken();
-*/
+
     //ACHTUNG das slash / vor api/... ist wichtig, damit der fetch funktioniert!
     return fetch(`${baseURL}/api/survey/feedback`, {
         method: 'POST',
         headers: {
             'Content-Type': "application/json",
-/*
-            Authorization: `Bearer ${token}`,
-*/
+
         },
         body: JSON.stringify(survey)
     }).then(() => {

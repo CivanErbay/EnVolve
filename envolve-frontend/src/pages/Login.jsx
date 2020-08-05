@@ -4,8 +4,6 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import TextField from '@material-ui/core/TextField';
 import Box from "@material-ui/core/Box";
 import BasicButton from "../components/BasicButton";
-/*import {UserDispatchContext, UserStateContext} from "../context/UserContext";
-import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from "../context/UserContextProvider";*/
 import {getDecodedJWTToken, setJWTToken} from "../utils/jwt-utils";
 import {performLogin} from "../utils/auth-utils";
 import {Redirect, useLocation} from "react-router-dom";
