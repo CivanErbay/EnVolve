@@ -45,20 +45,28 @@ export default function SurveyCreation() {
     const {id} = useParams();
     const [schoolClass, setSchoolClass] = useState(null)
     const [creationSuccess, setCreationSuccess] = useState(false)
-    const [questionText, setQuestionText] = useState('')
+    const [singleQuestion, setSingleQuestion] = useState({questionText: '', keyWord: '', response: 0})
     const [questionList, setQuestionList] = useState([]);
     const [survey, setSurvey] = useState({
         schoolClassId: '',
         questionList: []
     })
 
+
     //Buggy
     //Add single Question to state
     const addQuestion = () => {
-        setQuestionList(questionList.concat(questionText))
-        setQuestionText("")
+        setQuestionList(questionList.concat(singleQuestion))
+        setSingleQuestion({questionText: "", keyWord: "", response: 0})
     }
 
+    function handleChange(event) {
+        const {name, value} = event.target;
+        setSingleQuestion({
+            ...singleQuestion,
+            [name]: value
+        });
+    }
 
     //Post fetch Method
     const postSingleSurvey = async () => {
@@ -86,6 +94,7 @@ export default function SurveyCreation() {
         )
     }
 
+    console.log(survey)
 
     return (
         <Box color={"secondary"} className={classes.center}>
@@ -104,14 +113,19 @@ export default function SurveyCreation() {
                                 <ListItem key={questionList.id}>
                                     <ListItemAvatar>
                                         <Avatar style={{backgroundColor: "#272635"}}>
-                                            <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "4vh",}}>{index+1}</div>
+                                            <div style={{
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                height: "4vh",
+                                            }}>{index + 1}</div>
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText
-                                        primary={singleQuestion}
+                                    <ListItemText key={questionList.id}
+                                        primary={singleQuestion.questionText}
                                     />
                                     <Box m={2}>
-                                        <ListItemSecondaryAction>
+                                        <ListItemSecondaryAction key={questionList.id}>
                                             <IconButton edge="end" aria-label="delete">
                                                 <img src="../images/delete.svg" alt="" style={{height: "2vh"}}/>
                                             </IconButton>
@@ -121,8 +135,12 @@ export default function SurveyCreation() {
                             )}
                         </List>
                         <Box className={classes.center}>
-                            <TextField onChange={(event) => setQuestionText(event.target.value)} id="standard-basic1"
-                                       label="Question" value={questionText} autoComplete="on"/>
+                            <TextField onChange={handleChange} id="standard-basic1"
+                                       label="Question" name="questionText" value={singleQuestion.questionText} autoComplete="on"/>
+
+                            <TextField onChange={handleChange} id="standard-basic2"
+                                       label="Keyword" name="keyWord" value={singleQuestion.keyWord} autoComplete="on"/>
+
                             <BasicButton style={{marginTop: "20px"}} onClick={addQuestion} content={"Add question"}/>
                         </Box>
                     </WhiteWrapper>

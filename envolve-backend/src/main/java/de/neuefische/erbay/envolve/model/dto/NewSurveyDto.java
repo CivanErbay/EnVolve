@@ -1,5 +1,6 @@
 package de.neuefische.erbay.envolve.model.dto;
 
+import de.neuefische.erbay.envolve.model.Question;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,6 @@ import java.util.List;
 public class NewSurveyDto {
 
     private String schoolClassId;
-    private List<String> questionList;
+    private List<Question> questionList;
 
 }
