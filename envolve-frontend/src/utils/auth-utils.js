@@ -1,7 +1,7 @@
 const baseURL = process.env.REACT_APP_BASE_URL
 export async function performLogin(username, password) {
 
-    const response = await fetch(`${baseURL}/auth/login`, {
+    const response = await fetch(`${baseURL}/auth/login`, { //maybe without auth
 
         method: 'POST',
         headers: {

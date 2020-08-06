@@ -36,10 +36,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.csrf().disable()
+            http
+/*
+                    .csrf().disable()  //not perfectly secure
 
+*/
                     .authorizeRequests()
-                    .antMatchers("/api/**").authenticated()
+                    .antMatchers("/api/**").authenticated() //maybe teacher in between
                     .antMatchers("/**").permitAll()
                     .and()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
