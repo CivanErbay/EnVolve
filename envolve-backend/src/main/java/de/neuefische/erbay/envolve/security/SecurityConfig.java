@@ -37,11 +37,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.csrf().disable()
+
                     .authorizeRequests()
-                    .antMatchers("/teacher/api/**").authenticated()
+                    .antMatchers("/api/**").authenticated()
                     .antMatchers("/**").permitAll()
                     .and()
-                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .anonymous();
+
             http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
         }
 

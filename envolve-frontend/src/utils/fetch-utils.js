@@ -2,7 +2,7 @@ import {getJWTToken} from "./jwt-utils";
 const baseURL = process.env.REACT_APP_BASE_URL
 
 export function postRegister(registerData) {
-    return fetch(`${baseURL}/register`, {
+    return fetch(`${baseURL}/auth/register`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"

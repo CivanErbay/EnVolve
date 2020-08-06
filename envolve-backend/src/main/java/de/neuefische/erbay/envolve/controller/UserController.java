@@ -17,13 +17,13 @@ public class UserController {
     private UserService userService;
 
 
-    @PostMapping("/register")
+    @PostMapping("auth/register")
     public String register (@RequestBody TeacherRegisterDto teacherRegisterDto)  {
         userService.register(teacherRegisterDto);
         return userService.login(teacherRegisterDto.getUsername(), teacherRegisterDto.getPassword());
     }
 
-    @PostMapping("/login")
+    @PostMapping("auth/login")
     public String login (@RequestBody LoginDto loginDto) {
         return userService.login(loginDto.getUsername(), loginDto.getPassword());
     }
