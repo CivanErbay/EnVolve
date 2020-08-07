@@ -40,7 +40,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                  //not perfectly secure
 
                     .authorizeRequests()
-                    .antMatchers("/api/**").authenticated() //maybe teacher in between
+                    .antMatchers("/teacher/api/**").authenticated() //maybe teacher in between
                     .antMatchers("/**").permitAll()
                     .and()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
