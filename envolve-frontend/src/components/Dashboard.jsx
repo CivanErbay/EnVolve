@@ -18,6 +18,7 @@ import Typography from "@material-ui/core/Typography";
 import BarChart from "recharts/lib/chart/BarChart";
 import {getSurveyAnswerListByClassId} from "../utils/survey-fetch-utils";
 import PolarRadiusAxis from "recharts/lib/polar/PolarRadiusAxis";
+import {allWeekResponseCalculator, lastWeekResponseCalculator} from "../utils/calculations/dashboard-calc";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -71,7 +72,7 @@ export const Dashboard = ({schoolClassId}) => {
     }, [keywordList])
 
 
-    //FETCH ALL SURVEYANSWER (WHOLE OBJECT)
+    //GET-FETCH
     useEffect(() => {
         getSurveyAnswerListByClassId(schoolClassId).then(response => {
             setAllSurveyAnswers(response.map(singleResponse => {
@@ -84,7 +85,7 @@ export const Dashboard = ({schoolClassId}) => {
     }, [])
 
 
-    //FILTER ALL RESPONSE INTO DATES
+
     useEffect(() => {
         if (allSurveyAnswers.length > 0) {
             const weekResults = []
@@ -102,16 +103,10 @@ export const Dashboard = ({schoolClassId}) => {
                     })
             })
             setKeywordList(tempKeywordList)
-
-
-
             //First Table
             setLastWeekResult(lastWeekResponseCalculator(weekResults[0]));
-
             //Second Table
             setPrevLastWeekResult(lastWeekResponseCalculator(weekResults[1]))
-
-
             //Third Table
             const fiveWeekResponses = []
             for (let i = 0; i < weekResults.length; i++) {
@@ -124,50 +119,7 @@ export const Dashboard = ({schoolClassId}) => {
     }, [allSurveyAnswers])
 
 
-    const allWeekResponseCalculator = (week) => {
-        let responses = []
 
-        for (let i = 0; i < week.length; i++) {
-            for (let j = 0; j < week[i].questionList.length; j++) {
-                responses.push(week[i].questionList[j].response)
-            }
-        }
-        if (responses.length > 0) {
-            const sum = responses.reduce((curr, acc) => {
-                return curr + acc
-            })
-
-            return sum / responses.length
-        }
-        return null
-    }
-
-    const lastWeekResponseCalculator = (student) => {
-
-        /*    let tempResponses = Array(student[0].questionList.length).fill([])*/
-        let tempResponses = [[], [], [], [], []]
-        for (let j = 0; j < student.length; j++) {
-            for (let i = 0; i < student[j].questionList.length; i++) {
-                tempResponses[i].push(student[j].questionList[i].response)
-            }
-        }
-
-        let finalResponses = []
-
-        for (let v = 0; v < tempResponses.length; v++) {
-            finalResponses.push(average(tempResponses[v]))
-        }
-        return finalResponses
-
-    }
-
-    const average = (array) => {
-        let sum = 0;
-        for (let p = 0; p < array.length; p++) {
-            sum += array[p];
-        }
-        return sum / array.length
-    }
 
 
     return (
@@ -228,9 +180,7 @@ export const Dashboard = ({schoolClassId}) => {
                             <defs>
                                 <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
                                     <stop stopColor="green" stopOpacity={1}/>
-                                    {/*offset={off}*/}
                                     <stop stopColor="#D9EFF9" stopOpacity={1}/>
-                                    {/*offset={off}*/}
                                 </linearGradient>
                             </defs>
                             <Area type="monotone" dataKey="uv" stroke="#000" fill="url(#splitColor)"/>
