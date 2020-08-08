@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         border: "solid",
         padding: "1em",
         borderRadius: "15px",
-        /* background: "rgba(58, 209, 155, 0.5)",*/
+        cursor: "pointer",
         backgroundColor: "#F7F7F7"
     },
 }));
@@ -106,8 +106,8 @@ export default function Overview() {
         <Box className={classes.center}>
 
             <DiagonalWrapper>
-                <h1>Heyho {userState.userData.firstname}!</h1>
-                <h4 style={{fontWeight: "600"}}>Check the latest survey results</h4>
+                <h1>Hello {userState.userData.firstname}!</h1>
+                <h4 >Check your latest survey results</h4>
                 <SchoolClasses/>
             </DiagonalWrapper>
 
@@ -115,7 +115,7 @@ export default function Overview() {
 
             <div> {/*Swipe able Drawer*/}
                 <React.Fragment key={"bottom"}>
-                    <Box m={3} onClick={toggleDrawer("bottom", true)} ><img style={{height: "8vh"}}  src="./images/menu.svg" alt=""/></Box>
+                    <Box m={5} onClick={toggleDrawer("bottom", true)} ><img style={{height: "8vh"}}  src="./images/menu.svg" alt=""/></Box>
                     <SwipeableDrawer
                         anchor={"bottom"}
                         open={swipe["bottom"]}

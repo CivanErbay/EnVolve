@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
         border: "solid",
         padding: "1em",
         borderRadius: "15px",
-        backgroundColor: "#F7F7F7"
+        backgroundColor: "#F7F7F7",
+        cursor: "pointer"
     },
     cName: {
         fontSize: "3em",
@@ -108,9 +109,7 @@ export default function SingleClass() {
         >
             <List>
 
-                {/*
-            BackgroundColor defined in index.css
-*/}
+
                 {!showStudents ?
                     <Box boxShadow={3} mb={2} className={classes.centerRow} onClick={showStudentList}> <img
                         style={{height: "4vh"}} src="../images/classIcon.svg" alt=""/> <Typography
@@ -159,7 +158,7 @@ export default function SingleClass() {
 
             </Box>
 
-            <Box m={4}> {/*Swipe able Drawer*/}
+            <Box m={6}> {/*Swipe able Drawer*/}
                 <React.Fragment key={"bottom"}>
                     <Box onClick={toggleDrawer("bottom", true)}><img style={{height: "8vh"}} src="/images/menu.svg"
                                                                      alt=""/></Box>

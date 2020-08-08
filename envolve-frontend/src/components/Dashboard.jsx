@@ -19,12 +19,30 @@ import BarChart from "recharts/lib/chart/BarChart";
 import {getSurveyAnswerListByClassId} from "../utils/survey-fetch-utils";
 import PolarRadiusAxis from "recharts/lib/polar/PolarRadiusAxis";
 import {allWeekResponseCalculator, lastWeekResponseCalculator} from "../utils/calculations/dashboard-calc";
+import {useMediaQuery} from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
-    stretch: {
-        fontSize: "0.75em",
+    center: {
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "center"
     },
+    graphHeadlineMobile: {
+        fontSize: "2em",
+        fontWeight: "bold",
+        padding: "0.25em",
+        textAlign: "left"
+    },
+    graphHeadlineDesktop: {
+        fontSize: "3em",
+        fontWeight: "bold",
+        padding: "0.25em",
+        textAlign: "center",
+
+    }
 
 }));
 
@@ -118,19 +136,21 @@ export const Dashboard = ({schoolClassId}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [allSurveyAnswers])
 
+    const matches = useMediaQuery('(min-width:800px)');
 
 
 
 
     return (
-        <Box color={"secondary"} className={classes.stretch}>
+        <Box mt={2} color={"secondary"} className={classes.center}>
 
             {data.data1 &&
             <>
-                <Typography style={{fontSize: "2.5em", fontWeight: "bold", padding: "0.25em", textAlign: "left"}}>LAST
-                    WEEK</Typography>
                 <Box mt={-3}>
-                    <RadarChart cx={140} cy={140} outerRadius={60} width={300} height={250} data={data.data1}>
+                <Typography className={matches ? classes.graphHeadlineDesktop : classes.graphHeadlineMobile}>LAST
+                    WEEK</Typography>
+
+                    <RadarChart cx={matches ? 380 : 150} cy={ matches ? 220 : 110} outerRadius={matches ? 200 : 70} width={matches? 750: 300} height={matches? 450: 225} data={data.data1}>
                         <PolarGrid/>
                         <PolarAngleAxis dataKey="subject"/>
                         <PolarRadiusAxis domain={[0, 5]}/>
@@ -139,15 +159,10 @@ export const Dashboard = ({schoolClassId}) => {
                 </Box>
 
 
-                <Box mt={4}>
-                    <Typography style={{
-                        fontSize: "2.5em",
-                        fontWeight: "bold",
-                        padding: "0.25em",
-                        textAlign: "left"
-                    }}>CHANGES</Typography>
+                <Box mt={6}>
+                    <Typography className={matches ? classes.graphHeadlineDesktop : classes.graphHeadlineMobile}>CHANGES</Typography>
                     <Box mt={2} ml={-6}>
-                        <BarChart width={350} height={300} data={data.data2}
+                        <BarChart width={ matches ? 700 : 350} height={matches ? 475 : 300} data={data.data2}
                                   margin={{top: 5, right: 1, left: 1, bottom: 5}}>
                             <CartesianGrid strokeDasharray="3 3"/>
                             <XAxis dataKey="name"/>
@@ -159,17 +174,12 @@ export const Dashboard = ({schoolClassId}) => {
                     </Box>
                 </Box>
 
-                <Box mt={6}>
-                    <Typography style={{
-                        fontSize: "2.5em",
-                        fontWeight: "bold",
-                        padding: "0.25em",
-                        textAlign: "left"
-                    }}>OVERALL</Typography>
+                <Box mt={matches ? 12 : 6}>
+                    <Typography className={matches ? classes.graphHeadlineDesktop : classes.graphHeadlineMobile}>OVERALL</Typography>
                     <Box mt={2} ml={-4}>
                         <AreaChart
-                            width={350}
-                            height={300}
+                            width={matches ? 700: 350}
+                            height={matches ? 475 : 300}
                             data={data.data3}
                             margin={{top: 10, right: 30, left: 0, bottom: 0}}
                         >
