@@ -174,7 +174,7 @@ export const Dashboard = ({schoolClassId}) => {
                     </Box>
                 </Box>
 
-                <Box mt={matches ? 12 : 6}>
+                <Box mt={matches ? 8 : 6}>
                     <Typography className={matches ? classes.graphHeadlineDesktop : classes.graphHeadlineMobile}>OVERALL</Typography>
                     <Box mt={2} ml={-4}>
                         <AreaChart

@@ -107,11 +107,9 @@ export default function Overview() {
 
             <DiagonalWrapper>
                 <h1>Hello {userState.userData.firstname}!</h1>
-                <h4 >Check your latest survey results</h4>
+                <h4>Check your latest survey results</h4>
                 <SchoolClasses/>
             </DiagonalWrapper>
-
-
 
             <div> {/*Swipe able Drawer*/}
                 <React.Fragment key={"bottom"}>
