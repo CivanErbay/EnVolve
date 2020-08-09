@@ -36,7 +36,7 @@ export default function StepWrapper ({children, style}){
 
     return (
 
-        <Box mt={4} p={3} style={style} boxShadow={2} className={classNames ( matches ?  classes.wrapperDesktop : classes.wrapperMobile,)}>
+        <Box mt={4} p={3} style={style} boxShadow={2} className={classNames ( matches ?  classes.wrapperDesktop : classes.wrapperMobile)}>
 
             {children}
         </Box>

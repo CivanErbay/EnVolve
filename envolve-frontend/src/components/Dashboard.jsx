@@ -64,6 +64,7 @@ export const Dashboard = ({schoolClassId}) => {
                     return {subject: keyword, A: lastWeekResult[index]}
                 })
 
+
             const keywordListShortCapitalize = []
             keywordList.map(keyword => {
                let keywordShort = '';
@@ -72,7 +73,6 @@ export const Dashboard = ({schoolClassId}) => {
                 }
                 keywordListShortCapitalize.push(keywordShort)
             });
-
 
             const data2 =
                 keywordListShortCapitalize.map((keyword, index) => {
@@ -107,6 +107,8 @@ export const Dashboard = ({schoolClassId}) => {
     useEffect(() => {
         if (allSurveyAnswers.length > 0) {
             const weekResults = []
+            console.log(weekResults)
+
             for (let i = 0; i < 5; i++) {
                 weekResults.push(allSurveyAnswers.filter(result => {
                     return result.localDate.getTime() > new Date().getTime() - ((i + 1) * 7 * 24 * 60 * 60 * 1000) && result.localDate.getTime() < new Date().getTime() - (i * 7 * 24 * 60 * 60 * 1000)
@@ -115,11 +117,16 @@ export const Dashboard = ({schoolClassId}) => {
 
             //Get Keywords out of Questions
             const tempKeywordList = []
-            allSurveyAnswers.map(singleSurveyAnswer => {
+                allSurveyAnswers[0].questionList.map(singleQuestion => {
+                    tempKeywordList.push(singleQuestion.keyWord)
+                })
+
+
+           /* allSurveyAnswers.map(singleSurveyAnswer => {
                     singleSurveyAnswer.questionList.map(singleQuestion => {
                       tempKeywordList.push(singleQuestion.keyWord)
                     })
-            })
+            })*/
             setKeywordList(tempKeywordList)
             //First Table
             setLastWeekResult(lastWeekResponseCalculator(weekResults[0]));
