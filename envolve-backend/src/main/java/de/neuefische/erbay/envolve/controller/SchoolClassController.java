@@ -3,6 +3,7 @@ package de.neuefische.erbay.envolve.controller;
 import de.neuefische.erbay.envolve.model.SchoolClass;
 import de.neuefische.erbay.envolve.model.dto.AddSchoolClassDto;
 import de.neuefische.erbay.envolve.service.SchoolClassService;
+import de.neuefische.erbay.envolve.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +17,12 @@ import java.util.List;
 public class SchoolClassController {
 
     private final SchoolClassService schoolClassService;
+    private final SurveyService surveyService;
 
     @Autowired
-    public SchoolClassController(SchoolClassService schoolClassService) {
+    public SchoolClassController(SchoolClassService schoolClassService, SurveyService surveyService) {
         this.schoolClassService = schoolClassService;
+        this.surveyService = surveyService;
     }
 
     @PostMapping
@@ -40,6 +43,7 @@ public class SchoolClassController {
 
     @DeleteMapping("/class/{id}")
     public void deleteClassById(@PathVariable String id) {
+        surveyService.clearSurveyBySchoolClassId(id);
         schoolClassService.deleteClassById(id);
     }
 
