@@ -70,7 +70,6 @@ export function deleteClassById(id) {
             'Content-Type': "application/json",
             Authorization: `Bearer ${token}`,
         },
-
     }).then(() => {
         return true
     }).catch(() => {
