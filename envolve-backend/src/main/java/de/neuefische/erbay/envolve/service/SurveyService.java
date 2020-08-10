@@ -185,6 +185,7 @@ public class SurveyService {
         return filteredAnswerList;
     }
 
+
     public void clearSurveyBySchoolClassId(String schoolClassId) {
         //Deletes all class-related NewSurveys
         List<NewSurvey> newSurveysBySchoolClassId = newSurveyDb.findByNewSurveysBySchoolClassId(schoolClassId);
