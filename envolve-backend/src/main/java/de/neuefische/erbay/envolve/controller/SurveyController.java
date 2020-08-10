@@ -45,9 +45,9 @@ public class SurveyController {
         return surveyService.getSurveyAnswerListFilteredByDate(schoolClassId);
     }
 
-   @DeleteMapping("/clear/{schoolClassId}")
+ /*  @DeleteMapping("/clear/{schoolClassId}")
        public void clearSurveyBySchoolClassId(@PathVariable String schoolClassId) {
         surveyService.clearSurveyBySchoolClassId(schoolClassId);
    }
-
+*/
 }

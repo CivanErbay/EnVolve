@@ -17,12 +17,12 @@ import java.util.Optional;
 public class SchoolClassService {
 
     private final SchoolClassDb schoolClassDb;
-/*    private final SurveyService surveyService;*/
+    private final SurveyService surveyService;
 
     @Autowired
     public SchoolClassService(SchoolClassDb schoolClassDb, SurveyService surveyService) {
         this.schoolClassDb = schoolClassDb;
-     /*   this.surveyService = surveyService;*/
+        this.surveyService = surveyService;
     }
 
     public void addClass(AddSchoolClassDto tempSchoolClass, String teacherName) {
@@ -62,7 +62,7 @@ public class SchoolClassService {
     }
 
     public void deleteClassById(String schoolClassId) {
-       /* surveyService.clearSurveyBySchoolClassId(schoolClassId);*/
+        surveyService.clearSurveyBySchoolClassId(schoolClassId);
         //Deletes class itself
         schoolClassDb.deleteById(schoolClassId);
     }
