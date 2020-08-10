@@ -59,8 +59,9 @@ public class SchoolClassService {
         return schoolClassDb.getAllClasses();
     }
 
-    public void deleteClassById(String id) {
-        schoolClassDb.deleteById(id);
+    public void deleteClassById(String schoolClassId) {
+        //Deletes class itself
+        schoolClassDb.deleteById(schoolClassId);
     }
 }
 

@@ -76,15 +76,6 @@ public class SurveyService {
         newSurveyDb.save(newSurvey);
     }
 
-/*    public NewSurvey getNewSurvey(String schoolClassId) {
-
-        Optional<NewSurvey> tempNewSurvey = newSurveyDb.findById(schoolClassId);
-        if (tempNewSurvey.isPresent()) {
-            return tempNewSurvey.get();
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Survey with " + schoolClassId + " not found)");
-    }*/
-
     public NewSurvey getActiveNewSurvey (String schoolClassId) {
         //Gets list of all NewSurveys of a single Class
         List<NewSurvey> fullNewSurveyList = newSurveyDb.findByNewSurveysBySchoolClassId(schoolClassId);
@@ -126,8 +117,6 @@ public class SurveyService {
         //This Method IS BROKEN, Or not?!!!
         String schoolClassId = getSchoolClassIdByStudentCode(studentCode);
 
-
-
         //Check if StudentCode is valid //if student is member of Class
         SchoolClass currentSchoolClass = schoolClassService.getClassById(schoolClassId);
 
@@ -159,14 +148,6 @@ public class SurveyService {
         surveyAnswer.setStudentCode(surveyAnswerDto.getStudentCode());
         surveyAnswer.setQuestionList(surveyAnswerDto.getQuestionList());
 
-        //Check if StudentCode used already - Put this in getNewSurveyFiltered later
-        //DEACTIVATED TO FILL DATABASE WITH MORE DATA OVER A LONGER PERIOD TO FILL DASHBOARD
- /*       List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId( schoolClassId);
-        for (int j = 0; j < allSurveyAnswerListByClassId.size(); j++) {
-            if (allSurveyAnswerListByClassId.get(j).getStudentCode().equals(surveyAnswerDto.getStudentCode())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + surveyAnswerDto.getStudentCode() + " finished his survey already");
-            }
-        } */
         LocalDate localDate = LocalDate.now();//For reference
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         String formattedString = localDate.format(formatter);
@@ -178,7 +159,6 @@ public class SurveyService {
     public List<SurveyAnswer> getAllSurveyAnswerListByClassId(String schoolClassId) {
         return surveyAnswerDb.findBySchoolClassId(schoolClassId);
     }
-
 
     public List<SurveyAnswer> getSurveyAnswerListFilteredByDate(String schoolClassId) {
         //Get all surveys from specific schoolClass
@@ -203,6 +183,28 @@ public class SurveyService {
             }
         }
         return filteredAnswerList;
+    }
+
+
+    public void clearSurveyBySchoolClassId(String schoolClassId) {
+        //Deletes all class-related NewSurveys
+        List<NewSurvey> newSurveysBySchoolClassId = newSurveyDb.findByNewSurveysBySchoolClassId(schoolClassId);
+        List<String> newSurveyIdListBySchoolClass = new ArrayList<>();
+        for (NewSurvey newSurvey : newSurveysBySchoolClassId) {
+            newSurveyIdListBySchoolClass.add(newSurvey.getId());
+        }
+        for (String surveyIdBySchoolClass : newSurveyIdListBySchoolClass) {
+            newSurveyDb.deleteById(surveyIdBySchoolClass);
+        }
+        //Delete alls class-related SurveyAnswers
+        List<SurveyAnswer> surveyAnswersBySchoolClassId = surveyAnswerDb.findBySchoolClassId(schoolClassId);
+        List<String> surveyAnswerIdList = new ArrayList<>();
+        for (SurveyAnswer surveyAnswer : surveyAnswersBySchoolClassId) {
+            surveyAnswerIdList.add(surveyAnswer.getId());
+        }
+        for (String surveyAnswerId : surveyAnswerIdList) {
+            surveyAnswerDb.delete(surveyAnswerId);
+        }
     }
 
 

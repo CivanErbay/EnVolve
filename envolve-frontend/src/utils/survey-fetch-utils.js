@@ -41,7 +41,6 @@ export function postSurveyAnswer(survey) {
         method: 'POST',
         headers: {
             'Content-Type': "application/json",
-
         },
         body: JSON.stringify(survey)
     }).then(() => {
@@ -66,4 +65,19 @@ export async function getSurveyAnswerListByClassId(schoolClassId) {
         throw new Error('something went wrong!!!');
     }
     return await response.json();
+
+
+}export async function clearSurveyByClassId(schoolClassId) {
+    const token = getJWTToken();
+    return fetch(`${baseURL}/api/survey/clear/${schoolClassId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }).then(() => {
+    return true
+    }).catch(() => {
+    return false
+    })
+
 }

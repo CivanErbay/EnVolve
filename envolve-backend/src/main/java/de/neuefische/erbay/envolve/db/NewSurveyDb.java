@@ -24,15 +24,6 @@ public class NewSurveyDb  {
 
     }
 
-    //Diese Methode will nicht, vermutlich ist loop-logik nicht möglich mit FireBase DB
-/*    public void saveList(List<NewSurvey> newSurveyList) {
-
-        Firestore dbFireStore = FirestoreClient.getFirestore();
-        for (int i = 0; i < newSurveyList.size(); i++) {
-            dbFireStore.collection(collection).document(newSurveyList.get(i).getId()).set(newSurveyList);
-        }
-    }*/
-
 
     public void deleteById(String schoolClassId) {
         Firestore dbFireStore = FirestoreClient.getFirestore();

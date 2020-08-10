@@ -36,4 +36,9 @@ public class SurveyAnswerDb  {
         Firestore dbFireStore = FirestoreClient.getFirestore();
         dbFireStore.collection(collection).document(surveyAnswer.getId()).set(surveyAnswer);
     }
+
+    public void delete(String schoolClassId) {
+        Firestore dbFireStore = FirestoreClient.getFirestore();
+        dbFireStore.collection(collection).document(schoolClassId).delete();
+    }
 }
