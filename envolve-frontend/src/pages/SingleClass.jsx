@@ -15,7 +15,6 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
-import Button from "@material-ui/core/Button";
 import {clearSurveyByClassId} from "../utils/survey-fetch-utils";
 
 const useStyles = makeStyles((theme) => ({
@@ -127,7 +126,7 @@ export default function SingleClass() {
     }
     const clearSurvey = async () => {
         const clearBool = await clearSurveyByClassId(id)
-        /*      clearBool ? setClearResponse(true) : "";*/
+        setRedirectTrigger(clearBool)
     }
 
     if (redirectTrigger) {
@@ -224,7 +223,11 @@ export default function SingleClass() {
                 <DialogTitle id="alert-dialog-slide-title">{" Attention! "}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        Your data will be permanently deleted. Clear survey removes all results and survey-templates.
+                        <Box style={{display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center"}}>
+                        <Typography><b>Delete Class</b> deletes the entire class including its survey data.</Typography>
+                        <Typography><b>Clear survey</b> deletes all survey data belonging to this class.</Typography>
+                        <Typography>Your data will be permanently deleted.</Typography>
+                        </Box>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

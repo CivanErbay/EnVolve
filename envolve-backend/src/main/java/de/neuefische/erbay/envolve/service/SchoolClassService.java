@@ -63,5 +63,7 @@ public class SchoolClassService {
         //Deletes class itself
         schoolClassDb.deleteById(schoolClassId);
     }
+
+
 }
 

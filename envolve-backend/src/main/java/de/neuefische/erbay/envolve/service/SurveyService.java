@@ -128,8 +128,6 @@ public class SurveyService {
                     if (allSurveyAnswerListByClassId.get(j).getStudentCode().equals(studentCode)) {
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + studentCode + " finished his survey already");
                     }
-
-
                 }
                 return getActiveNewSurvey(schoolClassId);
             }
