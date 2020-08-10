@@ -45,7 +45,7 @@ export const About = () => {
 
                 <Typography className={classes.headline}>About</Typography>
 
-                <Box px={3} py={4} m={5} boxShadow={3} style={{maxWidth: "600px", backgroundColor: "#F7F7F7"}}>
+                <Box px={3} py={4} m={5} boxShadow={3} style={{maxWidth: "600px", backgroundColor: "#F7F7F7", borderRadius: "10px"}}>
                     <img style={{height: "25vh"}} src="./images/twoPersons.png" alt=""/>
                     <Typography className={classes.textTypo}><span style={{letterSpacing: "-2.25px", fontSize:"1.5em", lineHeight:".75", fontWeight: "bold"}}>Envolve </span> is an app to <b>improve communication between students and their teachers </b>.
                         <br /> The approach is to
