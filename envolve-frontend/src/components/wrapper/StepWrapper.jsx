@@ -10,10 +10,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#F7F7F7",
         width: "300px",
         background: `url(${"/images/steps.svg"})`,
-        /*     backgroundSize: "cover",*/
         backgroundRepeat: "no-repeat",
         backgroundPosition: "50% 0px",
         height: "100%",
+        borderRadius: "10px"
     },
     wrapperDesktop: {
         backgroundColor: "#F7F7F7",
@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "800px",
         borderRadius: "10px",
         background: `url(${"/images/stepsBig.svg"})`,
-        /*     backgroundSize: "cover",*/
         backgroundRepeat: "no-repeat",
         backgroundPosition: "50% 0px",
         height: "100%",

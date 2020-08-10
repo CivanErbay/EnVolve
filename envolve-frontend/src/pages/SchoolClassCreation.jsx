@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import BackButton from "../components/BackButton";
 import WhiteWrapper from "../components/wrapper/WhiteWrapper";
 import {Redirect} from "react-router-dom";
+import {useMediaQuery} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     column: {
@@ -31,6 +32,7 @@ export default function SchoolClassCreation() {
         classname: '',
         classmembers: []
     })
+    const matches = useMediaQuery('(min-width:800px)');
 
     function isDisabled(){
         return !(schoolClass.classname.length >= 2 || schoolClass.classmembers.length >= 5);
@@ -78,8 +80,10 @@ export default function SchoolClassCreation() {
             <BasicButton disabled={isDisabled()} onClick={handleSubmit} content={"Create"}/>
             </Box>
             </WhiteWrapper>
-            <BackButton/>
 
+            <Box mt={matches ? 20 : 0}>
+            <BackButton/>
+            </Box>
         </Box>
     )
 }

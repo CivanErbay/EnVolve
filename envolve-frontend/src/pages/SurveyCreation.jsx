@@ -19,6 +19,7 @@ import BasicButton from "../components/BasicButton";
 import BackButton from "../components/BackButton";
 import SimplePopover from "../components/SimplePopover";
 import SimplePopoverWhite from "../components/SimplePopoverWhite";
+import {useMediaQuery} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -54,6 +55,7 @@ export default function SurveyCreation() {
         schoolClassId: '',
         questionList: []
     })
+    const matches = useMediaQuery('(min-width:800px)');
 
 
     //Add single Question to state
@@ -97,6 +99,7 @@ export default function SurveyCreation() {
     }
 
 
+
     return (
         <Box color={"secondary"} className={classes.center}>
 
@@ -138,9 +141,10 @@ export default function SurveyCreation() {
                         <Box className={classes.center}>
                             <TextField onChange={handleChange} id="standard-basic1"
                                        label="Question" name="questionText" value={singleQuestion.questionText}
-                                       autoComplete="on" style={{width: "200px"}}/>
+                                       autoComplete="on" style={{width: "250px"}}/>
 
-                            <Box ml={-7} style={{display: "flex", alignItems: "flex-end", justifyContent: "center"}}>
+                            <Box mt={2} ml={-7}
+                                 style={{display: "flex", alignItems: "flex-end", justifyContent: "center"}}>
                                 <Box mr={3}>
                                     <SimplePopover popoverContent={"Please add a descriptive keyword each question"}/>
                                 </Box>
@@ -156,15 +160,18 @@ export default function SurveyCreation() {
 
 
             <Box mt={2} style={{display: "flex", alignItems: "center", justifyContent: "center", width: "300px"}}>
-                <Box ml={-12} style={{display: "flex", alignItems: "center", justifyContent: "center", width: "100px"}} >
+                <Box ml={-12} style={{display: "flex", alignItems: "center", justifyContent: "center", width: "100px"}}>
                     <SimplePopoverWhite popoverContent={"Please add between 3 - 5 questions"}/>
                 </Box>
-                <Box >
+                <Box>
                     <BasicButton
-                                 style={{fontSize: "2em"}} content={"Create"} onClick={postSingleSurvey} disabled={questionList.length < 3 || questionList.length > 5}/></Box>
+                        style={{fontSize: "2em"}} content={"Create"} onClick={postSingleSurvey}
+                        disabled={questionList.length < 3 || questionList.length > 5}/></Box>
             </Box>
-            <BackButton/>
 
+            <Box  mt={matches ? 20 : 0}>
+            <BackButton/>
+            </Box>
         </Box>
     )
 }
