@@ -65,8 +65,7 @@ export const SurveyAnswer = () => {
 
     //Post fetch Method
     const postAnswer = async (collectedAnswers) => {
-        const b = await postSurveyAnswer(collectedAnswers);
-        console.log(b)
+        await postSurveyAnswer(collectedAnswers);
     }
 
 
@@ -128,7 +127,7 @@ export const SurveyAnswer = () => {
         setUserResponse(value);
     };
 
-    console.log(currentSurvey)
+
     return (
         <Box className={classes.center} mt={4}>
             <Box>

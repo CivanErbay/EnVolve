@@ -18,6 +18,7 @@ import WhiteWrapper from "../components/wrapper/WhiteWrapper";
 import BasicButton from "../components/BasicButton";
 import BackButton from "../components/BackButton";
 import SimplePopover from "../components/SimplePopover";
+import SimplePopoverWhite from "../components/SimplePopoverWhite";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -55,7 +56,6 @@ export default function SurveyCreation() {
     })
 
 
-    //Buggy
     //Add single Question to state
     const addQuestion = () => {
         setQuestionList(questionList.concat(singleQuestion))
@@ -138,9 +138,9 @@ export default function SurveyCreation() {
                         <Box className={classes.center}>
                             <TextField onChange={handleChange} id="standard-basic1"
                                        label="Question" name="questionText" value={singleQuestion.questionText}
-                                       autoComplete="on"/>
+                                       autoComplete="on" style={{width: "200px"}}/>
 
-                            <Box ml={-6} style={{display: "flex", alignItems: "flex-end"}}>
+                            <Box ml={-7} style={{display: "flex", alignItems: "flex-end", justifyContent: "center"}}>
                                 <Box mr={3}>
                                     <SimplePopover popoverContent={"Please add a descriptive keyword each question"}/>
                                 </Box>
@@ -155,8 +155,14 @@ export default function SurveyCreation() {
             </Grid>
 
 
-            <Box mt={2}> <BasicButton style={{fontSize: "2em"}} content={"Create"} onClick={postSingleSurvey}/></Box>
-
+            <Box mt={2} style={{display: "flex", alignItems: "center", justifyContent: "center", width: "300px"}}>
+                <Box ml={-12} style={{display: "flex", alignItems: "center", justifyContent: "center", width: "100px"}} >
+                    <SimplePopoverWhite popoverContent={"Please add between 3 - 5 questions"}/>
+                </Box>
+                <Box >
+                    <BasicButton
+                                 style={{fontSize: "2em"}} content={"Create"} onClick={postSingleSurvey} disabled={questionList.length < 3 || questionList.length > 5}/></Box>
+            </Box>
             <BackButton/>
 
         </Box>

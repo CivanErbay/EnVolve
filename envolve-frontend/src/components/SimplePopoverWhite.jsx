@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SimplePopover({popoverContent}) {
+export default function SimplePopoverWhite({popoverContent}) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -28,7 +28,7 @@ export default function SimplePopover({popoverContent}) {
     return (
         <div>
             <Box aria-describedby={id} onClick={handleClick}>
-                <img src="../images/info.svg" alt="" style={{height: "3.7vh"}}/>
+                <img src="../images/infoWhite.svg" alt="" style={{height: "3.7vh"}}/>
             </Box>
 
             <Popover
