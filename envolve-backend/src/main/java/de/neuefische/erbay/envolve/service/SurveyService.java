@@ -149,6 +149,7 @@ public class SurveyService {
                 currentSchoolClass.getClassmembers().get(i).setActiveStatus(false);
             }
         }
+
         surveyAnswer.setSchoolClassId(schoolClassId);
         surveyAnswer.setStudentCode(surveyAnswerDto.getStudentCode());
         surveyAnswer.setQuestionList(surveyAnswerDto.getQuestionList());
@@ -157,8 +158,9 @@ public class SurveyService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         String formattedString = localDate.format(formatter);
 
-
+        System.out.println(currentSchoolClass);
         surveyAnswer.setLocalDate(formattedString);
+        schoolClassDb.save(currentSchoolClass);
         surveyAnswerDb.save(surveyAnswer);
     }
 
