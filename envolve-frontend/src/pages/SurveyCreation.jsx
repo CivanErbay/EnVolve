@@ -152,7 +152,7 @@ export default function SurveyCreation() {
                                            label="Keyword" name="keyWord" value={singleQuestion.keyWord}
                                            autoComplete="on"/>
                             </Box>
-                            <BasicButton style={{marginTop: "20px"}} onClick={addQuestion} content={"Add question"}/>
+                            <BasicButton style={{marginTop: "20px"}}  disabled={singleQuestion.questionText.length < 10 || singleQuestion.keyWord.length < 2} onClick={addQuestion} content={"Add question"}/>
                         </Box>
                     </WhiteWrapper>
                 </Grid>

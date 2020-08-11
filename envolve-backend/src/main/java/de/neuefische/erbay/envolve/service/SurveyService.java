@@ -126,6 +126,7 @@ public class SurveyService {
                 List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId(schoolClassId);
                 for (int j = 0; j < allSurveyAnswerListByClassId.size(); j++) {
                     if (allSurveyAnswerListByClassId.get(j).getStudentCode().equals(studentCode)) {
+
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + studentCode + " finished his survey already");
                     }
                 }
@@ -139,8 +140,16 @@ public class SurveyService {
     //Method which is called after user(student) replied to getNewSurveyFiltered
     public void addSurveyAnswer(SurveyAnswerDto surveyAnswerDto) {
         SurveyAnswer surveyAnswer = new SurveyAnswer();
-        //ACHTUNG: SLOW METHOD
+
         String schoolClassId = getSchoolClassIdByStudentCode(surveyAnswerDto.getStudentCode());
+        SchoolClass currentSchoolClass = schoolClassService.getClassById(schoolClassId);
+
+
+        for (int i = 0; i < currentSchoolClass.getClassmembers().size(); i++) {
+            if(currentSchoolClass.getClassmembers().get(i).getCode().equals(surveyAnswerDto.getStudentCode())){
+                currentSchoolClass.getClassmembers().get(i).setActiveStatus(false);
+            }
+        }
 
         surveyAnswer.setSchoolClassId(schoolClassId);
         surveyAnswer.setStudentCode(surveyAnswerDto.getStudentCode());
@@ -150,8 +159,15 @@ public class SurveyService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         String formattedString = localDate.format(formatter);
 
+        //Check if all ActiveStatus are false - if yes, set them true --> else return same mixed-status class
+        SchoolClass possibleRefreshedClass = checkActiveStatusOfClassAndRefreshIfAllFalse(currentSchoolClass);
+
+
+        System.out.println(possibleRefreshedClass);
         surveyAnswer.setLocalDate(formattedString);
+        schoolClassDb.save(possibleRefreshedClass);
         surveyAnswerDb.save(surveyAnswer);
+
     }
 
     public List<SurveyAnswer> getAllSurveyAnswerListByClassId(String schoolClassId) {
@@ -185,6 +201,10 @@ public class SurveyService {
 
 
     public void clearSurveyBySchoolClassId(String schoolClassId) {
+
+       //Set all ActiveStatus to true of one single schoolClass
+        refreshAllActiveStudentStatusToTrue(schoolClassId);
+
         //Deletes all class-related NewSurveys
         List<NewSurvey> newSurveysBySchoolClassId = newSurveyDb.findByNewSurveysBySchoolClassId(schoolClassId);
         List<String> newSurveyIdListBySchoolClass = new ArrayList<>();
@@ -205,5 +225,31 @@ public class SurveyService {
         }
     }
 
+    public void refreshAllActiveStudentStatusToTrue(String schoolClassId){
+        SchoolClass currentSchoolClass = schoolClassService.getClassById(schoolClassId);
+            for (int j = 0; j < currentSchoolClass.getClassmembers().size(); j++) {
+                currentSchoolClass.getClassmembers().get(j).setActiveStatus(true);
+            }
+    }
+
+    public SchoolClass checkActiveStatusOfClassAndRefreshIfAllFalse(SchoolClass currentSchoolClass) {
+
+        int counter = 0;
+        for (int i = 0; i < currentSchoolClass.getClassmembers().size(); i++) {
+            if(!currentSchoolClass.getClassmembers().get(i).isActiveStatus()){
+                counter++;
+            }
+        }
+        if (counter == currentSchoolClass.getClassmembers().size()) {
+            for (int j = 0; j < currentSchoolClass.getClassmembers().size(); j++) {
+                currentSchoolClass.getClassmembers().get(j).setActiveStatus(true);
+            }
+            return currentSchoolClass;
+        }
+        else {
+            return  currentSchoolClass;
+        }
+
+    }
 
 }
