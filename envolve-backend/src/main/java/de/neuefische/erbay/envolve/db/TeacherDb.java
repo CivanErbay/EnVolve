@@ -36,5 +36,10 @@ public class TeacherDb  {
         }
     }
 
+    public void deleteTeacherByUsername(String userName) {
+        Firestore dbFireStore = FirestoreClient.getFirestore();
+        dbFireStore.collection(collection).document(userName).delete();
+    }
+
 
 }
