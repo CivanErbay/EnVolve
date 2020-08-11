@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Clipboard from 'react-clipboard.js';
 import makeStyles from "@material-ui/core/styles/makeStyles";
+
 const useStyles = makeStyles((theme) => ({
     center: {
         display: "flex",
@@ -21,12 +22,11 @@ const useStyles = makeStyles((theme) => ({
         padding: "1.1em",
         width: "100%",
         borderRadius: "10px",
-        color:"#F7F7F7",
+        color: "#F7F7F7",
         backgroundColor: "#272635"
     }
 
 }));
-
 
 
 export const StudentList = ({id}) => {
@@ -57,20 +57,25 @@ export const StudentList = ({id}) => {
                             </Grid>
                             <Grid item xs={4}>
                                 {member.activeStatus ?
-                                    <Box style={{     display: "flex",
+                                    <Box style={{
+                                        display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
-                                        width: "100%"}} ><Clipboard style={{backgroundColor: "#272635", borderRadius: "15px", marginRight: "10px"}} data-clipboard-text={member.code}>
-                                        <img style={{height: "4vh", marginTop: "5px"}} src="/images/copy.svg"
-                                             alt=""/>
-                                    </Clipboard><span><b>{member.code}</b></span> </Box>:
+                                        width: "100%"
+                                    }}>
+                                        <Clipboard
+                                        style={{backgroundColor: "#272635", borderRadius: "15px", marginRight: "10px"}}
+                                        data-clipboard-text={member.code}>
+                                        <img style={{height: "4vh", marginTop: "5px"}} src="/images/copy.svg" alt=""/>
+
+                                    </Clipboard><span><b>{member.code}</b></span> </Box> :
                                     <img style={{height: "4vh", marginTop: "5px"}} src="/images/tick.svg"
                                          alt=""/>}
-
                             </Grid>
                         </Box>
                     )}     </Grid>
-                <Typography><b>Note</b>: The green check mark indicates that the student has already participated.</Typography>
+                <Typography><b>Note</b>: The green check mark indicates that the student has already
+                    participated.</Typography>
             </WhiteWrapper>)
             }
 

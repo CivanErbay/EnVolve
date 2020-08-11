@@ -28,7 +28,10 @@ export default function SimplePopover({popoverContent}) {
     return (
         <div>
             <Box aria-describedby={id} onClick={handleClick}>
+
                 <img src="../images/info.svg" alt="" style={{height: "3.7vh"}}/>
+
+
             </Box>
 
             <Popover
