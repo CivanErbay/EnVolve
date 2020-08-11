@@ -126,6 +126,7 @@ public class SurveyService {
                 List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId(schoolClassId);
                 for (int j = 0; j < allSurveyAnswerListByClassId.size(); j++) {
                     if (allSurveyAnswerListByClassId.get(j).getStudentCode().equals(studentCode)) {
+
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with " + studentCode + " finished his survey already");
                     }
                 }
@@ -141,7 +142,13 @@ public class SurveyService {
         SurveyAnswer surveyAnswer = new SurveyAnswer();
         //ACHTUNG: SLOW METHOD
         String schoolClassId = getSchoolClassIdByStudentCode(surveyAnswerDto.getStudentCode());
+        SchoolClass currentSchoolClass = schoolClassService.getClassById(schoolClassId);
 
+        for (int i = 0; i < currentSchoolClass.getClassmembers().size(); i++) {
+            if(currentSchoolClass.getClassmembers().get(i).getCode().equals(surveyAnswerDto.getStudentCode())){
+                currentSchoolClass.getClassmembers().get(i).setActiveStatus(false);
+            }
+        }
         surveyAnswer.setSchoolClassId(schoolClassId);
         surveyAnswer.setStudentCode(surveyAnswerDto.getStudentCode());
         surveyAnswer.setQuestionList(surveyAnswerDto.getQuestionList());
@@ -149,6 +156,7 @@ public class SurveyService {
         LocalDate localDate = LocalDate.now();//For reference
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         String formattedString = localDate.format(formatter);
+
 
         surveyAnswer.setLocalDate(formattedString);
         surveyAnswerDb.save(surveyAnswer);

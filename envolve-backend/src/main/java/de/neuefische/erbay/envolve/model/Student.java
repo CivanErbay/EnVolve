@@ -12,5 +12,5 @@ public class Student {
 
     private String student;
     private String code;
-
+    private boolean activeStatus = true;
 }

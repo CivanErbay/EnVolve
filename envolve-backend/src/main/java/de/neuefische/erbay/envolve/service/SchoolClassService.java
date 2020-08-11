@@ -3,7 +3,6 @@ package de.neuefische.erbay.envolve.service;
 import de.neuefische.erbay.envolve.db.SchoolClassDb;
 import de.neuefische.erbay.envolve.model.SchoolClass;
 import de.neuefische.erbay.envolve.model.Student;
-import de.neuefische.erbay.envolve.model.SurveyAnswer;
 import de.neuefische.erbay.envolve.model.dto.AddSchoolClassDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +34,7 @@ public class SchoolClassService {
             String singleClassmemberName = tempSchoolClass.getClassmembers().get(i);
             int r = ((int) (Math.random() * (99999 - 10000)) + 10000);
             String code = r + "";
-            Student singleClassmember = new Student(singleClassmemberName,code);
+            Student singleClassmember = new Student(singleClassmemberName,code,true);
             tempList.add(singleClassmember);
         }
         schoolClass.setClassmembers(tempList);
@@ -64,18 +63,5 @@ public class SchoolClassService {
         //Deletes class itself
         schoolClassDb.deleteById(schoolClassId);
     }
-
- /*   public SchoolClass setStudentActiveStatus (String schoolClassId) {
-        //Check if StudentCode is valid //if student is member of Class
-        SchoolClass currentSchoolClass = getClassById(schoolClassId);
-
-        for (int i = 0; i < currentSchoolClass.getClassmembers().size(); i++) {
-            if (currentSchoolClass.getClassmembers().get(i).getCode().equals(studentCode)) {
-                //check if StudentCode is already used for this survey
-                List<SurveyAnswer> allSurveyAnswerListByClassId = getAllSurveyAnswerListByClassId(schoolClassId);
-                for (int j = 0; j < allSurveyAnswerListByClassId.size(); j++) {
-                    if (allSurveyAnswerListByClassId.get(j).getStudentCode().equals(studentCode)) {
-    }
-*/
 }
 
