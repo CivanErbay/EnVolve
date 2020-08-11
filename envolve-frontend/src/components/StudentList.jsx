@@ -24,36 +24,38 @@ export const StudentList = ({id}) => {
         <>
 
             {schoolClass && (<WhiteWrapper>
-                <Grid container spacing={1}  style={{
+                <Grid container style={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     width: "100%"
                 }}>
                     {schoolClass.classmembers.map((member) =>
-                        <Box style={{
-                            margin: "1em",
+                        <Box boxShadow={3} style={{
+                            margin: "10px",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            flexDirection: "column",
-                            border: "solid",
-                            borderWidth: "1px",
                             padding: "1.1em",
-                            borderRadius: "10px"
+                            width: "100%",
+                            borderRadius: "10px",
+                            color:"#F7F7F7",
+                            backgroundColor: "#272635"
                         }}>
-                            <Grid item sm={3}>
+                            <Grid item xs={12}>
                                 <Typography style={{textAlign: "left", fontSize: "1.3em", fontWeight: "700"}}
                                             key={member.student}> {member.student}  </Typography>
                             </Grid>
-                            <Grid item sm={3} >
+                            <Grid item xs={4} >
                                 {member.activeStatus ?
                                     <span><b> {member.code}</b></span> :
                                     <img style={{height: "4vh", marginTop: "5px"}} src="/images/tick.svg"
                                          alt=""/>}
                             </Grid>
                         </Box>
-                    )}     </Grid> </WhiteWrapper>)
+                    )}     </Grid>
+                <Typography><b>Note</b>: Click on a Student to copy the corresponding Code.</Typography>
+            </WhiteWrapper>)
             }
 
         </>
