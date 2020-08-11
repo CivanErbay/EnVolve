@@ -1,3 +1,4 @@
+/*
 package de.neuefische.erbay.envolve.controller;
 
 import de.neuefische.erbay.envolve.db.TeacherDb;
@@ -36,11 +37,13 @@ public class LoginControllerTest {
     @Autowired
     private JWTUtils jwtUtils;
 
-   /* @BeforeEach
+   */
+/* @BeforeEach
     public void resetDb() {
         teacherDb.deleteAll();
     }
-    */
+    *//*
+
 
 
 
@@ -61,3 +64,4 @@ public class LoginControllerTest {
         assertTrue(jwtUtils.validateToken(postResponse.getBody(), "test@test.de"));
     }
 }
+*/
