@@ -43,7 +43,6 @@ export default function Login() {
     const [password, setPassword] = useState("")
 /*    const [errorInfo, setErrorInfo] = useState("")*/
     const classes = useStyles();
-
     const dispatch = useDispatch();
 
 

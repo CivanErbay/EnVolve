@@ -55,6 +55,7 @@ public class SchoolClassService {
 
     }
 
+
     public List<SchoolClass> getAllClasses() {
         return schoolClassDb.getAllClasses();
     }
