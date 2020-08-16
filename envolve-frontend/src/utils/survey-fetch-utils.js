@@ -1,7 +1,7 @@
 import {getJWTToken} from "./jwt-utils";
 
-/*const baseURL = "https://envolve-feedback.herokuapp.com"*/
-const baseURL = process.env.REACT_APP_BASE_URL
+const baseURL = "https://envolve-feedback.herokuapp.com"
+//const baseURL = process.env.REACT_APP_BASE_URL
 
 export function postNewSurvey(survey) {
     const token = getJWTToken();

@@ -1,5 +1,6 @@
 import {getJWTToken} from "./jwt-utils";
-const baseURL = process.env.REACT_APP_BASE_URL
+//const baseURL = process.env.REACT_APP_BASE_URL
+const baseURL = "https://envolve-feedback.herokuapp.com"
 
 export function postRegister(registerData) {
     return fetch(`${baseURL}/auth/register`, { //maybe without auth
