@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
     center: {
         display: "flex",
         justifyContent: "space-around",
-        alignItems: "center"
+        alignItems: "center",
+        flexDirection: "column"
     },
     boxStyle: {
         width: "80%",
@@ -38,7 +39,8 @@ const useStyles = makeStyles((theme) => ({
     },
     cNames: {
         color: "white",
-        fontSize: "45px"
+        fontSize: "45px",
+        marginTop: "10px"
     },
 
 }));
@@ -82,12 +84,13 @@ export default function SchoolClasses() {
 
             <Box mt={2} key={schoolClasses.id} className={classes.center}>{schoolClasses.map((schoolClass) =>
                 <Box mt={2} className={classNames(classes.boxStyle, classes.center)} boxShadow={6}
-                     key={schoolClass.id} m={1}> <Link
+                     key={schoolClass.id} m={1}>
+                    <Link
                     className={classNames(classes.link, classes.details)}
                     to={`/singleclass/${schoolClass.id}`}
                     key={schoolClasses.id}>
-                    <Typography style={{fontWeight: "700"}}
-                                                        className={classes.cNames}>{schoolClass.classname}
+                    <Typography style={{fontWeight: "700"}} className={classes.cNames}>
+                        {schoolClass.classname}
                      </Typography>
                     <Box style={{display: "flex", flexDirection: "column"}}>
                     <Typography style={{lineHeight: "1.1", fontWeight: "700"}}>
