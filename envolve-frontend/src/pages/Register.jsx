@@ -2,7 +2,6 @@ import {Box} from "@material-ui/core";
 import React, { useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {postRegister} from "../utils/fetch-utils";
 import BasicButton from "../components/BasicButton";
 import {Link, Redirect} from 'react-router-dom';
 import Popover from "@material-ui/core/Popover";
@@ -12,6 +11,7 @@ import WhiteWrapper from "../components/wrapper/WhiteWrapper";
 import Button from "@material-ui/core/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {LOGIN_FAILED, LOGIN_SUCCESS} from "../actions";
+import {postRegister} from "../utils/auth-utils";
 
 
 const useStyles = makeStyles((theme) => ({

@@ -2,21 +2,6 @@ import {getJWTToken} from "./jwt-utils";
 //const baseURL = process.env.REACT_APP_BASE_URL
 const baseURL = "https://envolve-feedback.herokuapp.com"
 
-export function postRegister(registerData) {
-    return fetch(`${baseURL}/auth/register`, { //maybe without auth
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(registerData),
-    }).then((response) => {
-        if (response.status !== 200) {
-            throw new Error('invalid response')
-        }
-        return response.text(); //necessary to handle token in the Browser, which comes with the Fetch from the backend
-    })
-}
-
 export function postClass(schoolClass) {
     const token = getJWTToken();
     return fetch(`${baseURL}/api/classes`, {
