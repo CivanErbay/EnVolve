@@ -15,7 +15,7 @@ export default function UserReducer(state = initialState, action) {
                 userData: action.payload,
             };
         case LOGIN_FAILED:
-            return {...state, authStatus: 'FAILED' };
+            return {...state, authStatus: 'FAILED'};
         case LOGOUT:
             return {};
         default:

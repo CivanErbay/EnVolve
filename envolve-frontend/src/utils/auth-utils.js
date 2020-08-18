@@ -1,5 +1,7 @@
 //const baseURL = process.env.REACT_APP_BASE_URL
-const baseURL = "https://envolve-feedback.herokuapp.com"
+// const baseURL = "https://envolve-feedback.herokuapp.com"
+const baseURL = "http://localhost:8080"
+
 
 export async function performLogin(username, password) {
 
@@ -9,7 +11,7 @@ export async function performLogin(username, password) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({username, password}),
     })
 
     if (response.status !== 200) {
