@@ -29,7 +29,6 @@ export function postRegister(registerData) {
         },
         body: JSON.stringify(registerData),
     }).then((response) => {
-        console.log(response)
         if (response) {
                return response.text(); //necessary to handle token in the Browser, which comes with the Fetch from the backend
         }
