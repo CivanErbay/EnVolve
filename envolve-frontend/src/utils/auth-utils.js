@@ -29,10 +29,13 @@ export function postRegister(registerData) {
         },
         body: JSON.stringify(registerData),
     }).then((response) => {
-        if (response.status !== 200) {
+        console.log(response)
+        if (response) {
+               return response.text(); //necessary to handle token in the Browser, which comes with the Fetch from the backend
+        }
+        else if (response.status !== 200) {
             throw new Error('invalid response')
         }
-        return response.text(); //necessary to handle token in the Browser, which comes with the Fetch from the backend
     })
 }
 
