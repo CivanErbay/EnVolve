@@ -24,6 +24,7 @@ public class UserController {
     public Callable<String> register (@RequestBody TeacherRegisterDto teacherRegisterDto)  {
         userService.register(teacherRegisterDto);
 
+        //Timeout Function wrapping the login
         return new Callable<String>() {
             @Override
             public String call() throws Exception {

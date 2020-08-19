@@ -3,7 +3,6 @@ import React, { useEffect} from "react";
 import {removeJWTToken} from "../utils/jwt-utils";
 
 import {Redirect, Route} from "react-router-dom";
-import LoadingSpinner from "./LoadingSpinner";
 import {useDispatch, useSelector} from "react-redux";
 import {LOGOUT} from "../actions";
 
@@ -41,7 +40,7 @@ export default function PrivateRoute({component: Component, ...rest}) {
                     }
                     return <Component {...props} />
                 }
-                return <LoadingSpinner/>
+
 
             }}
         />
